@@ -1,0 +1,91 @@
+body {
+    font-family: 'Open Sans', sans-serif; /* Set Open Sans as the default font */
+}
+ion-content{
+    --background:white;
+    --color:black;
+}
+.image-container {
+    display: flex;
+    justify-content: center; /* Centers horizontally */
+    align-items: flex-start; /* Aligns the image to the top */
+  }
+  
+.welcomeLogo {
+    max-width: 100%;
+    height: 7%;
+    width: 30%;
+    margin-top: 20px;
+}
+
+.welcomeTop{
+    margin-top: 75px;
+    width: 74%;
+    height: 165px;
+}
+
+.welcomeText1{
+    background: linear-gradient(to right, #FB0303, #F8D814); /* Gradient from red to yellow */
+    -webkit-background-clip: text; /* Ensures the gradient is applied to the text */
+    color: transparent; /* Makes the text color transparent so the gradient is visible */
+    font-size: 28px;
+    font-weight: 700;
+  }
+.text-container{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center; /* Horizontally center */
+    align-items: center; /* Vertically center */
+    text-align: center; /* Ensure text is centered */
+}  
+.text-container1{
+    display: flex;
+    justify-content: center; /* Horizontally center */
+    align-items: center; /* Vertically center */
+    text-align: center; /* Ensure text is centered */
+}  
+.welcomeText2{
+    color:#363636;
+    font-size: 20px;
+}
+.welcomeSlider{
+    margin-top: 35px;
+}
+/* Gradient button styling */
+.login-button {
+    margin-top: 4rem;
+    background: linear-gradient(to right, #FB0303, #F8D814);
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    padding: 12px 24px;
+    border-radius: 30px;
+    cursor: pointer;
+    text-align: center;
+    width: 100%;
+    font-family: "Open Sans", sans-serif;
+    height: 3.5rem;
+}
+/* Sign-up button styling (without gradient) */
+.signup-button {
+    margin-top: 2rem; /* Space between buttons */
+    background: white; /* White background */
+    border: 1px solid black;
+    color: black; /* Red text color */
+    font-size: 1.2rem;
+    padding: 12px 24px;
+    border-radius: 30px;
+    cursor: pointer;
+    text-align: center;
+    width: 100%;
+    font-family: "Open Sans", sans-serif;
+    height: 3.5rem;
+  }
+.welcomeText3{
+        color:#363636;
+        font-size: 20px;
+}
+.welcomeText4{
+    font-weight: bold;
+}
+  
