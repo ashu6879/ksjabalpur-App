@@ -1,0 +1,72 @@
+ion-header {
+--padding-top: 20px; /* Adjust top padding */
+--padding-bottom: 0px; /* Remove bottom padding */
+}
+
+ion-toolbar {
+height: 50px; /* Increase the height of the toolbar */
+--border-width: 0px; /* Remove bottom border */
+--box-shadow: none; /* Remove any shadow if present */
+}
+
+.topRibbon {
+padding: 0; /* Remove padding around the icons */
+}
+
+.center-image-container {
+display: flex;
+justify-content: center;
+align-items: center;
+width: 100%;
+}
+
+.center-image-container ion-button {
+background: none;
+padding: 0;
+}
+
+.center-image-container img {
+max-width: 100px; /* Adjust the size of the center image */
+height: auto;
+}
+
+/* Increase size of the first (left) image */
+ion-buttons.topRibbon ion-button img[src="assets/sidebar.png"] {
+width: 30px; /* Set desired width */
+height: 20px; /* Set desired height */
+}
+
+/* Increase size of the last (right) image */
+ion-buttons.topRibbon ion-button img[src="assets/bell.png"] {
+width: 30px; /* Set desired width */
+height: 20px; /* Set desired height */
+}
+/* Ensure ion-menu shows below the header */
+ion-menu {
+--top: 80px; /* Set the top position of the menu to be below the header */
+z-index: 5; /* Ensure the menu appears below the header */
+--background: white; /* Set the background color of the menu to white */
+}
+
+ion-menu .menu-inner {
+padding-top: 0px; /* Remove any extra padding inside the menu */
+}
+
+/* Set the background color of the sidebar menu */
+ion-menu {
+--background: white; /* This will make the background of the menu white */
+}
+
+ion-menu ion-header {
+--background: white; /* Ensure the header inside the menu also has a white background */
+}
+
+ion-menu ion-content {
+--background: white; /* Ensure the content inside the menu also has a white background */
+}
+.below-header-image {
+    width: 100%;
+    height: auto;
+  }
+    
+  
