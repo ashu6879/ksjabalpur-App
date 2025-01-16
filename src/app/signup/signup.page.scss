@@ -1,0 +1,112 @@
+body {
+    font-family: 'Open Sans', sans-serif; /* Set Open Sans as the default font */
+}
+ion-content{
+    --background:white;
+    --color:black;
+    position: relative; /* Ensures the icons are positioned relative to the content */
+    // --padding: 20px;
+}
+
+// ion-grid {
+// padding: 10px;
+// }
+
+.icon-left,
+.icon-right {
+position: absolute;
+top: 20px; /* Adjust to move the icons vertically */
+width: 50px; /* Set icon size */
+height: 50px; /* Set icon size */
+}
+
+.icon-left {
+left: 10px; /* Position the left icon */
+width: 25px;
+height: 25px;
+}
+
+.icon-right {
+right: 10px;
+width: 25px;
+height: 25px;
+}
+.heading-container {
+margin-top: 70px; /* Adjust spacing to avoid overlap with icons */
+flex-grow: 1; /* Ensures the content fills the screen */
+}
+
+.heading1 {
+font-size: 29px;
+font-weight: bold;
+padding: 10px;
+font-family: "Open Sans", sans-serif;
+color: #181818;
+}
+.image-container {
+margin-top: 20px; /* Spacing between heading and image */
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.center-image {
+width: 270px; /* Adjusted size for a larger image */
+height: 270px; /* Adjusted size for a larger image */
+object-fit: contain; /* Ensure the image is not distorted */
+}
+.main-container {
+margin-top: 30px; /* Add top margin to the main container */
+}
+.row {
+display: flex;
+justify-content: space-between;
+align-items: center; /* Center the items vertically within each row */
+margin: 20px 15px;
+}
+
+.iconcontact-left{
+width: 22px;  /* Reduced icon size */
+height: 22px; /* Reduced icon size */
+}
+.iconcontact-right{
+width: 8px;  /* Reduced icon size */
+height: 13px; /* Reduced icon size */  
+}
+
+.row-heading {
+flex-grow: 1;
+margin: 0 20px; /* Add some margin between icons and heading */
+font-size: 20px;
+color: #181818;
+font-family: 'Open Sans', sans-serif; /* Set Open Sans as the default font */
+}
+.signup-button {
+margin-top: 1.5rem;
+background: linear-gradient(to right, #FB0303, #F8D814);
+border: none;
+color: white;
+font-size: 1.2rem;
+padding: 12px 24px;
+border-radius: 30px;
+cursor: pointer;
+text-align: center;
+width: 100%;
+font-family: "Open Sans", sans-serif;
+height: 3.5rem;
+}
+.memberText{
+display: flex;
+color: #181818;
+justify-content: center;
+align-items: center; /* Center the items vertically within each row */ 
+font-family: 'Open Sans', sans-serif; /* Set Open Sans as the default font */   
+}
+.welcomeText3{
+    color:#808080;
+    font-size: 18px;
+}
+.welcomeText4{
+color:#181818;
+font-weight: bold;
+}

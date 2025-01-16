@@ -1,0 +1,52 @@
+<ion-content [fullscreen]="true">
+  <div class="outerDiv">
+    <!-- Left Icon -->
+    <img src="assets/Vector.png" alt="Left Icon" class="icon-left" />
+
+    <!-- Right Icon -->
+    <img src="assets/question.png" alt="Right Icon" class="icon-right" />
+    <!-- Heading -->
+    <div class="heading-container">
+      <h1 class="heading1">How do you want to sign up?</h1>
+    </div>
+    <!-- Center Image -->
+    <div class="image-container">
+      <img src="assets/cuate.png" alt="Center Image" class="center-image" />
+    </div>
+    <div class="main-container">
+      <!-- Row 1 -->
+      <div class="row">
+        <img src="assets/facebookIcon.png" alt="Left Icon" class="iconcontact-left" />
+        <h2 class="row-heading">Continue with Facebook</h2>
+        <img src="assets/rightArrow.png" alt="Right Icon" class="iconcontact-right" />
+      </div>
+    
+      <!-- Row 2 -->
+      <div class="row">
+        <img src="assets/googleIcon.png" alt="Left Icon" class="iconcontact-left" />
+        <h2 class="row-heading">Sign up with Google</h2>
+        <img src="assets/rightArrow.png" alt="Right Icon" class="iconcontact-right" />
+      </div>
+    
+      <!-- Row 3 -->
+      <div class="row">
+        <img src="assets/phoneIcon.png" alt="Left Icon" class="iconcontact-left" />
+        <h2 class="row-heading">Sign up with Phone Number</h2>
+        <img src="assets/rightArrow.png" alt="Right Icon" class="iconcontact-right" />
+      </div>
+    </div>
+    <div class="signupButton">
+      <button class="signup-button"(click)="goToSignup()">Sign up</button>
+    </div>  
+    <div class="memberText">
+      <h4>Already a member?</h4>
+    </div>  
+    <div class="text-container2">
+      <div>
+        <h4>
+          <span class="welcomeText3">By logging in or registering, you agree to our<br> <span class="welcomeText4">Terms of service</span> and <span class="welcomeText4">Privacy policy.</span></span><br>
+        </h4>
+      </div>
+    </div>
+  </div>  
+</ion-content>
