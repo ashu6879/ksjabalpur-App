@@ -1,0 +1,126 @@
+ion-content {
+    position: relative;
+    height: 100%; /* Ensures the content takes full height */
+  }
+  .outerDiv {
+    padding-bottom: 70px; /* Space to avoid button overlay */
+  }
+  
+.icon-left,
+.icon-right {
+position: absolute;
+top: 20px; /* Adjust to move the icons vertically */
+width: 50px; /* Set icon size */
+height: 50px; /* Set icon size */
+}
+
+.icon-left {
+left: 10px; /* Position the left icon */
+width: 25px;
+height: 25px;
+}
+
+.icon-right {
+right: 10px;
+width: 25px;
+height: 25px;
+}
+.heading-container {
+margin-top: 70px; /* Adjust spacing to avoid overlap with icons */
+flex-grow: 1; /* Ensures the content fills the screen */
+}
+
+.heading1 {
+font-size: 29px;
+font-weight: bold;
+padding: 10px;
+font-family: "Open Sans", sans-serif;
+color: #181818;
+}
+.form-container {
+width: 100%;
+max-width: 400px;
+margin-top: 20px;
+}
+
+.input-item {
+border: none;
+color: #181818;
+--background: #ffffff;  /* White background for input field */
+margin-bottom: 20px;      /* Add some space below the input field */
+}
+
+ion-label {
+margin-bottom: 10px;  /* Add space between the label and the input field */
+}
+
+ion-input {
+--padding-start: 10px; /* Add padding inside the input field */
+}
+ion-input.placeholderText{
+margin-top: 40px;
+height: 60px;
+border-radius: 15px;
+}
+ion-label.numberText{
+font-size: 22px;
+color: #181818;
+font-family: 'Open Sans', sans-serif; /* Set Open Sans as the default font */
+}
+.notification-preference {
+padding: 15px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+margin: 20px 0; /* Add space around */
+}
+
+.notification-text {
+flex-grow: 1;
+font-size: 18px;
+color: #181818;
+font-family: 'Open Sans', sans-serif; /* Set Open Sans as the default font */
+}
+
+.notification-checkbox {
+// --size: 24px; /* Set the size of the checkbox */
+// --border-radius: 50%; /* Circle shape */
+// --background: transparent; /* Ensure no background color */
+// --border: 2px solid #000; /* Black border around the checkbox */
+--checkbox-background-checked: white;
+--border-color-checked: black;
+--checkbox-background: WHITE;
+--border-color: #000000;
+}
+
+.notification-checkbox .checkbox-icon {
+background-color: transparent !important; /* Ensures the fill is transparent */
+border: 2px solid #000 !important; /* Only black border */
+border-radius: 50%; /* Circular shape */
+}
+.letterText{
+font-size: 15px;
+color: #808080;
+}
+.signupButton {
+position: absolute;
+bottom: 30px; /* 10px from the bottom */
+left: 50%;
+transform: translateX(-50%); /* Centers the button horizontally */
+width: 90%; /* Makes the button span most of the width */
+text-align: center;
+}
+.signup-button {
+margin-top: 1.5rem;
+background: linear-gradient(to right, #FB0303, #F8D814);
+border: none;
+color: white;
+font-size: 1.2rem;
+padding: 12px 24px;
+border-radius: 30px;
+cursor: pointer;
+text-align: center;
+width: 100%;
+font-family: "Open Sans", sans-serif;
+height: 3.5rem;
+}

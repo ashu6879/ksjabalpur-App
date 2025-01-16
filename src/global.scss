@@ -41,3 +41,9 @@
 body{
     font-family: 'Open Sans', sans-serif; /* Set Open Sans as the default font */
 }
+ion-content{
+    --background:white;
+    --color:black;
+    position: relative; /* Ensures the icons are positioned relative to the content */
+    // --padding: 20px;
+}
