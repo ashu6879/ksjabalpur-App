@@ -14,7 +14,7 @@ export class SignupVerificationPage{
 
   // Navigate to Signup Verification page
   goToSignup() {
-    this.router.navigate(['/signup-verification']);
+    this.router.navigate(['/otp-verification']);
   }
 
   // Navigate back to the previous page

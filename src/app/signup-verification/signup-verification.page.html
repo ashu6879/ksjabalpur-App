@@ -16,6 +16,10 @@
           <ion-label position="floating"class="numberText">Phone Number</ion-label>
           <ion-input class="placeholderText" type="text" placeholder="Enter phone number" required></ion-input>
         </ion-item>
+        <ion-item class="input-item">
+          <ion-label position="floating"class="numberText">Email Address</ion-label>
+          <ion-input class="placeholderText" type="email" placeholder="Enter email address" required></ion-input>
+        </ion-item>
       </form>
     </div>
     <div class="notification-preference">
@@ -26,7 +30,7 @@
       <span class="letterText">When I’m subscribed. I can opt out by contacting with this app or via link in the newsletter.</span>
     </div>
     <div class="signupButton">
-      <button class="signup-button">Send OTP</button>
+      <button class="signup-button" (click)="goToSignup()">Send OTP</button>
     </div>
   </div>  
 </ion-content>
