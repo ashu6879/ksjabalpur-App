@@ -64,9 +64,120 @@ ion-menu ion-header {
 ion-menu ion-content {
 --background: white; /* Ensure the content inside the menu also has a white background */
 }
+.firstImage {
+  text-align: center; /* Centers the image horizontally */
+  margin: 0 auto; /* Ensures the div is centered if it has a max-width */
+  margin-top: 30px;
+}
+
 .below-header-image {
-    width: 100%;
-    height: auto;
+  max-width: 100%; /* Ensures the image does not overflow */
+  height: auto; /* Maintains aspect ratio */
+  display: block; /* Removes any inline spacing issues */
+  margin: 0 auto; /* Centers the image within the div */
+} 
+.button-container {
+    display: flex; /* Aligns buttons in a row */
+    justify-content: center; /* Centers the buttons horizontally */
+    gap: 20px; /* Adds spacing between buttons */
   }
-    
   
+  .custom-button {
+    height: 35px;
+    display: flex; /* Allows image and text to be in a row */
+    align-items: center; /* Vertically centers the content */
+    padding: 10px 20px; /* Adds padding to the button */
+    background-color: #f0f0f0; /* Default background color */
+    border: 2px solid #ccc; /* Button border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s, color 0.3s; /* Smooth hover effect */
+  }
+  
+  .custom-button img {
+    width: 20px; /* Icon width */
+    height: 20px; /* Icon height */
+    margin-right: 5px; /* Space between image and text */
+  }
+  
+  .custom-button span {
+    font-family: "Open Sans", sans-serif;
+    font-size: 12px; /* Button text size */
+    color: #333; /* Default text color */
+  }
+  
+  .custom-button:hover, 
+  .custom-button:active {
+    background-color: red !important;
+    color: white !important;
+  }
+  
+  .custom-button:hover img, 
+  .custom-button:active img {
+    filter: brightness(0) invert(1); /* Adjust icon color to match text */
+  }  
+/* Container for the custom buttons */
+.custom-button-container {
+    display: flex;
+    flex-direction: column; /* Stack buttons vertically */
+    gap: 20px; /* Space between buttons */
+    width: 100%; /* Full-width container */
+  }
+  
+  /* Common styles for custom buttons */
+  .custom-image-button {
+    width: 100%; /* Full width */
+    border: none; /* Remove border */
+    border-radius: 40px; /* Optional: Rounded corners */
+    background-size: cover; /* Ensure the background image covers the entire button */
+    background-position: center; /* Center the background image */
+    color: white; /* Text color */
+    font-size: 20px; /* Font size for text */
+    font-weight: bold; /* Make text bold */
+    text-align: center; /* Center text horizontally */
+    display: flex; /* Enable flexbox for centering */
+    align-items: center; /* Center text vertically */
+    justify-content: center; /* Center content */
+    gap: 10px; /* Space between the image and text */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: transform 0.3s ease; /* Add a smooth scaling effect */
+  }
+  
+  /* Styles for the image inside the second button */
+  .button-two img {
+    width: 30px; /* Set the image width */
+    height: 30px; /* Set the image height */
+    object-fit: contain; /* Ensure the image maintains its aspect ratio */
+  }
+  
+  /* Hover effect for the custom buttons */
+  .custom-image-button:hover {
+    transform: scale(1.05); /* Slightly enlarge the button on hover */
+    opacity: 0.9; /* Slightly dim the button */
+  }
+  
+  /* Specific styles for the first button */
+//   .button-one {
+//     height: 200px; /* Set height for the first button */
+//   }
+  
+  /* Specific styles for the second button */
+//   .button-two {
+//     height: 200px; /* Set height for the second button */
+//   }
+  
+  .toolbar_mine {
+    --border-width: 0px !important;
+}
+
+
+
+button.custom-image-button.button-one {
+    padding: 80px;
+    margin-bottom: -50px;
+}
+
+button.custom-image-button.button-two {
+    padding: 80px;
+    /* margin-bottom: -50px; */
+}

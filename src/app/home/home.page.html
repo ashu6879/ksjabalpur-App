@@ -18,7 +18,7 @@
 
       <!-- Header with images -->
       <ion-header>
-        <ion-toolbar color="white">
+        <ion-toolbar color="white" class="toolbar_mine">
           <!-- Left Image (Open Sidebar) -->
           <ion-buttons slot="start" class="topRibbon">
             <ion-button (click)="openMenu()">
@@ -41,11 +41,34 @@
           </ion-buttons>
         </ion-toolbar>
       </ion-header>
-
-      <!-- Image below the header -->
-      <div class="firstImage">
-        <img src="assets/firstImage.png" alt="Image Below Header" class="below-header-image" />
-      </div>
     </ion-app>
+    <!-- Image below the header -->
+    <div class="firstImage">
+      <img src="assets/firstImage.png" alt="Image Below Header" class="below-header-image" />
+    </div>
+    <div class="button-container">
+      <button class="custom-button">
+        <img src="assets/commercial.png" alt="Icon 1" />
+        <span class="categoryText">Commercial</span>
+      </button>
+      <button class="custom-button">
+        <img src="assets/industrial.png" alt="Icon 2" />
+        <span class="categoryText">Industrial</span>
+      </button>
+      <button class="custom-button">
+        <img src="assets/residential.png" alt="Icon 3" />
+        <span class="categoryText">Residential</span>
+      </button>
+    </div>   
+    <div class="custom-button-container">
+      <button class="custom-image-button button-one" style="background-color: white; background-image: url('assets/button2.png');">
+        <span>POST YOUR REQUIREMENTS</span>
+      </button>
+      <button class="custom-image-button button-two" style="background-color: white; background-image: url('assets/button2.png');">
+        <img src="assets/discount.png" alt="Icon" />
+        <span>ADD OFFER</span>
+      </button>
+    </div>
+           
   </div>
 </ion-content>
