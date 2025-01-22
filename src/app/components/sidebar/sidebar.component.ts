@@ -1,27 +1,19 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit,OnDestroy } from '@angular/core';
 import { IonicModule } from '@ionic/angular';  // Ensure this is imported
 import { FormsModule } from '@angular/forms';
 import { MenuController } from '@ionic/angular';
-import { register } from 'swiper/element/bundle';
-import { IonicSlides } from '@ionic/angular';
-import { FooterComponent } from '../components/footer/footer.component';
-import { SidebarComponent } from '../components/sidebar/sidebar.component'; // Import FooterComponent
-import { Router } from '@angular/router';
 
-
-register();
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.page.html',
-  styleUrls: ['./home.page.scss'],
+  selector: 'app-sidebar',
+  templateUrl: './sidebar.component.html',
+  styleUrls: ['./sidebar.component.scss'],
   standalone: true,
-  imports: [IonicModule, FormsModule,FooterComponent,SidebarComponent],  // Ensure IonicModule is here
+  imports: [IonicModule, FormsModule],  // Ensure IonicModule is here
 })
-export class HomePage implements OnInit, OnDestroy {
+export class SidebarComponent  implements  OnInit, OnDestroy {
   isMenuOpen: boolean = false;
-  swiperModules = [IonicSlides];
 
-  constructor(private router: Router, private menuCtrl: MenuController) {}
+  constructor(private menuCtrl: MenuController) {}
 
   ngOnInit() {
     this.menuCtrl.isOpen().then((isOpen) => {
@@ -57,7 +49,5 @@ export class HomePage implements OnInit, OnDestroy {
       this.isMenuOpen = false;
     });
   }
-  goToSignup() {
-    this.router.navigate(['/commercial-properties']);
-  }
 }
+

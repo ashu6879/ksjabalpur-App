@@ -6,6 +6,7 @@ import { SignupPage } from './signup/signup.page'; // Import SignupPage
 import { SignupVerificationPage } from './signup-verification/signup-verification.page'; // Import SignupPage
 import { OtpVerificationPage } from './otp-verification/otp-verification.page'; // Import SignupPage
 import { HomePage } from './home/home.page'; // Import SignupPage
+import { CommercialPropertiesPage } from './commercial-properties/commercial-properties.page'; // Import SignupPage
 const routes: Routes = [
   { path: '', component: SplashPage }, // Default route to SplashPage
   { path: 'welcome', component: WelcomePage }, // Route to WelcomePage
@@ -13,6 +14,8 @@ const routes: Routes = [
   { path: 'signup-verification', component: SignupVerificationPage },
   { path: 'otp-verification', component: OtpVerificationPage },
   { path: 'home', component: HomePage },
+  { path: 'commercial-properties', component: CommercialPropertiesPage }
+
 
 
 // Route to SignupPage

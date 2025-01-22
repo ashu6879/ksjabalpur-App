@@ -1,74 +1,82 @@
-<ion-content [fullscreen]="true">
-  <div class="outerDiv">
-    <ion-app class="topBar">
-      <!-- Sidebar (ion-menu) -->
-      <ion-menu side="start" menuId="mainMenu" contentId="main-content">
-        <ion-content>
-          <!-- Sidebar content like links or options -->
-          <ion-list>
-            <ion-item button (click)="closeMenu()">Home</ion-item>
-            <ion-item button (click)="closeMenu()">Settings</ion-item>
-            <ion-item button (click)="closeMenu()">Profile</ion-item>
-          </ion-list>
-        </ion-content>
-      </ion-menu>
-
-      <!-- Main content -->
-      <ion-router-outlet id="main-content"></ion-router-outlet>
-
-      <!-- Header with images -->
-      <ion-header>
-        <ion-toolbar color="white" class="toolbar_mine">
-          <!-- Left Image (Open Sidebar) -->
-          <ion-buttons slot="start" class="topRibbon">
-            <ion-button (click)="openMenu()">
-              <img src="assets/sidebar.png" alt="Menu Icon" />
-            </ion-button>
-          </ion-buttons>
-
-          <!-- Center Image (visible when sidebar is closed) -->
-          <ion-buttons slot="end" class="center-image-container">
-            <ion-button>
-              <img src="assets/ks.png" alt="Center Image" />
-            </ion-button>
-          </ion-buttons>
-
-          <!-- Right Image -->
-          <ion-buttons slot="end" class="topRibbon">
-            <ion-button>
-              <img src="assets/bell.png" alt="Right Image" />
-            </ion-button>
-          </ion-buttons>
-        </ion-toolbar>
-      </ion-header>
-    </ion-app>
+<ion-content>
+  <app-sidebar></app-sidebar>
+  <div class="outerDiv"> 
     <!-- Image below the header -->
     <div class="firstImage">
       <img src="assets/firstImage.png" alt="Image Below Header" class="below-header-image" />
     </div>
     <div class="button-container">
       <button class="custom-button">
-        <img src="assets/commercial.png" alt="Icon 1" />
-        <span class="categoryText">Commercial</span>
+        <img src="assets/commercial.png" alt="Icon 1" class="iconCategory"/>
+        <span class="categoryText"(click)="goToSignup()">Commercial</span>
       </button>
       <button class="custom-button">
-        <img src="assets/industrial.png" alt="Icon 2" />
+        <img src="assets/industrial.png" alt="Icon 2" class="iconCategory"/>
         <span class="categoryText">Industrial</span>
       </button>
       <button class="custom-button">
-        <img src="assets/residential.png" alt="Icon 3" />
+        <img src="assets/residential.png" alt="Icon 3" class="iconCategory"/>
         <span class="categoryText">Residential</span>
       </button>
-    </div>   
-    <div class="custom-button-container">
-      <button class="custom-image-button button-one" style="background-color: white; background-image: url('assets/button2.png');">
-        <span>POST YOUR REQUIREMENTS</span>
-      </button>
-      <button class="custom-image-button button-two" style="background-color: white; background-image: url('assets/button2.png');">
-        <img src="assets/discount.png" alt="Icon" />
-        <span>ADD OFFER</span>
-      </button>
     </div>
-           
+    <!-- <div class="button-container1">
+      <button class="custom-button1 button-one">
+        <span class="imageText">POST YOUR REQUIREMENTS</span>
+      </button>
+      <button class="custom-button1 button-two">
+        <img src="assets/discount.png" class="discountImage" alt=""><span class="imageText">ADD OFFER</span>
+      </button>
+    </div> -->
+    <div class="featuredContainer">
+      <span class="left">Featured Property</span>
+      <span class="right">Show All</span>
+    </div>
+    <div class="buildingImage">
+      <img src="assets/building.png" alt="">
+    </div>  
+    <div class="featuredContainer">
+      <span class="left">Recently Added</span>
+      <span class="right">Show All</span>
+    </div> 
+    <div class="featuredContainer">
+      <span class="left">builder</span>
+      <span class="right">Show All</span>
+    </div> 
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6">
+          <div class="box">
+            <div class="box-content">
+              <img src="assets/buildingLogo.png" alt="Image" class="buldingIcon"/>
+            </div>
+            <div class="box-content">
+              <h2 class="headingIcon">xyz builder</h2>
+            </div>
+            <div class="box-content">
+              <ion-button expand="block" class="view-more">View More</ion-button>
+            </div>
+          </div>
+        </ion-col>
+  
+        <ion-col size="6">
+          <div class="box">
+            <div class="box-content">
+              <img src="assets/buildingLogo.png" alt="Image" class="buldingIcon"/>
+            </div>
+            <div class="box-content">
+              <h2 class="headingIcon">xyz builder</h2>
+            </div>
+            <div class="box-content">
+              <ion-button expand="block" class="view-more">View More</ion-button>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <div class="featuredContainer">
+      <span class="left">Offers</span>
+      <span class="right">Show All</span>
+    </div> 
   </div>
+  <app-footer></app-footer>
 </ion-content>

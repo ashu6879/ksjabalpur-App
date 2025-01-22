@@ -1,0 +1,137 @@
+ion-header {
+    --padding-top: 20px; /* Adjust top padding */
+    --padding-bottom: 0px; /* Remove bottom padding */
+    }
+    
+    ion-toolbar {
+    height: 50px; /* Increase the height of the toolbar */
+    --border-width: 0px; /* Remove bottom border */
+    --box-shadow: none; /* Remove any shadow if present */
+    }
+    
+    .topBar{
+      box-shadow: none;
+    }
+    
+    .topRibbon {
+    padding: 0; /* Remove padding around the icons */
+    }
+    
+    .center-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    }
+    
+    .center-image-container ion-button {
+    background: none;
+    padding: 0;
+    }
+    
+    .center-image-container img {
+    max-width: 100px; /* Adjust the size of the center image */
+    height: auto;
+    }
+    
+    /* Increase size of the first (left) image */
+    ion-buttons.topRibbon ion-button img[src="assets/sidebar.png"] {
+    width: 30px; /* Set desired width */
+    height: 20px; /* Set desired height */
+    }
+    
+    /* Increase size of the last (right) image */
+    ion-buttons.topRibbon ion-button img[src="assets/bell.png"] {
+    width: 30px; /* Set desired width */
+    height: 20px; /* Set desired height */
+    }
+    /* Ensure ion-menu shows below the header */
+    ion-menu {
+    --top: 80px; /* Set the top position of the menu to be below the header */
+    z-index: 5; /* Ensure the menu appears below the header */
+    --background: white; /* Set the background color of the menu to white */
+    }
+    
+    ion-menu .menu-inner {
+    padding-top: 0px; /* Remove any extra padding inside the menu */
+    }
+    
+    /* Set the background color of the sidebar menu */
+    ion-menu {
+    --background: white; /* This will make the background of the menu white */
+    }
+    
+    ion-menu ion-header {
+    --background: white; /* Ensure the header inside the menu also has a white background */
+    }
+    ion-menu ion-content {
+    --background: white; /* Ensure the content inside the menu also has a white background */
+    }
+    .headerTitle{
+        color: #20568B;
+        font-family: "Open Sans", sans-serif;
+        font-weight: bold;
+        font-size: 15px;
+        font-family: "Open Sans", sans-serif;
+    }
+    .property-card {
+        margin: 10px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+      
+      .property-image {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+      }
+      
+      .property-title {
+        font-size: 24px;
+        font-weight: bold;
+        margin-top: 12px;
+        color: #333;
+        font-family: "Open Sans", sans-serif;
+      }
+      
+      .property-price {
+        display: flex;
+        align-items: center;
+        margin-top: 10px;
+        font-family: "Open Sans", sans-serif;
+      }
+      
+      .old-price {
+        font-size: 13px;
+        text-decoration: line-through;
+        margin-right: 10px;
+        color: red;
+        font-family: "Open Sans", sans-serif;
+        margin: 6px 0;
+      }
+      
+      .new-price {
+        font-size: 15px;
+        font-weight: bold;
+        color: #FFFFFF;
+        padding: 5px 10px;
+        border-radius: 4px;
+        font-family: "Open Sans", sans-serif;
+      }
+      
+      .property-address {
+        font-size: 16px;
+        color: #8C8C8C;
+        margin-top: 15px;
+        font-family: "Open Sans", sans-serif;
+      }
+      .old-new-price {
+        background-color: #FAAD25;
+        padding: 5px 10px;
+        border-radius: 4px;
+        display: flex;
+        justify-content: space-between;
+        width: fit-content;
+      }
+      
