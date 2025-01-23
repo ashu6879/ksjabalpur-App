@@ -37,26 +37,26 @@ flex-grow: 1; /* Ensures the content fills the screen */
 }
 
 .heading1 {
-font-size: 29px;
+font-size: 25px;
 font-weight: bold;
 padding: 10px;
 font-family: "Open Sans", sans-serif;
 color: #181818;
 }
 .image-container {
-margin-top: 20px; /* Spacing between heading and image */
+margin-top: 10px; /* Spacing between heading and image */
 display: flex;
 justify-content: center;
 align-items: center;
 }
 
 .center-image {
-width: 270px; /* Adjusted size for a larger image */
+width: 230px; /* Adjusted size for a larger image */
 height: 270px; /* Adjusted size for a larger image */
 object-fit: contain; /* Ensure the image is not distorted */
 }
 .main-container {
-margin-top: 30px; /* Add top margin to the main container */
+margin-top: 15px; /* Add top margin to the main container */
 }
 .row {
 display: flex;
@@ -77,7 +77,7 @@ height: 13px; /* Reduced icon size */
 .row-heading {
 flex-grow: 1;
 margin: 0 20px; /* Add some margin between icons and heading */
-font-size: 20px;
+font-size: 16px;
 color: #181818;
 font-family: 'Open Sans', sans-serif; /* Set Open Sans as the default font */
 }
@@ -104,9 +104,12 @@ font-family: 'Open Sans', sans-serif; /* Set Open Sans as the default font */
 }
 .welcomeText3{
     color:#808080;
-    font-size: 18px;
+    font-size: 15px;
 }
 .welcomeText4{
 color:#181818;
 font-weight: bold;
+}
+.memberText1{
+    font-size: 15px;
 }

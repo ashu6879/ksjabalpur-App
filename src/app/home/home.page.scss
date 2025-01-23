@@ -36,7 +36,7 @@
   
   .custom-button span {
     font-family: "Open Sans", sans-serif;
-    font-size: 13px; /* Button text size */
+    font-size: 10px; /* Button text size */
     color: #333; /* Default text color */
     text-align: center;
   }
@@ -150,12 +150,14 @@ img.discountImage {
 }
 .left {
   color: #223263; /* Ionic primary color */
+  font-size: 15px;
 }
 
 .right {
   color: #EFA318; /* Custom color */
   font-size: 12px;
   margin-right: 40px;
+  font-size: 12px;
 }
 .buildingImage{
   margin: 10px;
@@ -196,4 +198,22 @@ h2.headingIcon {
   font-family: "Open Sans", sans-serif;
   width: 80%;
   font-size: 15px;
+}
+
+ion-slides {
+  height: 100%; // Make slides cover full content area
+}
+
+ion-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+ion-slide img {
+  max-width: 100%;
+  max-height: 60%;
+  margin-bottom: 20px;
 }

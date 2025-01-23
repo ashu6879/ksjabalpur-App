@@ -26,12 +26,12 @@ width: 25px;
 height: 25px;
 }
 .heading-container {
-margin-top: 70px; /* Adjust spacing to avoid overlap with icons */
+margin-top: 60px; /* Adjust spacing to avoid overlap with icons */
 flex-grow: 1; /* Ensures the content fills the screen */
 }
 
 .heading1 {
-font-size: 29px;
+font-size: 25px;
 font-weight: bold;
 padding: 10px;
 font-family: "Open Sans", sans-serif;
@@ -63,7 +63,7 @@ height: 60px;
 border-radius: 15px;
 }
 ion-label.numberText{
-font-size: 21px;
+font-size: 15px;
 color: #181818;
 font-family: 'Open Sans', sans-serif; /* Set Open Sans as the default font */
 }
@@ -81,7 +81,10 @@ font-size: 18px;
 color: #181818;
 font-family: 'Open Sans', sans-serif; /* Set Open Sans as the default font */
 }
-
+.notification-text{
+  font-family: 'Open Sans', sans-serif; /* Set Open Sans as the default font */
+  font-size: 15px;
+}
 .notification-checkbox {
 // --size: 24px; /* Set the size of the checkbox */
 // --border-radius: 50%; /* Circle shape */
@@ -99,7 +102,7 @@ border: 2px solid #000 !important; /* Only black border */
 border-radius: 50%; /* Circular shape */
 }
 .letterText{
-font-size: 15px;
+font-size: 13px;
 color: #808080;
 }
 .signupButton {

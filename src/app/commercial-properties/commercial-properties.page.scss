@@ -88,7 +88,7 @@ ion-header {
       }
       
       .property-title {
-        font-size: 24px;
+        font-size: 18px;
         font-weight: bold;
         margin-top: 12px;
         color: #333;
@@ -98,12 +98,12 @@ ion-header {
       .property-price {
         display: flex;
         align-items: center;
-        margin-top: 10px;
+        margin-top: 8px;
         font-family: "Open Sans", sans-serif;
       }
       
       .old-price {
-        font-size: 13px;
+        font-size: 10px;
         text-decoration: line-through;
         margin-right: 10px;
         color: red;
@@ -112,7 +112,7 @@ ion-header {
       }
       
       .new-price {
-        font-size: 15px;
+        font-size: 13px;
         font-weight: bold;
         color: #FFFFFF;
         padding: 5px 10px;
@@ -121,7 +121,7 @@ ion-header {
       }
       
       .property-address {
-        font-size: 16px;
+        font-size: 12px;
         color: #8C8C8C;
         margin-top: 15px;
         font-family: "Open Sans", sans-serif;
