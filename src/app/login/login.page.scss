@@ -1,18 +1,45 @@
+ion-content {
+    position: relative;
+    height: 100%; /* Ensures the content takes full height */
+  }
+  .outerDiv {
+    padding-bottom: 70px; /* Space to avoid button overlay */
+  }
+  
+.icon-left,
+.icon-right {
+position: absolute;
+top: 20px; /* Adjust to move the icons vertically */
+width: 50px; /* Set icon size */
+height: 50px; /* Set icon size */
+}
+
+.icon-left {
+left: 10px; /* Position the left icon */
+width: 25px;
+height: 25px;
+}
+
+.icon-right {
+right: 10px;
+width: 25px;
+height: 25px;
+}
 .heading-container {
-margin-top: 20px; /* Adjust spacing to avoid overlap with icons */
+margin-top: 60px; /* Adjust spacing to avoid overlap with icons */
 flex-grow: 1; /* Ensures the content fills the screen */
 }
 
 .heading1 {
-font-size: 20px;
+font-size: 25px;
 font-weight: bold;
-padding: 10px;
 font-family: "Open Sans", sans-serif;
 color: #181818;
 }
 .form-container {
 width: 100%;
 max-width: 400px;
+margin-top: 20px;
 }
 
 .input-item {
@@ -30,19 +57,17 @@ ion-input {
 --padding-start: 10px; /* Add padding inside the input field */
 }
 ion-input.placeholderText{
-margin-top: 40px;
+margin-top: 25px;
 height: 60px;
 border-radius: 15px;
 }
+
 ion-label.numberText{
 font-size: 15px;
 color: #181818;
 font-family: 'Open Sans', sans-serif; /* Set Open Sans as the default font */
 }
-.numberText1{
-font-weight: bold;
-}
-.otpAgain-preference {
+.notification-preference {
 padding: 15px;
 display: flex;
 align-items: center;
@@ -52,14 +77,33 @@ margin: 20px 0; /* Add space around */
 
 .otpAgain {
 flex-grow: 1;
-font-size: 15px;
+font-size: 18px;
 color: #181818;
 font-family: 'Open Sans', sans-serif; /* Set Open Sans as the default font */
-cursor: pointer; /* Makes it look clickable */
-text-decoration: none; /* Removes underline by default */
 }
-.otpAgain:hover {
-text-decoration: underline; /* Adds underline on hover */
+.notification-text{
+  font-family: 'Open Sans', sans-serif; /* Set Open Sans as the default font */
+  font-size: 15px;
+}
+.notification-checkbox {
+// --size: 24px; /* Set the size of the checkbox */
+// --border-radius: 50%; /* Circle shape */
+// --background: transparent; /* Ensure no background color */
+// --border: 2px solid #000; /* Black border around the checkbox */
+--checkbox-background-checked: white;
+--border-color-checked: black;
+--checkbox-background: WHITE;
+--border-color: #000000;
+}
+
+.notification-checkbox .checkbox-icon {
+background-color: transparent !important; /* Ensures the fill is transparent */
+border: 2px solid #000 !important; /* Only black border */
+border-radius: 50%; /* Circular shape */
+}
+.letterText{
+font-size: 13px;
+color: #808080;
 }
 .signupButton {
 position: absolute;
@@ -83,28 +127,3 @@ width: 100%;
 font-family: "Open Sans", sans-serif;
 height: 3.5rem;
 }
-.otp-container {
-display: flex; /* Align inputs in a row */
-justify-content: center; /* Center the inputs horizontally */
-gap: 40px; /* Add space between inputs */
-margin-top: 50px; /* Add space above the container */
-}
-
-.otp-box {
-width: 50px; /* Fixed width for each box */
-// height: 60px; /* Fixed height for each box */
-text-align: center; /* Align text in the center */
-font-size: 20px; /* Larger font for better visibility */
-border: 1px solid black; /* Add a light border */
-border-radius: 8px; /* Slightly rounded corners */
-outline: none; /* Remove outline on focus */
-background-color: #f9f9f9; /* Light background color */
-height: 50px;
-}
-.otp-box:focus {
-border-color: #007bff; /* Highlight border on focus */
-box-shadow: 0px 0px 8px #007bff; /* Glow effect on focus */
-} 
-  
-
-  

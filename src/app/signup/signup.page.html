@@ -1,10 +1,7 @@
 <ion-content [fullscreen]="true">
   <div class="outerDiv">
     <!-- Left Icon -->
-    <img src="assets/Vector.png" alt="Left Icon" class="icon-left" (click)="goBack()" />
-
-    <!-- Right Icon -->
-    <img src="assets/question.png" alt="Right Icon" class="icon-right" />
+    <app-go-back></app-go-back>
     <!-- Heading -->
     <div class="heading-container">
       <h1 class="heading1">How do you want to sign up?</h1>
@@ -39,7 +36,7 @@
       <button class="signup-button"(click)="goToSignup()">Sign up</button>
     </div>  
     <div class="memberText">
-      <h4 class="memberText1">Already a member?</h4>
+      <h4 class="memberText1"(click)="goToLogin()">Already a member?</h4>
     </div>  
     <div class="text-container2">
       <div>

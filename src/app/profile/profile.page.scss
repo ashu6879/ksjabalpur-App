@@ -1,0 +1,76 @@
+.profile-image-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Optional: Centers content horizontally */
+  gap: 10px; /* Optional: Adds space between elements */
+  background: #F8D814;
+  height: 400px;
+}
+
+.editHeading {
+  font-family: "Open Sans", sans-serif;
+  margin-top:40px ; /* Removes default margin if not needed */
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.profile-image {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid white;
+}
+  .submit-button{
+    background: #FAAD25;
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    padding: 12px 24px;
+    cursor: pointer;
+    text-align: center;
+    width: 100%;
+    font-family: "Open Sans", sans-serif;
+    height: 3.5rem;
+    }
+    .otp-container {
+    display: flex; /* Align inputs in a row */
+    justify-content: center; /* Center the inputs horizontally */
+    gap: 40px; /* Add space between inputs */
+    margin-top: 50px; /* Add space above the container */
+    }
+    .profileItem{
+      font-size: 1rem;
+      font-family: "Open Sans", sans-serif;
+    }
+    .profileItemDetails{
+      margin-top: 6px;
+      font-size: 20px;
+      font-family: "Open Sans", sans-serif;
+    }
+    ion-item {
+      --background: white; /* Set the background color of the item */
+      --color: black; /* Set the text color to white */
+      margin-bottom: 20px; /* Add spacing between form items */
+    }
+    
+    ion-label {
+      color: black !important; /* Ensure the label text is white */
+    }
+    
+    ion-input, ion-select {
+      --background: white; /* Set the background color of input/select */
+      --color: black; /* Set the text color to white */
+      --placeholder-color: white; /* Set placeholder text color to white */
+    }
+  .profileForm{
+    position: relative;
+    bottom: 5rem;
+    border: 1px solid #ccc; /* Adds a border around the form */
+    border-radius: 15px; /* Rounds the corners of the form */
+    padding: 20px; /* Adds internal spacing inside the form */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow for depth */
+    max-width: 500px; /* Sets a maximum width for the form */
+    margin: 0 auto; /* Centers the form horizontally */
+    background-color: #fff; /* Optional: Sets a background color for the form */
+  }

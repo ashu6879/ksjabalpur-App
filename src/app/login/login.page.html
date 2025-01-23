@@ -1,0 +1,27 @@
+<ion-content [fullscreen]="true">
+  <div class="outerDiv">
+    <img src="assets/Vector.png" alt="Left Icon" class="icon-left" (click)="goBack()" />
+    <div class="heading-container">
+      <h1 class="heading1">Log in with Email</h1>
+    </div>
+    <div class="form-container">
+      <form (ngSubmit)="sendOtp()">
+        <ion-item class="input-item">
+          <ion-label position="floating" class="numberText">Email</ion-label>
+          <ion-input class="placeholderText" type="email" [(ngModel)]="email" name="email" placeholder="Enter email" required></ion-input>
+        </ion-item>
+      </form>
+    </div>
+    <div class="notification-preference">
+      <span class="notification-text">I don’t want to get news, good deals and gifts from App.</span>
+      <ion-checkbox class="notification-checkbox" slot="end"></ion-checkbox>
+    </div>
+    <div class="notification-preference">
+      <span class="letterText">When I’m subscribed. I can opt out by contacting with this app or via link in the newsletter.</span>
+    </div>
+    <div class="signupButton" id="open-loading">
+      <button class="signup-button" (click)="sendOtp()">Send OTP</button>
+      <ion-loading trigger="open-loading" message="Loading..." [duration]="3000" spinner="circles"></ion-loading>
+    </div>
+  </div>  
+</ion-content>

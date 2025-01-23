@@ -52,7 +52,7 @@ export class HomePage implements OnInit, OnDestroy {
     });
   }
   
-  goToSignup() {
+  goToCommercial() {
     this.router.navigate(['/commercial-properties']);
   }
   

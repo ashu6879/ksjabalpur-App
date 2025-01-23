@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';  // Ensure this is imported
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
@@ -8,10 +9,13 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   imports: [IonicModule, FormsModule],  // Ensure IonicModule is here
 })
-export class FooterComponent  implements OnInit {
+export class FooterComponent {
+  constructor(private router: Router) {}
 
-  constructor() { }
-
-  ngOnInit() {}
-
+  goToprofile() {
+    this.router.navigate(['/profile']); // Navigate to the Signup page
+  }
+  goToHome() {
+    this.router.navigate(['/home']); // Navigate to the Signup page
+  }
 }

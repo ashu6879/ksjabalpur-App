@@ -5,16 +5,15 @@
     </div>
     <div class="form-container">
       <form>
-        <!-- Phone Number Input -->
         <ion-item class="input-item">
-          <ion-label position="floating"class="numberText">Phone Verification</ion-label>
-          <ion-label position="floating"class="numberText">Code will sent on <span class="numberText1">+91 - 12989200823 </span></ion-label>
+          <ion-label position="floating" class="numberText">Phone Verification</ion-label>
+          <ion-label position="floating" class="numberText">Code will sent on <span class="numberText1">+91 - 12989200823 </span></ion-label>
           <div class="otp-container">
-            <ion-input #otpInput class="otp-box" type="text" maxlength="1" [(ngModel)]="otp[0]" (input)="onInput($event, 0)" (keydown)="onKeydown($event, 0)"></ion-input>
-            <ion-input #otpInput class="otp-box" type="text" maxlength="1" [(ngModel)]="otp[1]" (input)="onInput($event, 1)" (keydown)="onKeydown($event, 1)"></ion-input>
-            <ion-input #otpInput class="otp-box" type="text" maxlength="1" [(ngModel)]="otp[2]" (input)="onInput($event, 2)" (keydown)="onKeydown($event, 2)"></ion-input>
-            <ion-input #otpInput class="otp-box" type="text" maxlength="1" [(ngModel)]="otp[3]" (input)="onInput($event, 3)" (keydown)="onKeydown($event, 3)"></ion-input>
-          </div>      
+            <input #otpInput1 type="text" maxlength="1" class="otp-box" (input)="onInput($event, 0)" (keydown)="onKeydown($event, 0)">
+            <input #otpInput2 type="text" maxlength="1" class="otp-box" (input)="onInput($event, 1)" (keydown)="onKeydown($event, 1)">
+            <input #otpInput3 type="text" maxlength="1" class="otp-box" (input)="onInput($event, 2)" (keydown)="onKeydown($event, 2)">
+            <input #otpInput4 type="text" maxlength="1" class="otp-box" (input)="onInput($event, 3)" (keydown)="onKeydown($event, 3)">
+          </div>
         </ion-item>
       </form>
     </div>
@@ -22,7 +21,7 @@
       <span class="otpAgain">Didn't get OTP? Send OTP again.</span>
     </div>
     <div class="signupButton">
-      <button class="signup-button" (click)="goToSignup()">Submit</button>
+      <button class="signup-button" (click)="onSubmit()">Submit</button>
     </div>
   </div>
 </ion-content>

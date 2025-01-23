@@ -1,0 +1,46 @@
+<ion-content>
+  <div class="profile-image-container">
+    <div>
+      <h1 class="editHeading">Edit Profile</h1>
+    </div>
+    <div class="imageDiv">
+      <img [src]="profileImage" alt="Profile Image" class="profile-image" />
+    </div>
+    <div>
+      <h1 class="editHeading1">KSjabalpur</h1>
+    </div>
+  </div>
+  <div class="outerDiv">
+    <!-- Form Fields -->
+    <div class="profileForm">
+      <form (ngSubmit)="submitProfile()" class="profileFormRelative">
+        <ion-item class="itemForm">
+          <ion-label position="floating" class="profileItem">Username</ion-label>
+          <ion-input [(ngModel)]="Username" name="Username" required class="profileItemDetails"></ion-input>
+        </ion-item>
+        <ion-item class="itemForm">
+          <ion-label position="floating" class="profileItem">First Name</ion-label>
+          <ion-input [(ngModel)]="firstName" name="firstName" required class="profileItemDetails"></ion-input>
+        </ion-item>
+
+        <ion-item class="itemForm">
+          <ion-label position="floating" class="profileItem">Last Name</ion-label>
+          <ion-input [(ngModel)]="lastName" name="lastName" required class="profileItemDetails"></ion-input>
+        </ion-item>
+        <ion-item class="itemForm">
+          <ion-label position="floating" class="profileItem">Phone</ion-label>
+          <ion-input [(ngModel)]="phone" name="phone" type="phone" required class="profileItemDetails"></ion-input>
+        </ion-item>
+
+        <ion-item class="itemForm">
+          <ion-label position="floating" class="profileItem">Email</ion-label>
+          <ion-input [(ngModel)]="email" name="email" type="email" required class="profileItemDetails"></ion-input>
+        </ion-item>
+      </form>
+      <div class="signupButton">
+        <button expand="full" class="submit-button"type="submit">Save Profile</button>
+      </div>
+    </div>
+  </div>  
+  <app-footer></app-footer>
+</ion-content>

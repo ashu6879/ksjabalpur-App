@@ -1,0 +1,14 @@
+
+.icon-left,
+.icon-right {
+position: absolute;
+top: 20px; /* Adjust to move the icons vertically */
+width: 50px; /* Set icon size */
+height: 50px; /* Set icon size */
+}
+
+.icon-left {
+left: 15px; /* Position the left icon */
+width: 25px;
+height: 25px;
+}
