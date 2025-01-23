@@ -1,11 +1,17 @@
 <ion-content>
   <app-sidebar></app-sidebar>
-  <div class="outerDiv"> 
-    <!-- Image below the header -->
+  <div class="outerDiv">
     <div class="firstImage">
-      <img src="assets/firstImage.png" alt="Image Below Header" class="below-header-image" />
-    </div>
-    <div class="button-container">
+      <div class="swiper-container">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide" *ngFor="let image of images">
+            <img [src]="image" alt="Image Below Header" class="below-header-image" />
+          </div>
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>  
+    <!-- <div class="button-container">
       <button class="custom-button">
         <img src="assets/commercial.png" alt="Icon 1" class="iconCategory"/>
         <span class="categoryText"(click)="goToCommercial()">Commercial</span>
@@ -18,15 +24,26 @@
         <img src="assets/residential.png" alt="Icon 3" class="iconCategory"/>
         <span class="categoryText">Residential</span>
       </button>
+    </div> -->
+    <div class="swiper-container category-slider">
+      <div class="swiper-wrapper">
+        <!-- Dynamic slides -->
+        <div class="swiper-slide" *ngFor="let category of categories">
+          <button class="custom-button">
+            <!-- <span class="categoryText">{{ category.Category }}</span> -->
+          </button>
+        </div>
+      </div>
     </div>
-    <!-- <div class="button-container1">
-      <button class="custom-button1 button-one">
+
+    <div class="button-container1">
+      <!-- <button class="custom-button1 button-one">
         <span class="imageText">POST YOUR REQUIREMENTS</span>
-      </button>
+      </button> -->
       <button class="custom-button1 button-two">
         <img src="assets/discount.png" class="discountImage" alt=""><span class="imageText">ADD OFFER</span>
       </button>
-    </div> -->
+    </div>
     <div class="featuredContainer">
       <span class="left">Featured Property</span>
       <span class="right">Show All</span>
