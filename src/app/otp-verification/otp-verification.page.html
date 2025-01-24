@@ -7,7 +7,7 @@
       <form>
         <ion-item class="input-item">
           <ion-label position="floating" class="numberText">Phone Verification</ion-label>
-          <ion-label position="floating" class="numberText">Code will sent on <span class="numberText1">+91 - 12989200823 </span></ion-label>
+          <ion-label position="floating" class="numberText">Code will sent on: <span class="numberText1">{{email}}</span></ion-label>
           <div class="otp-container">
             <input #otpInput1 type="text" maxlength="1" class="otp-box" (input)="onInput($event, 0)" (keydown)="onKeydown($event, 0)">
             <input #otpInput2 type="text" maxlength="1" class="otp-box" (input)="onInput($event, 1)" (keydown)="onKeydown($event, 1)">

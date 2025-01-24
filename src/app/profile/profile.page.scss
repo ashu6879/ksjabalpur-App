@@ -74,3 +74,8 @@
     margin: 0 auto; /* Centers the form horizontally */
     background-color: #fff; /* Optional: Sets a background color for the form */
   }
+  .itemForm .profileItemDetails::placeholder {
+    color: black !important; /* Sets the placeholder text color to black */
+    opacity: 1; /* Ensures the placeholder text is fully visible */
+    font-weight: bold; /* Optional: Makes the text bold */
+  }

@@ -12,5 +12,6 @@ export const ROUTES = {
   GET_BUILDERS: `${API_BASE_URL}/getbuilder`,
   BUILDER_BYID: `${API_BASE_URL}/getbuilder_by_ID`,
   PROPERTY_CAT_BYID: `${API_BASE_URL}/properties_by_category`,
+  UPDATE_PROFILE: `${API_BASE_URL}/properties_by_category`,
   // Add other routes here as needed
 };

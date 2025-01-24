@@ -6,6 +6,7 @@ import { ROUTES } from '../config/api.config'; // Adjust the import path as need
 import { HttpClient } from '@angular/common/http';
 import { ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
+import { Storage } from '@ionic/storage-angular';
 
 @Component({
   selector: 'app-otp-verification',
@@ -26,14 +27,20 @@ export class OtpVerificationPage {
     private http: HttpClient,
     private router: Router,
     private route: ActivatedRoute,
-    private loadingController: LoadingController
+    private loadingController: LoadingController,
+    private storage: Storage
   ) {
+    this.initStorage();
     // Retrieve email from route parameters (if applicable)
     this.route.queryParams.subscribe((params) => {
       if (params['email']) {
         this.email = params['email'];
       }
     });
+  }
+  
+  async initStorage() {
+    await this.storage.create(); // Initialize Ionic Storage
   }
   ngAfterViewInit() {
     // Focus on the first input field after view initialization
@@ -87,23 +94,26 @@ export class OtpVerificationPage {
       console.error('Email is missing. Please handle this error appropriately.');
       return; // Prevent sending the request without email
     }
+  
     const loading = await this.loadingController.create({
       message: 'Verifying OTP...',
-      spinner: 'circles'
+      spinner: 'circles',
     });
     await loading.present();
-    this.http.post(ROUTES.VERIFY_OTP, { otp: enteredOtp,email: this.email }) 
-      .subscribe(
-        (response) => {
-          console.log('OTP verified successfully:', response);
-          loading.dismiss();
-          this.router.navigate(['/home']);;
-          // Handle successful verification 
-        },
-        (error) => {
-          console.error('OTP verification failed:', error);
-          // Handle verification error 
-        }
-      );
+  
+    try {
+      const response = await this.http
+        .post(ROUTES.VERIFY_OTP, { otp: enteredOtp, email: this.email })
+        .toPromise(); // Use toPromise to work with async/await
+  
+      console.log('OTP verified successfully:', response);
+      await this.storage.set('email', this.email);
+      await loading.dismiss();
+      this.router.navigate(['/home']); // Navigate to the home page
+    } catch (error) {
+      console.error('OTP verification failed:', error);
+      await loading.dismiss(); // Ensure the loader is dismissed in case of an error
+    }
   }
+  
 }
