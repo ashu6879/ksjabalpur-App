@@ -10,5 +10,7 @@ export const ROUTES = {
   FEATURED_PROPERTY: `${API_BASE_URL}/featured_properties`,
   All_PROPERTY: `${API_BASE_URL}/properties`,
   GET_BUILDERS: `${API_BASE_URL}/getbuilder`,
+  BUILDER_BYID: `${API_BASE_URL}/getbuilder_by_ID`,
+  PROPERTY_CAT_BYID: `${API_BASE_URL}/properties_by_category`,
   // Add other routes here as needed
 };

@@ -1,0 +1,231 @@
+.container {
+    display: flex; /* Use Flexbox to align items */
+    justify-content: space-between; /* Ensures left, center, and right items are spaced out */
+    align-items: center; /* Vertically align items in the center */
+    width: 100%; /* Make the container take up the full width */
+  }
+  
+  .left {
+    flex: 0 0 auto; /* Do not allow left section to grow or shrink */
+  }
+  
+  .image.backArrowimage {
+    width: 35px; /* Set the width of the image */
+    height: 35px; /* Set the height of the image */
+  }
+  
+  .center {
+    flex: 1; /* This will make the center section take the available space */
+    text-align: center; /* Center the name text */
+  }
+  
+  .name {
+    font-size: 25px; /* Set the font size for the name */
+    font-weight: bold; /* Optional, make the name bold */
+    font-family: "Open Sans", sans-serif;
+    color: #20568B;
+  }
+  
+  .right {
+    flex: 0 0 auto; /* Right section is empty, so it doesn't take up space */
+  }
+  /* Make the swiper container responsive and properly sized */
+.image-slider {
+    padding: 15px 0;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .swiper-slide {
+    display: flex; /* Use flexbox to center the image */
+    justify-content: center; /* Center the image horizontally */
+    align-items: center; /* Center the image vertically */
+  }
+  
+  .property-image {
+    width: 100%; /* Make the image responsive */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: cover; /* Ensure images fill the container without stretching */
+    border-radius: 10px;
+  }
+  .propertyTitle{
+    font-family: "Open Sans", sans-serif;
+    color: #004680;
+    font-weight: bolder;
+  }
+  .location-info {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between icon and text */
+    font-size: 14px; /* Adjust the font size as needed */
+  }
+  
+  /* Location icon styling */
+  .location-icon {
+    width: 20px; /* Set the size of the location icon */
+    height: 25px; /* Keep the icon square */
+  }
+  
+  /* Address styling */
+  .property-address {
+    font-size: 15px;
+    font-family: "Open Sans", sans-serif;
+    color: #0D0B0C; /* Text color */
+  }
+/* Main container to hold all rows */
+/* Main container to hold all rows */
+.image-text-grid {
+    display: flex;
+    flex-direction: column; /* Stack rows vertically */
+    gap: 20px; /* Space between rows */
+  }
+  
+  /* Each row in the grid */
+  .row {
+    display: flex;
+    gap: 20px; /* Space between columns */
+    justify-content: space-between; /* Spread columns evenly */
+  }
+  
+  /* Each column in the grid */
+  .column {
+    width: 45%; /* Each column takes up 45% of the row width */
+  }
+  
+  /* Container for image and text to display them inline */
+  .image-text {
+    display: flex;
+    align-items: center; /* Align image and text vertically in the center */
+    gap: 10px; /* Space between the image and the text */
+  }
+  
+  /* Image styling */
+  .imageIcon {
+    width: 35px; /* Set a fixed width for the image */
+    height: 30px; /* Set a fixed height for the image */
+  }
+  
+  /* Text styling */
+  .imagetext {
+    font-size: 14px;
+    color: #808080; /* Text color */
+    padding: 0 15px;
+  }
+  .fourImage{
+    margin-top: 20px;
+  }
+  /* Container for the "More Details" section */
+.more-details-container {
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 8px; /* Optional, to add rounded corners */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Optional, for some shadow effect */
+  }
+  
+  /* Heading for the More Details section */
+  .more-details-heading {
+    font-family: "Open Sans", sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    color: #FAAD25;
+    margin-bottom: 20px; /* Space between heading and the rows */
+  }
+  
+/* Each row containing key-value pairs */
+.details-row {
+    display: flex;
+    justify-content: flex-start; /* Align rows to the left */
+    padding: 10px 0; /* Add padding to rows for better spacing */
+    border-bottom: 1px solid #ddd; /* Light border to separate rows */
+  }
+  
+  /* Key styling */
+  .key {
+    font-family: "Open Sans", sans-serif;
+    color: #000000;
+    width: 200px; /* Optional: Fixed width to align all keys */
+    padding-right: 10px; /* Add some space between the key and value */
+  }
+  
+  /* Value styling */
+  .value {
+    font-family: "Open Sans", sans-serif;
+    color: #000000;
+    flex-grow: 1; /* Ensures the value takes up remaining space */
+  }
+  .description{
+    font-size: 12px;
+    font-family: "Open Sans", sans-serif;
+  }
+/* Container for the Total Amount and Enquire Now button */
+.amount-enquire-container {
+    padding: 20px 0;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Optional shadow */
+  }
+  
+  /* Row to contain two columns */
+  .row {
+    display: flex;
+    justify-content: space-between; /* Distribute columns evenly */
+    align-items: center; /* Align both items vertically */
+    height: 100%; /* Ensure the row stretches to fill the container */
+  }
+  
+  /* Column 1: Total Amount */
+  .total-amount {
+    flex: 5; /* Take 4 parts of the total space */
+    text-align: left; /* Align text to the left */
+  }
+  
+  .label {
+    font-family: "Open Sans", sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    color: #555;
+  }
+  
+  .amount {
+    font-family: "Open Sans", sans-serif;
+    display: block; /* Ensure amount appears on a new line */
+    font-size: 20px; /* Increase font size for the amount */
+    font-weight: bold;
+    color: #333;
+    margin-top: 5px; /* Add space between the label and the amount */
+  }
+  
+  /* Column 2: Enquire Now Button */
+  .enquire-button {
+    flex: 7; /* Take 8 parts of the total space */
+    text-align: center; /* Center align the button */
+    background-color: #FAAD25; /* Yellow background */
+    display: flex;
+    justify-content: center; /* Center the button */
+    align-items: center; /* Align button vertically */
+    height: 75px; /* Make the column height 100% of its container */
+  }
+  
+  .enquire-btn {
+    font-family: "Open Sans", sans-serif;
+    padding: 10px 20px;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #FAAD25; /* Yellow background */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%; /* Make the button fill the container */
+    max-width: 200px; /* Limit button width */
+    transition: background-color 0.3s;
+  }
+  
+  .enquire-btn:hover {
+    background-color: #FAAD25; /* Darker yellow on hover */
+  }
+  
+  
+  
+  
+  

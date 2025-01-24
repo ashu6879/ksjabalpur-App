@@ -29,13 +29,41 @@
       <div class="swiper-wrapper">
         <!-- Iterate over categories using *ngFor -->
         <div class="swiper-slide" *ngFor="let category of categories">
-          <button class="custom-button">
+          <button class="custom-button" (click)="goToCategory(category)">
             <img src="assets/industrial.png" alt="Category Icon" class="iconCategory">
-            <span class="categoryText">{{ category }}</span>
+            <span class="categoryText">{{ category.name }}</span>
           </button>
         </div>
       </div>
     </div>
+    
+    <!-- Show message if no categories are available or found -->
+    <div *ngIf="noPropertiesFound" class="no-properties-message">
+      <p>No properties found for the selected category.</p>
+    </div>
+    
+    <div class="featuredContainer">
+      <span class="left">builder</span>
+      <span class="right">Show All</span>
+    </div> 
+        <div class="swiper-container getBuilder-slider builderSlider">
+          <div class="swiper-wrapper">
+            <!-- Dynamic slides based on API response -->
+            <div class="swiper-slide recentlyadded " *ngFor="let builder of builders">
+                <div class="box">
+                  <div class="box-content">
+                    <img [src]="builder.BuilderLogo" alt="Image" class="buldingIcon" />
+                  </div>
+                  <div class="box-content">
+                    <h2 class="headingIcon">{{ builder.BuilderName }}</h2>
+                  </div>
+                  <div class="box-content">
+                    <ion-button expand="block" class="view-more" (click)="goToBuilder({ id: builder.ID, name: builder.BuilderName })">View More</ion-button>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
 
 
     <!-- <div class="button-container1">
@@ -59,11 +87,8 @@
     <!-- Property Slider -->
     <div class="swiper-container property-slider mainSlider">
       <div class="swiper-wrapper">
-        <!-- Iterate over the properties using *ngFor -->
         <div class="swiper-slide recentlyadded" *ngFor="let property of properties">
-            <!-- Property Details -->
             <div class="property-details">
-              
               <img src="assets/building.png" alt="Category Icon" class="property-image">
               <div class="feturedSlider">
                 <span class="property-title">{{ property.property_name }}</span>
@@ -158,59 +183,6 @@
         <h1>Slide 3</h1>
       </ion-slide>
     </ion-slides> -->
-    <div class="featuredContainer">
-      <span class="left">builder</span>
-      <span class="right">Show All</span>
-    </div> 
-    <!-- <ion-grid>
-      <ion-row>
-        <ion-col size="6">
-          <div class="box">
-            <div class="box-content">
-              <img src="assets/buildingLogo.png" alt="Image" class="buldingIcon"/>
-            </div>
-            <div class="box-content">
-              <h2 class="headingIcon">xyz builder</h2>
-            </div>
-            <div class="box-content">
-              <ion-button expand="block" class="view-more">View More</ion-button>
-            </div>
-          </div>
-        </ion-col>
-  
-        <ion-col size="6">
-          <div class="box">
-            <div class="box-content">
-              <img src="assets/buildingLogo.png" alt="Image" class="buldingIcon"/>
-            </div>
-            <div class="box-content">
-              <h2 class="headingIcon">xyz builder</h2>
-            </div>
-            <div class="box-content">
-              <ion-button expand="block" class="view-more">View More</ion-button>
-            </div>
-          </div>
-        </ion-col>
-      </ion-row>
-    </ion-grid> -->
-        <div class="swiper-container getBuilder-slider builderSlider">
-          <div class="swiper-wrapper">
-            <!-- Dynamic slides based on API response -->
-            <div class="swiper-slide recentlyadded " *ngFor="let builder of builders">
-                <div class="box">
-                  <div class="box-content">
-                    <img [src]="builder.BuilderLogo" alt="Image" class="buldingIcon" />
-                  </div>
-                  <div class="box-content">
-                    <h2 class="headingIcon">{{ builder.BuilderName }}</h2>
-                  </div>
-                  <div class="box-content">
-                    <ion-button expand="block" class="view-more">View More</ion-button>
-                  </div>
-                </div>
-            </div>
-          </div>
-        </div>
     <!-- <div class="featuredContainer">
       <span class="left">Offers</span>
       <span class="right">Show All</span>

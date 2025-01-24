@@ -1,20 +1,25 @@
-ion-header {
-    --padding-top: 20px; /* Adjust top padding */
-    --padding-bottom: 0px; /* Remove bottom padding */
-    }
+// ion-header {
+//     --padding-top: 20px; /* Adjust top padding */
+//     --padding-bottom: 0px; /* Remove bottom padding */
+//     }
     
-    ion-toolbar {
-    height: 50px; /* Increase the height of the toolbar */
-    --border-width: 0px; /* Remove bottom border */
-    --box-shadow: none; /* Remove any shadow if present */
-    }
+//     ion-toolbar {
+//     height: 50px; /* Increase the height of the toolbar */
+//     --border-width: 0px; /* Remove bottom border */
+//     --box-shadow: none; /* Remove any shadow if present */
+//     }
     
-    .topBar{
-      box-shadow: none;
-    }
+//     .topBar{
+//       box-shadow: none;
+//     }
     
-    .topRibbon {
-    padding: 0; /* Remove padding around the icons */
+//     .topRibbon {
+//     padding: 0; /* Remove padding around the icons */
+//     }
+    .icon-left {
+    left: 15px; /* Position the left icon */
+    width: 25px;
+    height: 25px;
     }
     
     .center-image-container {

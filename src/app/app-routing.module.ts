@@ -8,7 +8,9 @@ import { OtpVerificationPage } from './otp-verification/otp-verification.page'; 
 import { HomePage } from './home/home.page'; // Import SignupPage
 import { ProfilePage } from './profile/profile.page'; // Import SignupPage
 import { LoginPage } from './login/login.page'; // Import SignupPage
-import { CommercialPropertiesPage } from './commercial-properties/commercial-properties.page'; // Import SignupPage
+import { PropertyPage } from './property/property.page'; // Import SignupPage
+import { AllBuildersPage } from './all-builders/all-builders.page'; // Import SignupPage
+import { CommonPropertyPagePage } from './common-property-page/common-property-page.page'; // Import SignupPage
 import { HttpClientModule } from '@angular/common/http'; // <-- Import HttpClientModule
 import { FormsModule } from '@angular/forms'; // Import FormsModule for ngModel
 
@@ -21,9 +23,14 @@ const routes: Routes = [
   { path: 'signup-verification', component: SignupVerificationPage },
   { path: 'otp-verification', component: OtpVerificationPage },
   { path: 'home', component: HomePage },
-  { path: 'commercial-properties', component: CommercialPropertiesPage },
+  { path: 'common-property-page', component: CommonPropertyPagePage },
   { path: 'profile', component: ProfilePage },
-  { path: 'login', component: LoginPage }
+  { path: 'login', component: LoginPage },
+  { path: 'all-builders', component: AllBuildersPage },
+  { path: 'property', component: PropertyPage },
+
+
+
 
 // Route to SignupPage
 ];

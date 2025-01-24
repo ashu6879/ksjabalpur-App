@@ -1,0 +1,53 @@
+<ion-content>
+  <div class="topBar">
+  
+    <!-- Main content -->
+    <div id="main-content"></div>
+  
+    <!-- Header with images -->
+    <ion-header>
+      <ion-toolbar color="white" class="toolbar_mine">
+        <!-- Left Image (Open Sidebar) -->
+        <ion-buttons slot="start">
+          <img src="assets/Vector.png" alt="Left Icon" class="icon-left" (click)="goBack()" />
+        </ion-buttons>
+  
+        <!-- Center Image (visible when sidebar is closed) -->
+        <ion-buttons slot="end" class="center-image-container">
+          <!-- <ion-button>
+            <img src="assets/ks.png" alt="Center Image" />
+          </ion-button> -->
+          <span class="headerTitle">Builders</span>
+        </ion-buttons>
+  
+        <!-- Right Image -->
+        <ion-buttons slot="end" class="topRibbon">
+          <ion-button>
+            <img src="assets/bell.png" alt="Right Image" />
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+  </div>  
+
+  <!-- Outer Div to hold the properties loop -->
+  <div class="outerDiv"> 
+    <!-- Loop through the categoryData to display each property -->
+    <div *ngIf="!isLoading && !errorMessage && buildersData.length">
+      <div *ngFor="let builder of buildersData" class="builder-card">
+        <img [src]="builder.BuilderLogo" alt="{{ builder.BuilderName }}" class="builder-logo" />
+        <div class="builder-info">
+          <h3 class="property-title">{{ builder.BuilderName }}</h3>
+          <p class="property-title">Company: {{ builder.BuilderCompany }}</p>
+          <p>Created On: {{ builder.created_on | date: 'medium' }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="!isLoading && !errorMessage && !buildersData.length" class="no-data">
+      No builders found.
+    </div>
+
+  </div> 
+  <app-footer></app-footer>
+</ion-content>

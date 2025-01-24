@@ -30,7 +30,7 @@ export class ProfilePage {
 
   // Set the profile image based on the gender selection
   setProfileImage() {
-    if (this.gender === 'male') {
+    if (this.gender === 'female') {
       this.profileImage = 'assets/maleIcon.jpg';
     } else {
       this.profileImage = 'assets/femaleIcon.jpg';
