@@ -21,6 +21,8 @@ export class HomePage implements OnInit, OnDestroy, AfterViewInit {
   swiper2: Swiper | undefined;
   images: string[] = []; // Array to hold image URLs
   categories: string[] = []; // Array to hold category names
+  properties: any[] = [];  // Array to store the property data
+  builders: any[] = []; // Will hold the API data
   isMenuOpen: boolean = false;
   // Base URL for the image
   baseUrl = 'http://65.0.7.21/ksjabalpur/';
@@ -37,38 +39,41 @@ export class HomePage implements OnInit, OnDestroy, AfterViewInit {
     });
     this.fetchImages(); // Call fetchImages when the component is initialized
     this.fetchCategories();
+    this.fetchProperties();
+    this.fetchTodaydeal();
+    this.fetchRecentlyAdded();
+    this.fetchAndInitializeSwiper();
   }
 
   ngAfterViewInit() {
-    // Initialize Swiper after images are fetched
+    // Initialize the first Swiper (1 slide per view)
     setTimeout(() => {
-      this.swiper = new Swiper('.swiper-container', {
-        slidesPerView: 1,
+      this.swiper = new Swiper('.swiper-container.first-slider', {
+        slidesPerView: 1,  // Show one slide per view
         spaceBetween: 10,
-        loop: true, // Enable infinite loop
+        loop: true,  // Enable infinite loop
         pagination: {
           el: '.swiper-pagination',
-          clickable: true, // Enable clicking on dots
+          clickable: true,  // Enable clicking on dots
         },
       });
-      // console.log('Swiper initialized:', this.swiper);
+      console.log('First Swiper initialized:', this.swiper);
     }, 500);  // Delay to ensure images are loaded before initializing Swiper
-
-      // Initialize Swiper after images are fetched
-      setTimeout(() => {
-        this.swiper2 = new Swiper('.swiper-container', {
-          slidesPerView: 1,
-          spaceBetween: 10,
-          loop: true, // Enable infinite loop
-          pagination: {
-            el: '.swiper-pagination',
-            clickable: true, // Enable clicking on dots
-          },
-        });
-    
-        // console.log('Swiper initialized:', this.swiper);
-      }, 500);  // Delay to ensure images are loaded before initializing Swiper
-
+  
+    // Initialize the second Swiper (3 slides per view)
+    setTimeout(() => {
+      this.swiper2 = new Swiper('.swiper-container.second-slider', {
+        slidesPerView: 3,  // Show three slides per view
+        spaceBetween: 20,  // Space between slides
+        loop: true,  // Enable infinite loop
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true,  // Enable clicking on dots
+        },
+      });
+      console.log('Second Swiper initialized:', this.swiper2);
+    }, 500);  // Delay to ensure images are loaded before initializing Swiper
+    // Listen for clicks outside (optional functionality)
     document.addEventListener('click', this.handleOutsideClick.bind(this));
   }
 
@@ -139,26 +144,32 @@ export class HomePage implements OnInit, OnDestroy, AfterViewInit {
   
 
   fetchCategories() {
-    interface CategoryResponse {
-      Category: string; // Ensure this matches the exact field name from the API
-    }
+    // interface CategoryResponse {
+    //   id: string;
+    //   Category: string;
+    //   created_on: string;
+    // }
   
     const apiUrl = ROUTES.PROPERTY_CATEGORY; // Replace with your actual API URL
     const headers = new HttpHeaders({
       'Authorization': '2245', // Add the Authorization header
     });
   
-    this.http.get<CategoryResponse[]>(apiUrl, { headers }).subscribe({
+    this.http.get<any>(apiUrl, { headers }).subscribe({
       next: (data) => {
         console.log('API Response:', data);
-  
+    
         if (Array.isArray(data)) {
-          // Extract the Category field into the categories array
+          // Handle array response
           this.categories = data.map((item) => item.Category);
-          console.log('Processed Categories:', this.categories);
+        } else if (data && data.Category) {
+          // Handle single object response
+          this.categories = [data.Category];
         } else {
           console.error('Unexpected API response structure:', data);
         }
+    
+        console.log('Processed Categories:', this.categories);
       },
       error: (err) => {
         console.error('API call failed:', err);
@@ -166,16 +177,130 @@ export class HomePage implements OnInit, OnDestroy, AfterViewInit {
     });
   }
 
-// Handle category click
-goToCategory(category: { name: string; iconUrl: string }) {
-  console.log('Category clicked:', category); // Log the clicked category details
-  console.log('Navigating to category:', category.name);
+  fetchProperties() {
+    const apiUrl = ROUTES.FEATURED_PROPERTY; // Replace with your actual API URL
+    const headers = new HttpHeaders({
+      'Authorization': '2245', // Add the Authorization header
+    });
+    this.http.get<any[]>(apiUrl, { headers }).subscribe(data => {
+      this.properties = data;
+      this.initializePropertySlider();
+    });
+  }
+  initializePropertySlider() {
+    setTimeout(() => {
+      new Swiper('.property-slider', {
+        slidesPerView: 1,   // Display three slides at a time
+        spaceBetween: 10,    // Space between slides
+        loop: false,          // Enable infinite loop
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true,  // Enable clicking on dots
+        },
+      });
+    }, 500);  // Delay to ensure images are loaded before initializing Swiper
+  }  
 
-  // Add your navigation logic here, e.g., navigate to category page
-  this.router.navigate([`/commercial-properties`]).then(() => {
-    console.log('Navigation successful to:', category.name); // Confirm successful navigation
-  }).catch((err) => {
-    console.error('Navigation error:', err); // Log any navigation error
-  });
-}
+  fetchTodaydeal() {
+    const apiUrl = ROUTES.FEATURED_PROPERTY; // Replace with your actual API URL
+    const headers = new HttpHeaders({
+      'Authorization': '2245', // Add the Authorization header
+    });
+    this.http.get<any[]>(apiUrl, { headers }).subscribe(data => {
+      this.properties = data;
+      this.initializeTodayDealSlider();
+    });
+  }
+  initializeTodayDealSlider() {
+    setTimeout(() => {
+      new Swiper('.todayDeal-slider', {
+        slidesPerView: 1,   // Display three slides at a time
+        spaceBetween: 10,    // Space between slides
+        loop: false,          // Enable infinite loop
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true,  // Enable clicking on dots
+        },
+      });
+    }, 500);  // Delay to ensure images are loaded before initializing Swiper
+  }  
+
+  fetchRecentlyAdded() {
+    const apiUrl = ROUTES.All_PROPERTY; // Replace with your actual API URL
+    const headers = new HttpHeaders({
+      'Authorization': '2245', // Add the Authorization header
+    });
+    this.http.get<any[]>(apiUrl, { headers }).subscribe(data => {
+      this.properties = data;
+      this.initializeRecentlySlider();
+    });
+  }
+  initializeRecentlySlider() {
+    setTimeout(() => {
+      new Swiper('.Recentlyadded-slider', {
+        slidesPerView: 1,   // Display three slides at a time
+        spaceBetween: 10,    // Space between slides
+        loop: false,          // Enable infinite loop
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true,  // Enable clicking on dots
+        },
+      });
+    }, 500);  // Delay to ensure images are loaded before initializing Swiper
+  }  
+  
+// Handle category click
+  goToCategory(category: { name: string; iconUrl: string }) {
+    console.log('Category clicked:', category); // Log the clicked category details
+    console.log('Navigating to category:', category.name);
+
+    // Add your navigation logic here, e.g., navigate to category page
+    this.router.navigate([`/commercial-properties`]).then(() => {
+      console.log('Navigation successful to:', category.name); // Confirm successful navigation
+    }).catch((err) => {
+      console.error('Navigation error:', err); // Log any navigation error
+    });
+  }
+
+  // Function to fetch data and initialize swiper
+  fetchAndInitializeSwiper() {
+    const apiUrl = ROUTES.GET_BUILDERS;  // Replace with your actual API URL
+    const headers = new HttpHeaders({
+      'Authorization': '2245',  // Add the Authorization header
+    });
+
+    // Fetch builders data
+    this.http.get<any[]>(apiUrl, { headers }).subscribe(
+      (response) => {
+        this.builders = this.addBaseUrlToImages(response);  // Add base URL to image paths
+        this.initializeSwiper();  // Initialize Swiper after data is fetched
+      },
+      (error) => {
+        console.error('Error fetching data from API:', error);
+      }
+    );
+  }
+
+  // Function to add the base URL to image paths
+  addBaseUrlToImages(builders: any[]) {
+    return builders.map(builder => {
+      builder.BuilderLogo = this.baseUrl + builder.BuilderLogo; // Add base URL to image path
+      return builder;
+    });
+  }
+
+  // Function to initialize Swiper
+  initializeSwiper() {
+    setTimeout(() => {
+      this.swiper = new Swiper('.getBuilder-slider', {
+        slidesPerView: 2,  // Show two slides at a time
+        spaceBetween: 20,  // Adjust space between slides
+        loop: false,         // Enable infinite loop
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+        },
+      });
+    }, 500);  // Delay to ensure images are loaded before initializing Swiper
+  }
 }

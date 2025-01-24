@@ -3,6 +3,9 @@
     box-shadow: none; /* Ensures no shadow is applied to the IonFooter component */
     border: none; /* Removes any border that might look like a shadow */
   }
+  .footerMargin{
+    margin-bottom: 70px;
+  }
   ion-title {
     font-size: 14px;
     color: white;
