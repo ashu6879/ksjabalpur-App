@@ -79,3 +79,28 @@
     opacity: 1; /* Ensures the placeholder text is fully visible */
     font-weight: bold; /* Optional: Makes the text bold */
   }
+  .logoutButton {
+    margin-top: 20px;
+  }
+  
+  .logout-button {
+    background-color: #f44336; /* Red color for logout */
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 10px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .logout-button ion-icon {
+    margin-right: 8px; /* Space between icon and text */
+  }
+  
+  .logout-button:hover {
+    background-color: #d32f2f; /* Darker red on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  

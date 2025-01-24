@@ -329,50 +329,51 @@ export class HomePage implements OnInit, OnDestroy, AfterViewInit {
       console.log('Category clicked:', builder.id);
       console.log('Category Name:', builder.name);
   
-      // Call POST API to fetch data for the selected category
       const apiUrl = ROUTES.BUILDER_BYID; // Replace with actual API URL
       const headers = new HttpHeaders({
         'Authorization': '2245', // Replace with your actual Authorization token if needed
       });
   
       const body = {
-        builder: builder.id, // Send categoryId as part of the body
+        builder_id: builder.id, // Send builderId as part of the body
       };
   
-      // Send POST request to fetch category data
       this.http.post<any>(apiUrl, body, { headers }).subscribe({
         next: (responseData) => {
           console.log('Fetched category data:', responseData);
+  
           const combinedData = {
-            builderID: builder.id,           // Category ID
-            builderName: builder.name,       // Category Name
-            builderData: responseData.data,   // Fetched category data
+            builderID: builder.id,
+            builderName: builder.name,
+            builderData: responseData.message || [], // Ensure builderData is an array
           };
+  
           // Check if the response status is false and data is 'no'
-          if (responseData.status === false && responseData.data === 'no') {
+          if (responseData.status === false && responseData.message === 'no') {
             console.log('No Builders found');
             this.noPropertiesFound = true;  // Set the flag to true
-            return; // Exit the function and skip navigation
           } else {
-            // Reset noPropertiesFound to false if data is found
             this.noPropertiesFound = false;
-  
-            // Proceed with navigation, passing fetched data as state
-            this.router.navigate([`/all-builders/`], {
-              state: { combinedData: combinedData },
-            }).then(() => {
-              console.log('Navigation successful to category page with data:', responseData.data);
-            }).catch((err) => {
-              console.error('Navigation error:', err);
-            });
           }
+  
+          // Proceed with navigation, passing fetched data and noPropertiesFound flag as state
+          this.router.navigate([`/all-builders/`], {
+            state: {
+              combinedData: combinedData,
+              noPropertiesFound: this.noPropertiesFound, // Pass the flag
+            },
+          }).then(() => {
+            console.log('Navigation successful to category page with data:', responseData.message);
+          }).catch((err) => {
+            console.error('Navigation error:', err);
+          });
         },
         error: (err) => {
           console.error('API request failed:', err); // Handle any error from the API request
         },
       });
     } else {
-      console.error('Invalid category object:', builder); // Log an error if category doesn't have id
+      console.error('Invalid category object:', builder);
     }
   }
   // Function to add the base URL to image paths

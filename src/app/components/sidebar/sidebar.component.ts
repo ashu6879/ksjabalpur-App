@@ -2,6 +2,7 @@ import { Component, OnInit,OnDestroy } from '@angular/core';
 import { IonicModule } from '@ionic/angular';  // Ensure this is imported
 import { FormsModule } from '@angular/forms';
 import { MenuController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -13,7 +14,7 @@ import { MenuController } from '@ionic/angular';
 export class SidebarComponent  implements  OnInit, OnDestroy {
   isMenuOpen: boolean = false;
 
-  constructor(private menuCtrl: MenuController) {}
+  constructor(private menuCtrl: MenuController,private router: Router,) {}
 
   ngOnInit() {
     this.menuCtrl.isOpen().then((isOpen) => {
@@ -48,6 +49,9 @@ export class SidebarComponent  implements  OnInit, OnDestroy {
     this.menuCtrl.close('mainMenu').then(() => {
       this.isMenuOpen = false;
     });
+  }
+  gotoPofile(){
+    this.router.navigate(['/profile']); // Navigate to the Signup page
   }
 }
 

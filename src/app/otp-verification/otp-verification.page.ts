@@ -102,18 +102,27 @@ export class OtpVerificationPage {
     await loading.present();
   
     try {
-      const response = await this.http
+      const response: any = await this.http
         .post(ROUTES.VERIFY_OTP, { otp: enteredOtp, email: this.email })
         .toPromise(); // Use toPromise to work with async/await
   
       console.log('OTP verified successfully:', response);
-      await this.storage.set('email', this.email);
+  
+      // Retrieve and log user_id
+      if (response?.data?.user_id) {
+        await this.storage.set('user_id', response.data.user_id); // Save email in local storage
+        console.log('User ID:', response.data.user_id); // Log user_id to the console
+      } else {
+        console.warn('User ID not found in the response.');
+      }
+  
+      await this.storage.set('email', this.email); // Save email in local storage
       await loading.dismiss();
       this.router.navigate(['/home']); // Navigate to the home page
+      await this.storage.set('is_logged_in', true); // Save session status
     } catch (error) {
       console.error('OTP verification failed:', error);
       await loading.dismiss(); // Ensure the loader is dismissed in case of an error
     }
   }
-  
 }

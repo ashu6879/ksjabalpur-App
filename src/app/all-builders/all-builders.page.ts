@@ -20,7 +20,8 @@ import { HttpHeaders } from '@angular/common/http';
 })
 export class AllBuildersPage implements OnInit {
   baseUrl = 'http://65.0.7.21/ksjabalpur/';
-  buildersData: any[] = []; // Variable to store fetched data
+  noPropertiesFound: boolean = false;
+  builderData: any; // This will store the combined data object
   isLoading: boolean = false; // Loading state
   errorMessage: string = ''; // Error message
 
@@ -31,7 +32,13 @@ export class AllBuildersPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.fetchBuilders(); // Call fetch function on init
+    // Retrieve state passed from the previous page
+    const navigationState = history.state;
+
+    if (navigationState) {
+      this.builderData = navigationState.combinedData;
+      this.noPropertiesFound = navigationState.noPropertiesFound;
+    }
   }
 
   ngAfterViewInit() {}
@@ -57,7 +64,7 @@ export class AllBuildersPage implements OnInit {
       .subscribe(
         (data) => {
           // Process each builder's data to include the full image URL
-          this.buildersData = data.map(builder => ({
+          this.builderData = data.map(builder => ({
             ...builder,
             BuilderLogo: this.baseUrl + builder.BuilderLogo // Attach the base URL to the image path
           }));

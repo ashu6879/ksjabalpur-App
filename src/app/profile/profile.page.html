@@ -15,13 +15,13 @@
     <div class="profileForm">
       <form (ngSubmit)="submitProfile()" class="profileFormRelative">
         <ion-item class="itemForm">
-          <ion-label position="floating" class="profileItem">Username</ion-label>
+          <ion-label position="floating" class="profileItem">Email</ion-label>
           <ion-input 
-            [(ngModel)]="Username" 
-            name="Username" 
+            [(ngModel)]="Email" 
+            name="Email" 
             required 
             class="profileItemDetails"
-            placeholder="Enter Username"
+            placeholder="Enter Email"
             readonly
             (click)="showEmailMessage = 'Email cannot be edited';">
           </ion-input>
@@ -31,6 +31,20 @@
         </ion-item>
 
         <ion-item class="itemForm">
+          <ion-label position="floating" class="profileItem">Username</ion-label>
+          <ion-input 
+            [(ngModel)]="Username" 
+            name="Username" 
+            type="text" 
+            required 
+            class="profileItemDetails"
+            (ionFocus)="clearPlaceholder('Username')"
+            (ionBlur)="resetPlaceholder('Username')"
+            [placeholder]="Username === '' ? 'Enter Username' : ''">
+          </ion-input>
+        </ion-item>
+        
+        <ion-item class="itemForm">
           <ion-label position="floating" class="profileItem">Phone</ion-label>
           <ion-input 
             [(ngModel)]="phone" 
@@ -38,26 +52,30 @@
             type="tel" 
             required 
             class="profileItemDetails"
-            placeholder="Enter number">
+            (ionFocus)="clearPlaceholder('Phone')"
+            (ionBlur)="resetPlaceholder('Phone')"
+            [placeholder]="phone === '' ? 'Enter Phone Number' : ''">
           </ion-input>
         </ion-item>
     
-        <!-- <ion-item class="itemForm">
-          <ion-label position="floating" class="profileItem">Email</ion-label>
-          <ion-input [(ngModel)]="email" name="email" type="email" required class="profileItemDetails"></ion-input>
-        </ion-item> -->
-        
         <ion-item class="itemForm">
           <ion-label position="floating" class="profileItem">Gender</ion-label>
           <ion-select [(ngModel)]="gender" name="gender" required class="profileItemDetails" interface="popover" (ngModelChange)="setProfileImage()">
-            <ion-select-option value="male">Male</ion-select-option>
-            <ion-select-option value="female">Female</ion-select-option>
+            <ion-select-option [value]="'0'">Male</ion-select-option>
+            <ion-select-option [value]="'1'">Female</ion-select-option>
           </ion-select>
         </ion-item>
     
         <!-- Save Profile Button -->
         <div class="signupButton">
           <button expand="full" class="submit-button" type="submit">Save Profile</button>
+        </div>
+
+        <!-- Logout Button -->
+        <div class="logoutButton">
+          <button expand="full" class="logout-button" (click)="confirmLogout()">
+            <ion-icon name="power" slot="start"></ion-icon> Logout
+          </button>
         </div>
       </form>
     </div>

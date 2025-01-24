@@ -13,26 +13,22 @@ import { AllBuildersPage } from './all-builders/all-builders.page'; // Import Si
 import { CommonPropertyPagePage } from './common-property-page/common-property-page.page'; // Import SignupPage
 import { HttpClientModule } from '@angular/common/http'; // <-- Import HttpClientModule
 import { FormsModule } from '@angular/forms'; // Import FormsModule for ngModel
+import { AuthGuard } from './auth.guard'; // Import the AuthGuard
 
 
 
 const routes: Routes = [
   { path: '', component: SplashPage }, // Default route to SplashPage
   { path: 'welcome', component: WelcomePage }, // Route to WelcomePage
-  { path: 'signup', component: SignupPage },
-  { path: 'signup-verification', component: SignupVerificationPage },
-  { path: 'otp-verification', component: OtpVerificationPage },
-  { path: 'home', component: HomePage },
-  { path: 'common-property-page', component: CommonPropertyPagePage },
-  { path: 'profile', component: ProfilePage },
-  { path: 'login', component: LoginPage },
-  { path: 'all-builders', component: AllBuildersPage },
-  { path: 'property', component: PropertyPage },
-
-
-
-
-// Route to SignupPage
+  { path: 'signup', component: SignupPage }, // No AuthGuard needed
+  { path: 'signup-verification', component: SignupVerificationPage }, // No AuthGuard needed
+  { path: 'otp-verification', component: OtpVerificationPage }, // No AuthGuard needed
+  { path: 'home', component: HomePage, canActivate: [AuthGuard] }, // Protected route
+  { path: 'common-property-page', component: CommonPropertyPagePage, canActivate: [AuthGuard] }, // Protected route
+  { path: 'profile', component: ProfilePage, canActivate: [AuthGuard] }, // Protected route
+  { path: 'login', component: LoginPage }, // No AuthGuard needed
+  { path: 'all-builders', component: AllBuildersPage, canActivate: [AuthGuard] }, // Protected route
+  { path: 'property', component: PropertyPage, canActivate: [AuthGuard] }, // Protected route
 ];
 
 @NgModule({

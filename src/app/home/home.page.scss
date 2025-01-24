@@ -9,13 +9,16 @@
   display: block; /* Removes any inline spacing issues */
   margin: 0 auto; /* Centers the image within the div */
   height: 160px;
-  width: 100%;
+  width: 400px;
 } 
 .button-container {
     display: flex; /* Aligns buttons in a row */
     justify-content: center; /* Centers the buttons horizontally */
     gap: 20px; /* Adds spacing between buttons */
     margin-top: 20px;
+  }
+  .buildingImage{
+    width: 100%;
   }
   
   // .custom-button {
