@@ -38,27 +38,20 @@ export class ProfilePage {
   async retrieveEmail() {
     const storedEmail = await this._storage?.get('email');
     if (storedEmail) {
-      console.log('Email retrieved from Ionic Storage:', storedEmail);
+      // console.log('Email retrieved from Ionic Storage:', storedEmail);
       this.Username = storedEmail; // Assign the retrieved email to Username
     } else {
       // console.log('No email found in Ionic Storage');
       this.Username = 'Default Username'; // Optional: set a default value if no email is found
     }
   }
-
-  // // Save email to Ionic Storage (if needed for additional functionality)
-  // async saveEmail(email: string) {
-  //   await this._storage?.set('email', email);
-  //   console.log('Email saved to Ionic Storage:', email);
-  // }
-
   async ngOnInit() {
     // console.log('ngOnInit called...');
     await this.retrieveEmail(); // Ensure email is retrieved during component initialization
   }
 
   setProfileImage() {
-    console.log('Setting profile image based on gender:', this.gender);
+    // console.log('Setting profile image based on gender:', this.gender);
     if (this.gender === 'male') {
       this.profileImage = 'assets/maleIcon.jpg';
     } else if (this.gender === 'female') {
@@ -66,7 +59,7 @@ export class ProfilePage {
     } else {
       this.profileImage = 'assets/otherIcon.jpg'; // Default for any other option
     }
-    console.log('Profile image set to:', this.profileImage);
+    // console.log('Profile image set to:', this.profileImage);
   }
 
   submitProfile() {
