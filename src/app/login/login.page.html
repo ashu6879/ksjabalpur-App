@@ -10,8 +10,11 @@
           <ion-label position="floating" class="numberText">Email</ion-label>
           <ion-input class="placeholderText" type="email" [(ngModel)]="email" name="email" placeholder="Enter email" required></ion-input>
         </ion-item>
-      </form>
+      </form> 
     </div>
+    <div class="memberText">
+      <h4 class="memberText1"(click)="goTosignup()">Don't have an account?</h4>
+    </div> 
     <div class="notification-preference">
       <span class="notification-text">I don’t want to get news, good deals and gifts from App.</span>
       <ion-checkbox class="notification-checkbox" slot="end"></ion-checkbox>

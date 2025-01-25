@@ -4,12 +4,23 @@ import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FooterComponent } from '../components/footer/footer.component';
 import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common'; // Import Location service
-import { HttpClient } from '@angular/common/http'; // Import HttpClient
-import { catchError } from 'rxjs/operators'; // To handle errors
-import { of } from 'rxjs'; // To handle fallback values
+import { Location } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import { ROUTES } from '../config/api.config'; // Adjust the import path as needed
-import { HttpHeaders } from '@angular/common/http';
+
+interface Property {
+  id: string;
+  property_name: string;
+  land_category: string;
+  current_price: string;
+  previous_price: string;
+}
+
+interface Builder {
+  id: string;
+  builder_name: string;
+  builderData: Property[]; // Explicitly define builderData as an array of Property
+}
 
 @Component({
   selector: 'app-all-builders',
@@ -20,61 +31,42 @@ import { HttpHeaders } from '@angular/common/http';
 })
 export class AllBuildersPage implements OnInit {
   baseUrl = 'http://65.0.7.21/ksjabalpur/';
-  noPropertiesFound: boolean = false;
-  builderData: any; // This will store the combined data object
-  isLoading: boolean = false; // Loading state
-  errorMessage: string = ''; // Error message
+  combinedData?: Builder; // Optional type
+  noPropertiesFound = false;
+  isLoading = false;
+  errorMessage = '';
 
   constructor(
     private route: ActivatedRoute,
     private location: Location,
-    private http: HttpClient // Inject HttpClient
+    private http: HttpClient
   ) {}
 
-  ngOnInit() {
-    // Retrieve state passed from the previous page
+  ngOnInit(): void {
     const navigationState = history.state;
 
     if (navigationState) {
-      this.builderData = navigationState.combinedData;
-      this.noPropertiesFound = navigationState.noPropertiesFound;
+      this.combinedData = navigationState.combinedData;
+      // this.noPropertiesFound = navigationState.noPropertiesFound;
+
+      console.log('Received combined data:', this.combinedData);
+      // console.log('No properties found:', this.noPropertiesFound);
+
+      if (this.combinedData?.builderData?.length) {
+        this.combinedData.builderData.forEach((property) => {
+          console.log('Property Details:', property);
+        });
+      } else {
+        console.error('No builder data found');
+        this.errorMessage = 'No builder data available';
+      }
+    } else {
+      console.error('No navigation state found');
+      this.errorMessage = 'Navigation state is missing';
     }
   }
 
-  ngAfterViewInit() {}
-
-  ngOnDestroy() {}
-
-  goBack() {
+  goBack(): void {
     this.location.back(); // Navigate to the previous page
-  }
-
-  /**
-   * Fetch builders from API
-   */
-  fetchBuilders() {
-    const apiUrl = ROUTES.GET_BUILDERS; // Replace with your actual API endpoint
-    const headers = new HttpHeaders({
-      Authorization: '2245', // Add the Authorization header if required
-    });
-  
-    this.isLoading = true; // Show loading indicator
-    this.http
-      .get<any[]>(apiUrl, { headers }) // Use GET request with headers
-      .subscribe(
-        (data) => {
-          // Process each builder's data to include the full image URL
-          this.builderData = data.map(builder => ({
-            ...builder,
-            BuilderLogo: this.baseUrl + builder.BuilderLogo // Attach the base URL to the image path
-          }));
-          this.isLoading = false; // Hide loading indicator
-        },
-        (error) => {
-          console.error('Error fetching builders:', error);
-          this.errorMessage = 'Failed to fetch builders. Please try again later.';
-          this.isLoading = false; // Hide loading indicator even if there's an error
-        }
-      );
   }
 }

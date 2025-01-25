@@ -13,4 +13,5 @@ export const ROUTES = {
   BUILDER_BYID: `${API_BASE_URL}/get_properties_by_builder_id`,
   PROPERTY_CAT_BYID: `${API_BASE_URL}/properties_by_category`,
   UPDATE_PROFILE: `${API_BASE_URL}/updateUserDetails`,
+  PROFILE_DETAILS: `${API_BASE_URL}/user_profile_details`,
 };

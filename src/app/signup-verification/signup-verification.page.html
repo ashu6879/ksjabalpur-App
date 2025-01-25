@@ -10,15 +10,10 @@
       <h1 class="heading1">Sign Up with Phone and Email</h1>
     </div>
     <div class="form-container">
-      <form>
-        <!-- Phone Number Input -->
+      <form (ngSubmit)="sendOtp()">
         <ion-item class="input-item">
-          <ion-label position="floating"class="numberText">Phone Number</ion-label>
-          <ion-input class="placeholderText" type="text" placeholder="Enter phone number" required></ion-input>
-        </ion-item>
-        <ion-item class="input-item">
-          <ion-label position="floating"class="numberText">Email Address</ion-label>
-          <ion-input class="placeholderText" type="email" placeholder="Enter email address" required></ion-input>
+          <ion-label position="floating" class="numberText">Email</ion-label>
+          <ion-input class="placeholderText" type="email" [(ngModel)]="email" name="email" placeholder="Enter email" required></ion-input>
         </ion-item>
       </form>
     </div>
@@ -30,7 +25,7 @@
       <span class="letterText">When I’m subscribed. I can opt out by contacting with this app or via link in the newsletter.</span>
     </div>
     <div class="signupButton">
-      <button class="signup-button" (click)="goToSignup()">Send OTP</button>
+      <button class="signup-button" (click)="sendOtp()">Send OTP</button>
     </div>
   </div>  
 </ion-content>

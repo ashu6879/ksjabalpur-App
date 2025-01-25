@@ -146,31 +146,26 @@ export class HomePage implements OnInit, OnDestroy, AfterViewInit {
   
 
   fetchCategories() {
-    // interface CategoryResponse {
-    //   id: string;
-    //   Category: string;
-    //   created_on: string;
-    // }
-  
     const apiUrl = ROUTES.PROPERTY_CATEGORY; // Replace with your actual API URL
     const headers = new HttpHeaders({
       'Authorization': '2245', // Add the Authorization header
     });
   
     this.http.get<any>(apiUrl, { headers }).subscribe({
-      next: (data) => {
-        // console.log('API Response:', data);
-    
-        if (Array.isArray(data)) {
+      next: (responce) => {
+        console.log('my API Response:', responce);
+        const abc = responce.data;
+        console.log("abc is",abc)
+        if (Array.isArray(abc)) {
           // Handle array response
-          this.categories = data.map((item) => {
+          this.categories = abc.map((item) => {
             return { id: item.id, name: item.Category }; // Make sure the object contains 'id' and 'name'
           });
-        } else if (data && data.Category) {
+        } else if (abc && abc.Category) {
           // Handle single object response
-          this.categories = [{ id: data.id, name: data.Category }];
+          this.categories = [{ id: abc.id, name: abc.Category }];
         } else {
-          console.error('Unexpected API response structure:', data);
+          console.error('Unexpected API response structure:', abc);
         }
         // console.log('Processed Categories:', this.categories);
       },
@@ -311,18 +306,31 @@ export class HomePage implements OnInit, OnDestroy, AfterViewInit {
     const headers = new HttpHeaders({
       'Authorization': '2245',  // Add the Authorization header
     });
-
+  
     // Fetch builders data
-    this.http.get<any[]>(apiUrl, { headers }).subscribe(
+    this.http.get<any>(apiUrl, { headers }).subscribe(
       (response) => {
-        this.builders = this.addBaseUrlToImages(response);  // Add base URL to image paths
-        this.initializeSwiper();  // Initialize Swiper after data is fetched
+        // Log the full response to the console
+        console.log('Response data from API:', response);
+  
+        // Check if response contains expected data
+        if (response && response.data && Array.isArray(response.data)) {
+          console.log('Builders data:', response.data);
+  
+          this.builders = this.addBaseUrlToImages(response.data);  // Add base URL to image paths
+          console.log('Builders with base URLs:', this.builders);  // Log the builders with added base URL
+  
+          this.initializeSwiper();  // Initialize Swiper after data is fetched
+        } else {
+          console.warn('Unexpected response format:', response);
+        }
       },
       (error) => {
         console.error('Error fetching data from API:', error);
       }
     );
   }
+  
     
   goToBuilder(builder: { id: string; name: string }) {
     if (builder && builder.id) {
@@ -330,6 +338,7 @@ export class HomePage implements OnInit, OnDestroy, AfterViewInit {
       console.log('Category Name:', builder.name);
   
       const apiUrl = ROUTES.BUILDER_BYID; // Replace with actual API URL
+      console.log(apiUrl)
       const headers = new HttpHeaders({
         'Authorization': '2245', // Replace with your actual Authorization token if needed
       });

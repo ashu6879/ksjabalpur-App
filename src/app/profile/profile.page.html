@@ -7,7 +7,7 @@
       <img [src]="profileImage" alt="Profile Image" class="profile-image" />
     </div>
     <div>
-      <h1 class="editHeading1">KSjabalpur</h1>
+      <h1 class="editHeading1">{{ Username }}</h1>
     </div>
   </div>
   <div class="outerDiv">
@@ -74,7 +74,7 @@
         <!-- Logout Button -->
         <div class="logoutButton">
           <button expand="full" class="logout-button" (click)="confirmLogout()">
-            <ion-icon name="power" slot="start"></ion-icon> Logout
+            <ion-icon name="power" slot="start"></ion-icon><span class="powerIcon">Logout</span> 
           </button>
         </div>
       </form>

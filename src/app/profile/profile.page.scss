@@ -40,6 +40,7 @@
     margin-top: 50px; /* Add space above the container */
     }
     .profileItem{
+      font-weight: bold;
       font-size: 1rem;
       font-family: "Open Sans", sans-serif;
     }
@@ -81,19 +82,19 @@
   }
   .logoutButton {
     margin-top: 20px;
+    text-align: center;
   }
   
-  .logout-button {
-    background-color: #f44336; /* Red color for logout */
+  .logout-button{
+    background-color: #f44336;
     color: white;
     font-weight: bold;
     border-radius: 5px;
     padding: 10px;
     text-transform: uppercase;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+    text-align: center;
+    font-size: 15px;
+}
   
   .logout-button ion-icon {
     margin-right: 8px; /* Space between icon and text */

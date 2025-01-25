@@ -105,6 +105,12 @@ height: 50px;
 border-color: #007bff; /* Highlight border on focus */
 box-shadow: 0px 0px 8px #007bff; /* Glow effect on focus */
 } 
+.custom-toast {
+    background-color: #f44336; /* Red background for error */
+    color: #ffffff; /* White text color */
+    text-align: center;
+    font-family: 'Open Sans', sans-serif; /* Set Open Sans as the default font */
+  }
   
 
   

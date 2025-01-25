@@ -1,3 +1,13 @@
+interface ProfileResponse {
+  status: boolean;
+  data: Array<{
+    ID: string;
+    username: string;
+    email: string;
+    phone: string;
+    gender: string;
+  }>;
+}
 import { Component } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { GoBackComponent } from '../components/go-back/go-back.component'; // Import GoBackComponent
@@ -8,7 +18,7 @@ import { ROUTES } from '../config/api.config'; // Adjust the import path as need
 import { CommonModule } from '@angular/common';  // Import CommonModule
 import { Storage } from '@ionic/storage-angular';
 import { AlertController } from '@ionic/angular';
-import { Router  } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -18,63 +28,108 @@ import { Router  } from '@angular/router';
   imports: [IonicModule, GoBackComponent, FormsModule, FooterComponent, CommonModule], // Import IonicModule here
 })
 export class ProfilePage {
-  profileImage: string ="assets/maleIcon.jpg";
-  phone: string = '123-456-7890'; // Existing value for Phone
+  profileImage: string = "assets/maleIcon.jpg";
+  phone: string = ' '; // Default value for Phone
   Email: string = "";
   User_id: string = "";
-  Username: string = 'JohnDoe'; // Existing value for Username
+  Username: string = ' '; // Default value for Username
   showEmailMessage: string = "";
   gender: string = '0'; // Default value set to '0' (Male)
   private _storage: Storage | null = null; // Private storage instance
 
-  constructor(private http: HttpClient, private storage: Storage,private alertController: AlertController,private router: Router,) { 
-    // console.log('Initializing ProfilePage...');
+  constructor(
+    private http: HttpClient,
+    private storage: Storage,
+    private alertController: AlertController,
+    private router: Router
+  ) {
     this.initStorage();
   }
 
   // Initialize the Ionic Storage
   async initStorage() {
     this._storage = await this.storage.create(); // Create the storage instance
-    this.retrieveEmail(); // Retrieve the email after storage is initialized
+    this.retrieveEmailAndUserId(); // Retrieve data after storage is initialized
   }
 
-  // Retrieve email from Ionic Storage
-  async retrieveEmail() {
-    const storedEmail = await this._storage?.get('email');
-    const user_id = await this._storage?.get('user_id');
-    if (storedEmail && user_id) {
-      // console.log('Email retrieved from Ionic Storage:', storedEmail);
-      console.log('user_id retrieved from Ionic Storage:', user_id);
-      this.Email = storedEmail; // Assign the retrieved email to Username
-      this.User_id = user_id;
-    } else {
-      // console.log('No email found in Ionic Storage');
-      this.Email = 'Default Email'; // Optional: set a default value if no email is found
+  // Retrieve email and user_id from Ionic Storage
+  async retrieveEmailAndUserId() {
+    try {
+      const storedEmail = await this._storage?.get('email');
+      const user_id = await this._storage?.get('user_id');
+      
+      console.log('Stored email:', storedEmail);
+      console.log('Stored user_id:', user_id);
+      
+      if (storedEmail && user_id) {
+        this.Email = storedEmail;
+        this.User_id = user_id;
+        console.log('user_id retrieved from Ionic Storage:', this.User_id);
+        
+        const apiUrl = ROUTES.PROFILE_DETAILS; 
+        const headers = new HttpHeaders({
+          Authorization: '2245', // Authorization header
+          'Content-Type': 'application/json',
+        });
+
+        const body = {
+          user_id: this.User_id,
+        };
+
+        console.log('Sending profile update data:', body);
+
+        // Make the POST request with user_id in the body
+        this.http.post<ProfileResponse>(apiUrl, body, { headers }).subscribe(
+          (response) => {
+            console.log('Profile data response:', response);
+
+            const data = response.data[0]; // Now TypeScript knows response has 'data'
+
+            // For Username
+            this.Username = data.username ? data.username : 'Enter Username';
+
+            // For Phone
+            this.phone = data.phone ? data.phone : 'Enter Phone Number';
+
+            // For Gender
+            this.gender = data.gender ? data.gender : '0';  // Use the placeholder if no data
+
+            // Dynamically set the profile image based on the gender
+            this.setProfileImage();
+
+            console.log('Username:', this.Username);
+            console.log('Phone:', this.phone);
+            console.log('Gender:', this.gender);
+          },
+          (error) => {
+            console.error('Failed to retrieve profile:', error);
+          }
+        );
+      } else {
+        console.log('No email or user_id found in Ionic Storage');
+        this.Email = 'Default Email'; // Optional: set a default value if no email is found
+      }
+    } catch (error) {
+      console.error('Error retrieving email and user_id from Ionic Storage:', error);
     }
   }
-  // async ngOnInit() {
-  //   // console.log('ngOnInit called...');
-  //   await this.retrieveEmail(); // Ensure email is retrieved during component initialization
-  // }
-
+  
   setProfileImage() {
-    // Map the string gender value to the corresponding profile image
+    // Dynamically map the gender value to the corresponding profile image
     if (this.gender === '0') {
-      this.profileImage = 'assets/maleIcon.jpg';
+      this.profileImage = 'assets/maleIcon.jpg';  // Male image
     } else if (this.gender === '1') {
-      this.profileImage = 'assets/female.jpg';
-    } else {
-      this.profileImage = 'assets/otherIcon.jpg'; // Default for any other option
-    }
+      this.profileImage = 'assets/female.jpg';  // Female image
+    } 
     console.log('Profile image set to:', this.profileImage);
   }
 
   submitProfile() {
     const profileData = {
-      user_id:this.User_id,
+      user_id: this.User_id,
       phone: this.phone,
-      username:this.Username,
-      gender:this.gender
+      username: this.Username,
+      gender: this.gender
     };
     console.log('Submitting profile data:', profileData);
 
@@ -105,6 +160,7 @@ export class ProfilePage {
       this.showEmailMessage = '';
     }, 3000);  // Hide message after 3 seconds
   }
+
   // Clear the placeholder text when the user focuses on the input
   clearPlaceholder(field: string) {
     if (field === 'Username' && this.Username === "Enter Username") {
@@ -115,7 +171,6 @@ export class ProfilePage {
     }
   }
 
-  // Reset the placeholder text if the input is empty after losing focus
   resetPlaceholder(field: string) {
     if (field === 'Username' && this.Username.trim() === "") {
       this.Username = "Enter Username"; // Reset Username placeholder text
@@ -123,7 +178,11 @@ export class ProfilePage {
     if (field === 'Phone' && this.phone.trim() === "") {
       this.phone = "Enter Phone Number"; // Reset Phone placeholder text
     }
+    if (field === 'Gender' && (this.gender === "" || this.gender === "Select Gender")) {
+      this.gender = "Select Gender"; // Reset Gender placeholder text
+    }
   }
+
   async confirmLogout() {
     const alert = await this.alertController.create({
       header: 'Confirm Logout',
@@ -147,6 +206,7 @@ export class ProfilePage {
 
     await alert.present();
   }
+
   async logout() {
     await this.storage.remove('user_id'); // Remove user_id from session storage
     await this.storage.remove('email'); // Remove email from session storage
