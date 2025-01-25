@@ -35,7 +35,7 @@
     <!-- Loop through the categoryData to display each property -->
     <div *ngIf="categoryData && categoryData.length > 0; else noProperties" class="properties-container">
       <!-- Loop through categoryData -->
-      <div *ngFor="let property of categoryData" class="property-card">
+      <div *ngFor="let property of categoryData" class="property-card" (click)="goToPropertyDetails(property.id)">
         <div>
           <!-- Image section -->
           <img 

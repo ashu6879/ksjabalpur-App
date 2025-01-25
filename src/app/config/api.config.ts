@@ -14,4 +14,5 @@ export const ROUTES = {
   PROPERTY_CAT_BYID: `${API_BASE_URL}/properties_by_category`,
   UPDATE_PROFILE: `${API_BASE_URL}/updateUserDetails`,
   PROFILE_DETAILS: `${API_BASE_URL}/user_profile_details`,
+  PROPERTY_DETAILS: `${API_BASE_URL}/property_details_by_property_id`,
 };

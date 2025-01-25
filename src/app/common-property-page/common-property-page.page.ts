@@ -6,6 +6,7 @@ import { FooterComponent } from '../components/footer/footer.component';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Location } from '@angular/common'; // Import Location service
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -20,7 +21,7 @@ export class CommonPropertyPagePage  implements   OnDestroy {
   categoryData: any[] = [];
   categoryName: string = '';
   categoryId: string = '';
-  constructor(private menuCtrl: MenuController,private route: ActivatedRoute,private location: Location) {}
+  constructor(private menuCtrl: MenuController,private route: ActivatedRoute,private location: Location,private router: Router,) {}
 
   ngOnInit() {
     const combinedData = history.state.combinedData; // Access the combined data
@@ -45,5 +46,8 @@ export class CommonPropertyPagePage  implements   OnDestroy {
   }
   goBack() {
     this.location.back(); // This will navigate the user to the previous page
+  }
+  goToPropertyDetails(propertyId: number): void {
+    this.router.navigate(['/property'], { state: { propertyId: propertyId } });
   }
 }

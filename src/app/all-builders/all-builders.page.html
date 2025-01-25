@@ -1,1 +1,93 @@
-<h1></h1>
+<ion-content>
+  <div class="topBar">
+  
+    <!-- Main content -->
+    <div id="main-content"></div>
+  
+    <!-- Header with images -->
+    <ion-header>
+      <ion-toolbar color="white" class="toolbar_mine">
+        <!-- Left Image (Open Sidebar) -->
+        <ion-buttons slot="start">
+          <img src="assets/Vector.png" alt="Left Icon" class="icon-left" (click)="goBack()" />
+        </ion-buttons>
+  
+        <!-- Center Image (visible when sidebar is closed) -->
+        <ion-buttons slot="end" class="center-image-container">
+          <!-- <ion-button>
+            <img src="assets/ks.png" alt="Center Image" />
+          </ion-button> -->
+          <div><h2 class="propertyTitle">{{builderName}}</h2></div>
+          <!-- <span class="headerTitle"></span> -->
+        </ion-buttons>
+  
+        <!-- Right Image -->
+        <ion-buttons slot="end" class="topRibbon">
+          <ion-button>
+            <img src="assets/bell.png" alt="Right Image" />
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+  </div> 
+  <div class="outerDiv"> 
+    <!-- Check if builderData is available and has properties -->
+    <div *ngIf="builderData && builderData.length > 0; else noProperties" class="properties-container">
+      <!-- Loop through builderData -->
+      <div *ngFor="let property of builderData" class="property-card"(click)="goToPropertyDetails(property.id)">
+        <div>
+          <!-- Image section -->
+          <img 
+            [src]="property.image || 'assets/categoryImage2.png'" 
+            alt="Property Image" 
+            class="property-image"
+          />
+  
+          <!-- Title section -->
+          <h2 class="propertyTitle">{{ property.property_name }}</h2>
+          <p class="property-address">{{ property.property_address || 'Address not available' }}</p>
+          <div class="container">
+            <div class="left-area propertyTitle">
+              <!-- Left area content goes here -->
+              <p>{{property.property_area}}</p>
+            </div>
+            <div class="right-button">
+              <button>{{property.current_price}}</button>
+            </div>
+          </div>
+          <!-- Price section -->
+          <!-- <div class="property-price">
+            <span class="old-new-price">
+              <span class="old-price">{{ property.previous_price || 'N/A' }}</span>
+              <span class="new-price">{{ property.current_price || 'N/A' }} /Monthly</span>
+            </span>
+          </div> -->
+  
+          <!-- Address section -->
+
+  
+          <!-- Additional Information -->
+          <!-- <p class="property-area">{{ property.property_area || 'Area not specified' }}</p>
+          <p class="property-description">{{ property.property_desc || 'Description not available' }}</p>
+          <p class="property-finance-approval">Finance Approval: {{ property.finance_aproval || 'Not specified' }}</p>
+          <p class="property-constructed-date">Constructed on: {{ property.Constructed_date || 'Not specified' }}</p>
+  
+          <!-- Contact details -->
+          <!-- <p class="property-contact-details">Contact: {{ property.contact_details || 'Not available' }}</p>  -->
+  
+          <!-- Other details -->
+          <!-- <p class="property-documents">Documents: {{ property.documents || 'Not specified' }}</p>
+          <p class="property-soil-type">Soil Type: {{ property.d1_input || 'Not specified' }}</p> -->
+        </div>
+      </div>
+    </div>
+  
+    <!-- Template for no properties found -->
+    <ng-template #noProperties>
+      <div class="no-properties-message">
+        <p>No properties found for this builder.</p>
+      </div>
+    </ng-template>
+  </div>
+  <app-footer></app-footer>
+</ion-content>

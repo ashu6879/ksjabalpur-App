@@ -87,25 +87,26 @@
     <!-- Property Slider -->
     <div class="swiper-container property-slider mainSlider">
       <div class="swiper-wrapper">
-        <div class="swiper-slide recentlyadded" *ngFor="let property of properties">
-            <div class="property-details">
-              <img src="assets/building.png" alt="Category Icon" class="property-image">
-              <div class="feturedSlider">
-                <span class="property-title">{{ property.property_name }}</span>
-                <div class="property-price">
-                  <span class="old-new-price">
-                    <span class="old-price">{{ property.current_price }}</span>
-                    <span class="new-price">{{ property.previous_price }}</span>
-                  </span>   
-                </div>
-                <div class="property-info">
-                  <span class="property-address">{{ property.property_address }},{{ property.property_area }}</span>
-                </div>
-              </div>  
-            </div>
+        <div class="swiper-slide recentlyadded" *ngFor="let property of properties" (click)="goToPropertyDetails(property.id)">
+          <div class="property-details">
+            <img src="assets/building.png" alt="Category Icon" class="property-image">
+            <div class="feturedSlider">
+              <span class="property-title">{{ property.property_name }}</span>
+              <div class="property-price">
+                <span class="old-new-price">
+                  <span class="old-price">{{ property.current_price }}</span>
+                  <span class="new-price">{{ property.previous_price }}</span>
+                </span>   
+              </div>
+              <div class="property-info">
+                <span class="property-address">{{ property.property_address }},{{ property.property_area }}</span>
+              </div>
+            </div>  
+          </div>
         </div>
       </div>
     </div>
+    
 
     <div class="featuredContainer">
       <span class="left">Today’s Deal</span>
@@ -117,7 +118,7 @@
     <div class="swiper-container todayDeal-slider mainSlider">
       <div class="swiper-wrapper">
         <!-- Iterate over the properties using *ngFor -->
-        <div class="swiper-slide recentlyadded" *ngFor="let property of properties">
+        <div class="swiper-slide recentlyadded" *ngFor="let property of properties"(click)="goToPropertyDetails(property.id)">
             <!-- Property Details -->
             <div class="property-details">
               
@@ -151,7 +152,7 @@
     <div class="swiper-container Recentlyadded-slider mainSlider">
       <div class="swiper-wrapper">
         <!-- Iterate over the properties using *ngFor -->
-        <div class="swiper-slide recentlyadded" *ngFor="let property of properties">
+        <div class="swiper-slide recentlyadded" *ngFor="let property of properties" (click)="goToPropertyDetails(property.id)">
             <!-- Property Details -->
             <div class="property-details">
               

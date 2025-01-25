@@ -53,7 +53,7 @@ export class HomePage implements OnInit, OnDestroy, AfterViewInit {
       this.swiper = new Swiper('.swiper-container.first-slider', {
         slidesPerView: 1,  // Show one slide per view
         spaceBetween: 10,
-        loop: true,  // Enable infinite loop
+        loop: false,  // Enable infinite loop
         pagination: {
           el: '.swiper-pagination',
           clickable: true,  // Enable clicking on dots
@@ -67,7 +67,7 @@ export class HomePage implements OnInit, OnDestroy, AfterViewInit {
       this.swiper2 = new Swiper('.swiper-container.second-slider', {
         slidesPerView: 3,  // Show three slides per view
         spaceBetween: 20,  // Space between slides
-        loop: true,  // Enable infinite loop
+        loop: false,  // Enable infinite loop
         pagination: {
           el: '.swiper-pagination',
           clickable: true,  // Enable clicking on dots
@@ -235,6 +235,7 @@ export class HomePage implements OnInit, OnDestroy, AfterViewInit {
     });
     this.http.get<any[]>(apiUrl, { headers }).subscribe(data => {
       this.properties = data;
+      console.log("ye rhi",data)
       this.initializePropertySlider();
     });
   }
@@ -318,7 +319,7 @@ export class HomePage implements OnInit, OnDestroy, AfterViewInit {
           console.log('Builders data:', response.data);
   
           this.builders = this.addBaseUrlToImages(response.data);  // Add base URL to image paths
-          console.log('Builders with base URLs:', this.builders);  // Log the builders with added base URL
+          // console.log('Builders with base URLs:', this.builders);  // Log the builders with added base URL
   
           this.initializeSwiper();  // Initialize Swiper after data is fetched
         } else {
@@ -332,59 +333,80 @@ export class HomePage implements OnInit, OnDestroy, AfterViewInit {
   }
   
     
+  // goToBuilder(builder: { id: string; name: string }) {
+  //   if (builder && builder.id) {
+  //     console.log('Category clicked:', builder.id);
+  //     console.log('Category Name:', builder.name);
+  
+  //     const apiUrl = ROUTES.BUILDER_BYID; // Replace with actual API URL
+  //     console.log(apiUrl)
+  //     const headers = new HttpHeaders({
+  //       'Authorization': '2245', // Replace with your actual Authorization token if needed
+  //     });
+  
+  //     const body = {
+  //       builder_id: builder.id, // Send builderId as part of the body
+  //     };
+  
+  //     this.http.post<any>(apiUrl, body, { headers }).subscribe({
+  //       next: (responseData) => {
+  //         console.log('Fetched category data:', responseData);
+  
+  //         const combinedData = {
+  //           builderID: builder.id,
+  //           builderName: builder.name,
+  //           builderData: responseData.message || [], // Ensure builderData is an array
+  //         };
+  
+  //         // Check if the response status is false and data is 'no'
+  //         if (responseData.status === false && responseData.message === 'no') {
+  //           console.log('No Builders found');
+  //           this.noPropertiesFound = true;  // Set the flag to true
+  //         } else {
+  //           this.noPropertiesFound = false;
+  //         }
+  
+  //         // Proceed with navigation, passing fetched data and noPropertiesFound flag as state
+  //         this.router.navigate([`/all-builders/`], {
+  //           state: {
+  //             combinedData: combinedData,
+  //             noPropertiesFound: this.noPropertiesFound, // Pass the flag
+  //           },
+  //         }).then(() => {
+  //           console.log('Navigation successful to category page with data:', responseData.message);
+  //         }).catch((err) => {
+  //           console.error('Navigation error:', err);
+  //         });
+  //       },
+  //       error: (err) => {
+  //         console.error('API request failed:', err); // Handle any error from the API request
+  //       },
+  //     });
+  //   } else {
+  //     console.error('Invalid category object:', builder);
+  //   }
+  // }
   goToBuilder(builder: { id: string; name: string }) {
     if (builder && builder.id) {
       console.log('Category clicked:', builder.id);
       console.log('Category Name:', builder.name);
   
-      const apiUrl = ROUTES.BUILDER_BYID; // Replace with actual API URL
-      console.log(apiUrl)
-      const headers = new HttpHeaders({
-        'Authorization': '2245', // Replace with your actual Authorization token if needed
-      });
-  
-      const body = {
-        builder_id: builder.id, // Send builderId as part of the body
-      };
-  
-      this.http.post<any>(apiUrl, body, { headers }).subscribe({
-        next: (responseData) => {
-          console.log('Fetched category data:', responseData);
-  
-          const combinedData = {
-            builderID: builder.id,
-            builderName: builder.name,
-            builderData: responseData.message || [], // Ensure builderData is an array
-          };
-  
-          // Check if the response status is false and data is 'no'
-          if (responseData.status === false && responseData.message === 'no') {
-            console.log('No Builders found');
-            this.noPropertiesFound = true;  // Set the flag to true
-          } else {
-            this.noPropertiesFound = false;
-          }
-  
-          // Proceed with navigation, passing fetched data and noPropertiesFound flag as state
-          this.router.navigate([`/all-builders/`], {
-            state: {
-              combinedData: combinedData,
-              noPropertiesFound: this.noPropertiesFound, // Pass the flag
-            },
-          }).then(() => {
-            console.log('Navigation successful to category page with data:', responseData.message);
-          }).catch((err) => {
-            console.error('Navigation error:', err);
-          });
+      // Proceed with navigation, passing builder id and name as state
+      this.router.navigate([`/all-builders/`], {
+        state: {
+          builderID: builder.id,
+          builderName: builder.name
         },
-        error: (err) => {
-          console.error('API request failed:', err); // Handle any error from the API request
-        },
+      }).then(() => {
+        console.log('Navigation successful to category page');
+      }).catch((err) => {
+        console.error('Navigation error:', err);
       });
     } else {
       console.error('Invalid category object:', builder);
     }
   }
+  
   // Function to add the base URL to image paths
   addBaseUrlToImages(builders: any[]) {
     return builders.map(builder => {
@@ -407,5 +429,8 @@ export class HomePage implements OnInit, OnDestroy, AfterViewInit {
       });
     }, 500);  // Delay to ensure images are loaded before initializing Swiper
   }
-  
+
+  goToPropertyDetails(propertyId: number): void {
+    this.router.navigate(['/property'], { state: { propertyId: propertyId } });
+  }
 }

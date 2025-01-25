@@ -5,22 +5,9 @@ import { CommonModule } from '@angular/common';
 import { FooterComponent } from '../components/footer/footer.component';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ROUTES } from '../config/api.config'; // Adjust the import path as needed
-
-interface Property {
-  id: string;
-  property_name: string;
-  land_category: string;
-  current_price: string;
-  previous_price: string;
-}
-
-interface Builder {
-  id: string;
-  builder_name: string;
-  builderData: Property[]; // Explicitly define builderData as an array of Property
-}
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-all-builders',
@@ -31,12 +18,14 @@ interface Builder {
 })
 export class AllBuildersPage implements OnInit {
   baseUrl = 'http://65.0.7.21/ksjabalpur/';
-  combinedData?: Builder; // Optional type
-  noPropertiesFound = false;
+  builderID: string = ''; // Default to an empty string
+  builderName: string = ''; // Default to an empty string
+  builderData: any[] = []; // To hold the fetched builder data
   isLoading = false;
   errorMessage = '';
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private location: Location,
     private http: HttpClient
@@ -46,27 +35,55 @@ export class AllBuildersPage implements OnInit {
     const navigationState = history.state;
 
     if (navigationState) {
-      this.combinedData = navigationState.combinedData;
-      // this.noPropertiesFound = navigationState.noPropertiesFound;
+      // Extract builderID and builderName from the state
+      const { builderID, builderName } = navigationState;
 
-      console.log('Received combined data:', this.combinedData);
-      // console.log('No properties found:', this.noPropertiesFound);
+      console.log('Received builder ID:', builderID);
+      console.log('Received builder Name:', builderName);
 
-      if (this.combinedData?.builderData?.length) {
-        this.combinedData.builderData.forEach((property) => {
-          console.log('Property Details:', property);
-        });
-      } else {
-        console.error('No builder data found');
-        this.errorMessage = 'No builder data available';
-      }
+      // Set builderID and builderName
+      this.builderID = builderID;
+      this.builderName = builderName;
+
+      // Fetch builder data
+      this.fetchBuilderData(this.builderID);
+
     } else {
       console.error('No navigation state found');
       this.errorMessage = 'Navigation state is missing';
     }
   }
 
+  // Fetch builder data using the builderID
+  fetchBuilderData(builderID: string): void {
+    this.isLoading = true; // Start loading
+    const apiUrl = ROUTES.BUILDER_BYID; // Replace with actual API URL
+    const headers = new HttpHeaders({
+      'Authorization': '2245', // Replace with your actual Authorization token if needed
+    });
+
+    const body = {
+      builder_id: builderID, // Send builderId as part of the body
+    };
+
+    this.http.post<any>(apiUrl, body, { headers }).subscribe({
+      next: (responseData) => {
+        console.log('Fetched builder data:', responseData);
+        this.builderData = responseData.message; // Assuming 'message' contains the property data
+        this.isLoading = false; // Stop loading
+      },
+      error: (error) => {
+        console.error('Error fetching builder data:', error);
+        this.errorMessage = 'Error fetching builder data';
+        this.isLoading = false; // Stop loading
+      }
+    });
+  }
+
   goBack(): void {
     this.location.back(); // Navigate to the previous page
+  }
+  goToPropertyDetails(propertyId: number): void {
+    this.router.navigate(['/property'], { state: { propertyId: propertyId } });
   }
 }
