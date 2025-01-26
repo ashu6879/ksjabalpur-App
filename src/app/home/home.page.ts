@@ -54,7 +54,7 @@ export class HomePage implements OnInit, OnDestroy, AfterViewInit {
     await this.storage.create();
     this.userId = await this.storage.get('user_id');
     if (this.userId) {
-      // this.checkFavoriteProperties(this.userId);
+      this.checkFavoriteProperties(this.userId);
     } else {
       console.warn('User ID not found in storage.');
     }
@@ -505,7 +505,8 @@ export class HomePage implements OnInit, OnDestroy, AfterViewInit {
   //   return false;
   // }
   // Fetch favorite properties for the user
-  // checkFavoriteProperties(userId: string): void {
+  checkFavoriteProperties(userId: string): void {
+    console.log("userID",userId);
   //   const url = `${ROUTES.FETCH_FAVORITES}?user_id=${userId}`; // Replace with your actual endpoint
 
   //   const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
@@ -522,7 +523,7 @@ export class HomePage implements OnInit, OnDestroy, AfterViewInit {
   //       console.error('Error fetching favorite properties:', error);
   //     }
   //   );
-  // }
+  }
 
   // Toggle favorite property
   async toggleIcon(event: Event, property: any): Promise<void> {
@@ -538,19 +539,20 @@ export class HomePage implements OnInit, OnDestroy, AfterViewInit {
     if (this.favoriteProperties.has(propertyId)) {
       this.favoriteProperties.delete(propertyId);
       console.log(`Removed from favorites: ${propertyId}`);
-      // this.removeFromFavorites(this.userId, propertyId);
+      this.removeFromFavorites(this.userId, propertyId);
     } else {
       this.favoriteProperties.add(propertyId);
       console.log(`Added to favorites: ${propertyId}`);
-      // this.addToFavorites(this.userId, propertyId);
+      this.addToFavorites(this.userId, propertyId);
     }
   }
 
   // Add to favorites API call
-  // addToFavorites(userId: string, propertyId: number): void {
+  addToFavorites(userId: string, propertyId: number): void {
   //   const url = ROUTES.ADD_FAVORITE; // Replace with your actual endpoint
 
-  //   const body = { user_id: userId, property_id: propertyId };
+    const body = { user_id: userId, property_id: propertyId };
+    console.log(body);
   //   const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
   //   this.http.post(url, body, { headers }).subscribe(
@@ -561,13 +563,14 @@ export class HomePage implements OnInit, OnDestroy, AfterViewInit {
   //       console.error('Error adding to favorites:', error);
   //     }
   //   );
-  // }
+  }
 
   // Remove from favorites API call
-  // removeFromFavorites(userId: string, propertyId: number): void {
+  removeFromFavorites(userId: string, propertyId: number): void {
   //   const url = `${ROUTES.REMOVE_FAVORITE}`; // Replace with your actual endpoint
 
-  //   const body = { user_id: userId, property_id: propertyId };
+    const body = { user_id: userId, property_id: propertyId };
+    console.log(body);
   //   const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
   //   this.http.post(url, body, { headers }).subscribe(
@@ -578,7 +581,7 @@ export class HomePage implements OnInit, OnDestroy, AfterViewInit {
   //       console.error('Error removing from favorites:', error);
   //     }
   //   );
-  // }
+  }
 
   // Check if the icon should be filled
   isIconFilled(property: any): boolean {
