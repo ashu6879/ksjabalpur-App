@@ -98,7 +98,7 @@
   top: 21px;
   right: 10px;
   font-size: 25px;
-  color: white;
+  color: #333;
   cursor: pointer;
   z-index: 1; /* Ensure the icon appears on top */
 }
@@ -134,12 +134,6 @@
   top: 10px;
   right: 10px; /* Aligns the icon to the right */
   z-index: 10;  /* Ensures the icon is on top */
-}
-.property-icon i {
-  font-size: 24px;
-  color: white; /* Default color, can be changed */
-  padding: 5px;
-  border-radius: 50%;  /* Optional: Keeps the rounded shape, remove if not needed */
 }
 .top-right-icon.filled {
   color: red;  /* Make the heart red when filled */

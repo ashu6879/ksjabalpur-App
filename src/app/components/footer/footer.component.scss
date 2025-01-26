@@ -14,9 +14,6 @@
     text-align: center;
     background-color: white;
   }
-  ion-img.footerIcon.md.hydrated {
-    width: 26%;
-  }
   p.footerText {
     text-align: center;
     font-size: 13px;
@@ -46,3 +43,11 @@
     bottom: 0;
     width: 100%;
   }
+  .column-content {
+    &.active {
+      // background-color: #faad25; /* Replace with your desired color */
+      border: 3px solid #faad25;
+      border-radius: 15%;
+    }
+  }
+  

@@ -283,11 +283,11 @@ ion-slide img {
 }
 
 .property-title {
+  color: #004680;
   text-transform: capitalize;
   font-size: 20px;
   font-weight: bold;
   margin-top: 12px;
-  color: #333;
   font-family: "Open Sans", sans-serif;
 }
 
@@ -345,7 +345,7 @@ ion-slide img {
 }
 .property-icon i {
   font-size: 24px;
-  color: white; /* Default color, can be changed */
+  color: #333; /* Default color, can be changed */
   padding: 5px;
   border-radius: 50%;  /* Optional: Keeps the rounded shape, remove if not needed */
 }

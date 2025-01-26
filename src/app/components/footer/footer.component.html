@@ -1,32 +1,65 @@
 <ion-footer>
   <div class="footerMargin">
-    <ion-grid  class="footerMain">
+    <ion-grid class="footerMain">
       <ion-row class="ion-justify-content-center ion-align-items-center footer">
-        <!-- Column 1 -->
-        <ion-col size="3" class="ion-text-center column-content">
-          <ion-img src="assets/Home.png" alt="Image 1" class="footerIcon" (click)="goToHome()"></ion-img>
+        <!-- Column 1 (Home) -->
+        <ion-col
+          size="3"
+          class="ion-text-center column-content"
+          [ngClass]="{ 'active': currentRoute === '/home' }"
+        >
+          <ion-img
+            [src]="homeImage"
+            alt="Image 1"
+            class="footerIcon"
+            (click)="goToHome()"
+          ></ion-img>
           <p class="footerText">Home</p>
-          
         </ion-col>
-    
-        <!-- Column 2 -->
-        <ion-col size="3" class="ion-text-center column-content">
-          <ion-img src="assets/Search.png" alt="Image 2" class="footerIcon"></ion-img>
+
+        <!-- Column 2 (Search) -->
+        <ion-col
+          size="3"
+          class="ion-text-center column-content"
+          [ngClass]="{ 'active': currentRoute === '/search' }"
+        >
+          <ion-img
+            [src]="searchImage"
+            alt="Image 2"
+            class="footerIcon"
+          ></ion-img>
           <p class="footerText">Search</p>
         </ion-col>
-    
-        <!-- Column 3 -->
-        <ion-col size="3" class="ion-text-center column-content">
-          <ion-img src="assets/heart.png" alt="Image 3" class="footerIcon"></ion-img>
+
+        <!-- Column 3 (Favourite) -->
+        <ion-col
+          size="3"
+          class="ion-text-center column-content"
+          [ngClass]="{ 'active': currentRoute === '/favourite' }"
+        >
+          <ion-img
+            [src]="favouriteImage"
+            alt="Image 3"
+            class="footerIcon"
+          ></ion-img>
           <p class="footerText">Favourite</p>
         </ion-col>
-    
-        <!-- Column 4 -->
-        <ion-col size="3" class="ion-text-center column-content">
-          <ion-img src="assets/Group.png" alt="Image 4" class="footerIcon" (click)="goToprofile()"></ion-img>
+
+        <!-- Column 4 (Account) -->
+        <ion-col
+          size="3"
+          class="ion-text-center column-content"
+          [ngClass]="{ 'active': currentRoute === '/profile' }"
+        >
+          <ion-img
+            [src]="accountImage"
+            alt="Image 4"
+            class="footerIcon"
+            (click)="goToprofile()"
+          ></ion-img>
           <p class="footerText">Account</p>
         </ion-col>
       </ion-row>
-    </ion-grid>    
+    </ion-grid>
   </div>
 </ion-footer>
