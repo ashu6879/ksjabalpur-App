@@ -16,4 +16,5 @@ export const ROUTES = {
   PROFILE_DETAILS: `${API_BASE_URL}/user_profile_details`,
   PROPERTY_DETAILS: `${API_BASE_URL}/property_details_by_property_id`,
   RECENT_PROPERTY: `${API_BASE_URL}/get_recent_properties`,
+  ADD_FAVOURITE: `${API_BASE_URL}/property_wishlist`,
 };

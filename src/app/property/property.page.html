@@ -11,12 +11,17 @@
       <div class="center">
         <span class="name">{{ properties[0]?.property_name || 'Loading...' }}</span>
       </div>
+      <i 
+      [class]="isIconFilled(properties) ? 'fas fa-heart filled' : 'far fa-heart'" 
+      (click)="toggleIcon($event, properties)" 
+      class="top-right-icon"
+      ></i>
       <div class="right"></div>
     </div>
 
     <div *ngIf="properties.length > 0; else loading">
       <div class="swiper-container image-slider">
-        <div class="swiper-wrapper">
+        <div class="swiper-wrapper property-card">
           <div class="swiper-slide" *ngFor="let imagePath of properties[0]?.image_paths">
             <img [src]="imagePath" alt="Property Image" class="property-image">
           </div>

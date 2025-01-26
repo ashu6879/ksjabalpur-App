@@ -43,7 +43,11 @@
       <!-- Loop through categoryData -->
       <div *ngFor="let property of categoryData" class="property-card" (click)="goToPropertyDetails(property.id)">
         <div>
-          <!-- Image section -->
+          <i 
+          [class]="isIconFilled(property) ? 'fas fa-heart filled' : 'far fa-heart'" 
+          (click)="toggleIcon($event, property)" 
+          class="top-right-icon"
+        ></i>
           <img 
             [src]="property.image || 'assets/categoryImage2.png'" 
             alt="Property Image" 

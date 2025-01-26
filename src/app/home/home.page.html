@@ -88,7 +88,11 @@
     <div class="swiper-container property-slider mainSlider">
       <div class="swiper-wrapper">
         <div class="swiper-slide recentlyadded" *ngFor="let property of properties">
-          <div class="property-details"  (click)="goToPropertyDetails(property.property_id)">
+          <div class="property-details" (click)="goToPropertyDetails(property.property_id)">
+            <!-- Icon added here, positioned on the right side -->
+            <div class="property-icon" (click)="toggleIcon($event, property)">
+              <i [class]="isIconFilled(property) ? 'fas fa-heart' : 'far fa-heart'"></i> <!-- Toggling between filled and outlined heart -->
+            </div>
             <img [src]="property.main_img_path || 'assets/industrial.png'" alt="Category Icon" class="property-image">
             <div class="feturedSlider">
               <span class="property-title">{{ property.property_name }}</span>
@@ -121,7 +125,9 @@
         <div class="swiper-slide recentlyadded" *ngFor="let property of properties">
             <!-- Property Details -->
             <div class="property-details" (click)="goToPropertyDetails(property.property_id)">
-              
+              <div class="property-icon" (click)="toggleIcon($event, property)">
+                <i [class]="isIconFilled(property) ? 'fas fa-heart' : 'far fa-heart'"></i> <!-- Toggling between filled and outlined heart -->
+              </div>  
               <img [src]="property.main_img_path || 'assets/industrial.png'" alt="Category Icon" class="property-image">
               <div class="feturedSlider">
                 <span class="property-title">{{ property.property_name }}</span>
@@ -155,7 +161,9 @@
         <div class="swiper-slide recentlyadded" *ngFor="let property of Recentproperties">
             <!-- Property Details -->
             <div class="property-details" (click)="goToPropertyDetails(property.property_id)">
-              
+              <div class="property-icon" (click)="toggleIcon($event, property)">
+                <i [class]="isIconFilled(property) ? 'fas fa-heart' : 'far fa-heart'"></i> <!-- Toggling between filled and outlined heart -->
+              </div>
               <img [src]="property.main_img_path || 'assets/industrial.png'" alt="Category Icon" class="property-image">
               <div class="feturedSlider">
                 <span class="property-title">{{ property.property_name }}</span>

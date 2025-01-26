@@ -240,8 +240,35 @@
   .enquire-btn:hover {
     background-color: #FAAD25; /* Darker yellow on hover */
   }
-  
-  
+  .top-right-icon {
+    position: absolute;
+    top: 17px;
+    right: 14px;
+    font-size: 21px;
+    color: black;
+    cursor: pointer;
+    z-index: 1; /* Ensure the icon appears on top */
+  }
+  .property-icon {
+    margin-top:10px;
+    position: absolute;
+    top: 10px;
+    right: 10px; /* Aligns the icon to the right */
+    z-index: 10;  /* Ensures the icon is on top */
+  }
+  // .property-icon i {
+  //   font-size: 24px;
+  //   color: black; /* Default color, can be changed */
+  //   padding: 5px;
+  //   border-radius: 50%;  /* Optional: Keeps the rounded shape, remove if not needed */
+  // }
+  .top-right-icon.filled {
+    color: red;  /* Make the heart red when filled */
+  }
+  .property-card{
+    position: relative; /* Ensure positioning for the child elements */
+    padding: 10px 0;
+  }
   
   
   

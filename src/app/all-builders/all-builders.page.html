@@ -40,18 +40,25 @@
     <!-- Check if builderData is available and has properties -->
     <div *ngIf="builderData && builderData.length > 0; else noProperties" class="properties-container">
       <!-- Loop through builderData -->
-      <div *ngFor="let property of builderData" class="property-card"(click)="goToPropertyDetails(property.id)">
+      <div *ngFor="let property of builderData" class="property-card" (click)="goToPropertyDetails(property.id)">
         <div>
+          <!-- Top-right icon -->
+          <i 
+          [class]="isIconFilled(property) ? 'fas fa-heart filled' : 'far fa-heart'" 
+          (click)="toggleIcon($event, property)" 
+          class="top-right-icon"
+          ></i>
           <!-- Image section -->
           <img 
             [src]="property.image || 'assets/categoryImage2.png'" 
             alt="Property Image" 
             class="property-image"
           />
-  
+    
           <!-- Title section -->
           <h2 class="propertyTitle">{{ property.property_name }}</h2>
           <p class="property-address">{{ property.property_address || 'Address not available' }}</p>
+    
           <div class="container">
             <div class="left-area propertyTitle">
               <!-- Left area content goes here -->
@@ -61,29 +68,6 @@
               <button>{{property.current_price}}</button>
             </div>
           </div>
-          <!-- Price section -->
-          <!-- <div class="property-price">
-            <span class="old-new-price">
-              <span class="old-price">{{ property.previous_price || 'N/A' }}</span>
-              <span class="new-price">{{ property.current_price || 'N/A' }} /Monthly</span>
-            </span>
-          </div> -->
-  
-          <!-- Address section -->
-
-  
-          <!-- Additional Information -->
-          <!-- <p class="property-area">{{ property.property_area || 'Area not specified' }}</p>
-          <p class="property-description">{{ property.property_desc || 'Description not available' }}</p>
-          <p class="property-finance-approval">Finance Approval: {{ property.finance_aproval || 'Not specified' }}</p>
-          <p class="property-constructed-date">Constructed on: {{ property.Constructed_date || 'Not specified' }}</p>
-  
-          <!-- Contact details -->
-          <!-- <p class="property-contact-details">Contact: {{ property.contact_details || 'Not available' }}</p>  -->
-  
-          <!-- Other details -->
-          <!-- <p class="property-documents">Documents: {{ property.documents || 'Not specified' }}</p>
-          <p class="property-soil-type">Soil Type: {{ property.d1_input || 'Not specified' }}</p> -->
         </div>
       </div>
     </div>

@@ -19,6 +19,7 @@ import { CommonModule } from '@angular/common';  // Import CommonModule
 import { Storage } from '@ionic/storage-angular';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-profile',
@@ -38,6 +39,7 @@ export class ProfilePage {
   private _storage: Storage | null = null; // Private storage instance
 
   constructor(
+    private toastController: ToastController,
     private http: HttpClient,
     private storage: Storage,
     private alertController: AlertController,
@@ -123,8 +125,18 @@ export class ProfilePage {
     } 
     console.log('Profile image set to:', this.profileImage);
   }
+  async showToast(message: string, color: string = 'success') {
+    const toast = await this.toastController.create({
+      message,
+      duration: 3000, // Time in milliseconds the toast will remain
+      color, // Toast color: 'danger', 'success', etc.
+      position: 'bottom', // Display the toast in the center of the screen
+      cssClass: 'custom-toast', // Optional: Add a custom CSS class for styling
+    });
+    await toast.present();
+  }
 
-  submitProfile() {
+  async submitProfile() {
     const profileData = {
       user_id: this.User_id,
       phone: this.phone,
@@ -145,9 +157,12 @@ export class ProfilePage {
     this.http.post<any>(apiUrl, profileData, { headers }).subscribe(
       (response) => {
         console.log('Profile saved successfully:', response);
+        const errorMessage = 'Profile updated successfully!';
+        this.showToast(errorMessage);
       },
       (error) => {
         console.error('Error saving profile:', error);
+        alert('There was an error updating your profile. Please try again.');
       }
     );
   }
