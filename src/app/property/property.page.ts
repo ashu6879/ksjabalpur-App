@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { GoBackComponent } from '../components/go-back/go-back.component';
 import { FooterComponent } from '../components/footer/footer.component';
@@ -9,16 +9,15 @@ import Swiper from 'swiper';
 import { ROUTES } from '../config/api.config'; // Adjust the import path as needed
 import { CommonModule } from '@angular/common';  // Import CommonModule
 
-
 @Component({
   selector: 'app-property',
   templateUrl: './property.page.html',
   styleUrls: ['./property.page.scss'],
   standalone: true,
-  imports: [IonicModule, GoBackComponent, FooterComponent,CommonModule],
+  imports: [IonicModule, GoBackComponent, FooterComponent, CommonModule],
 })
-export class PropertyPage implements OnInit {
-  propertyId: number | null = null;
+export class PropertyPage implements OnInit, AfterViewInit {
+  propertyId: number | null = null; // Store property ID
   properties: any[] = [];
   swiper: Swiper | undefined;
   baseUrl = 'http://65.0.7.21/ksjabalpur/';
@@ -27,35 +26,30 @@ export class PropertyPage implements OnInit {
     private route: ActivatedRoute,
     private http: HttpClient,
     private location: Location,
-    private router: Router
+    private router: Router,
+    private cdr: ChangeDetectorRef // Inject ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
-    const navigation = this.router.getCurrentNavigation();
-
-    // Accessing propertyId using bracket notation
-    if (navigation?.extras.state && (navigation.extras.state as any)['propertyId']) {
-      this.propertyId = (navigation.extras.state as any)['propertyId'];
+    const navigationState = history.state;
+  
+    if (navigationState && navigationState.propertyId) {
+      this.propertyId = navigationState.propertyId;
+      console.log('Received property ID:', this.propertyId);
+  
+      // Call fetchPropertyDetails only if propertyId is not null
+      if (this.propertyId !== null) {
+        this.fetchPropertyDetails(this.propertyId);
+      }
+    } else {
+      console.error('No property ID found in navigation state');
     }
+  }
 
-    if (this.propertyId) {
-      this.fetchPropertyDetails(this.propertyId);
-    }
-
-    // Initialize Swiper
-    this.swiper = new Swiper('.image-slider', {
-      slidesPerView: 1,
-      spaceBetween: 10,
-      loop: true,
-      pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-      },
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
-    });
+  ngAfterViewInit(): void {
+    // Initialize Swiper after the view is initialized or after properties are updated
+    this.cdr.detectChanges(); // Ensure the view is fully initialized before swiper setup
+    this.initializeSwiper();
   }
 
   goBack(): void {
@@ -68,31 +62,63 @@ export class PropertyPage implements OnInit {
       'Authorization': '2245',
       'Content-Type': 'application/json',
     });
-  
+
     const body = { property_id: propertyId };
-  
+
     this.http.post<any>(apiUrl, body, { headers }).subscribe(
-      data => {
-        console.log('API Response:', data);
-    
-        // Assuming data is a single property object, not an array
-        if (data.main_img_path) {
-          // Prepend base URL to the 'main_img_path' and other image paths
-          data.main_img_path = this.baseUrl + data.main_img_path;
-          if (data.image_paths) {
-            data.image_paths = this.baseUrl + data.image_paths;
-          }
+      response => {
+        const propertyData = response.data;
+        console.log('API Response:', response.data);
+
+        // Update image paths with base URL
+        if (propertyData.main_img_path) {
+          propertyData.main_img_path = this.baseUrl + propertyData.main_img_path;
         }
-    
-        // Set the properties object to the fetched data
-        this.properties = [data];  // Wrap the single property in an array
-    
-        // Log the updated property for confirmation
-        console.log('Updated property with full image paths:', this.properties);
+        if (propertyData.image_paths) {
+          // console.log(propertyData.image_paths)
+          propertyData.image_paths = propertyData.image_paths.map((path: string) => this.baseUrl + path);
+        }
+
+        // Assign the fetched data to properties array
+        this.properties = [propertyData];
+        console.log('Updated property details:', this.properties);
+
+        // After properties are updated, refresh the swiper
+        this.cdr.detectChanges(); // Detect changes after fetching data
+        this.initializeSwiper(); // Reinitialize or refresh Swiper
       },
       error => {
         console.error('Error fetching property details:', error);
       }
     );
+  }
+
+  initializeSwiper(): void {
+    if (!this.swiper) {
+      // Ensure that the swiper container is available
+      const swiperContainer = document.querySelector('.image-slider');
+      
+      // If the swiper container exists, initialize Swiper
+      if (swiperContainer) {
+        this.swiper = new Swiper('.image-slider', {
+          slidesPerView: 1,
+          spaceBetween: 10,
+          loop: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+      } else {
+        console.error('Swiper container not found');
+      }
+    } else {
+      // If swiper is already initialized, update it
+      this.swiper.update();
+    }
   }
 }

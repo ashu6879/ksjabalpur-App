@@ -1,3 +1,6 @@
+.topshuru{
+  margin-top: 3rem;
+}
 .firstImage {
   text-align: center; /* Centers the image horizontally */
   margin: 0 auto; /* Ensures the div is centered if it has a max-width */
@@ -191,6 +194,7 @@ h2.headingIcon {
   font-size: 15px;
   font-weight: bolder;
   font-family: "Open Sans", sans-serif;
+  text-transform: capitalize;
 }
 
 // .view-more {
@@ -279,6 +283,7 @@ ion-slide img {
 }
 
 .property-title {
+  text-transform: capitalize;
   font-size: 20px;
   font-weight: bold;
   margin-top: 12px;
@@ -380,4 +385,8 @@ ion-slide img {
 }
 .builderslider{
   margin-top: 10px 0 !important;
+}
+.categoryText{
+  text-transform: capitalize;
+  font-family: "Open Sans", sans-serif;
 }

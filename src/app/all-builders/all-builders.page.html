@@ -9,7 +9,13 @@
       <ion-toolbar color="white" class="toolbar_mine">
         <!-- Left Image (Open Sidebar) -->
         <ion-buttons slot="start">
-          <img src="assets/Vector.png" alt="Left Icon" class="icon-left" (click)="goBack()" />
+          <div class="left">
+            <img 
+              src="assets/backArrow.png" 
+              alt="Image" 
+              class="backArrowimage" 
+              (click)="goBack()">
+          </div>
         </ion-buttons>
   
         <!-- Center Image (visible when sidebar is closed) -->
@@ -30,7 +36,7 @@
       </ion-toolbar>
     </ion-header>
   </div> 
-  <div class="outerDiv"> 
+  <div class="outerDiv topshuru"> 
     <!-- Check if builderData is available and has properties -->
     <div *ngIf="builderData && builderData.length > 0; else noProperties" class="properties-container">
       <!-- Loop through builderData -->

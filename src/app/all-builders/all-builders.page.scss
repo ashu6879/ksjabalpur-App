@@ -55,6 +55,7 @@
   --background: white; /* Ensure the content inside the menu also has a white background */
   }
   .propertyTitle{
+    text-transform: capitalize;
     font-family: "Open Sans", sans-serif;
     color: #004680;
     font-weight: bolder;
@@ -90,4 +91,29 @@
   }
 .property-card{
   padding: 10px 0;
+}
+.topBar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  width: 100%;
+  background-color: white;
+}
+
+.toolbar_mine {
+  position: relative;
+  z-index: 9999; /* Ensure toolbar stays above other content */
+}
+
+.center-image-container,
+.topRibbon {
+  z-index: 9999; /* Ensure images inside buttons are visible on top */
+}
+.backArrowimage {
+  width: 25px;
+  cursor: pointer;
+  margin-left: 15px;
+  margin-top: 8px;
 }

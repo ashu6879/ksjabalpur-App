@@ -1,123 +1,101 @@
 <ion-content>
-<div class="outerDiv">
-  <div class="container">
-    <div class="left">
-      <img src="assets/backArrow.png" alt="Image" class="backArrowimage" (click)="goBack()">
+  <div class="outerDiv">
+    <div class="container">
+      <div class="left">
+        <img 
+          src="assets/backArrow.png" 
+          alt="Image" 
+          class="backArrowimage" 
+          (click)="goBack()">
+      </div>
+      <div class="center">
+        <span class="name">{{ properties[0]?.property_name || 'Loading...' }}</span>
+      </div>
+      <div class="right"></div>
     </div>
-    <div class="center">
-      <span class="name">{{ properties[0].property_name }}</span>
+
+    <div *ngIf="properties.length > 0; else loading">
+      <div class="swiper-container image-slider">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide" *ngFor="let imagePath of properties[0]?.image_paths">
+            <img [src]="imagePath" alt="Property Image" class="property-image">
+          </div>
+        </div>
+      </div>
+      <div>
+        <h2 class="propertyTitle">{{ properties[0]?.property_name }}</h2>
+      </div>
+      <div class="location-info">
+        <img src="assets/location_icon.png" alt="Location Icon" class="location-icon">
+        <span class="property-address">{{ properties[0]?.property_address || 'No address available' }}</span>
+      </div>
+
+      <div class="image-text-grid fourImage">
+        <div class="row">
+          <div class="column" *ngFor="let item of [['Bed Room', 'assets/bed.png'], ['Bedroom', 'assets/bedRoom.png']]">
+            <div class="image-text">
+              <img [src]="item[1]" [alt]="item[0]" class="imageIcon">
+              <span class="imagetext">{{ item[0] }}</span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="column" *ngFor="let item of [['Wall', 'assets/wall.png'], ['Parking', 'assets/parking.png']]">
+            <div class="image-text">
+              <img [src]="item[1]" [alt]="item[0]" class="imageIcon">
+              <span class="imagetext">{{ item[0] }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="more-details-container">
+        <h2 class="more-details-heading">More Details</h2>
+        <div class="details-row" *ngFor="let detail of [
+          { key: 'Plot No', value: '797/816' },
+          { key: 'Type', value: 'Commercial' },
+          { key: 'Free Hold', value: 'No' },
+          { key: 'Front Direction', value: 'North' },
+          { key: 'Boundary Wall', value: 'No' },
+          { key: 'Corner Plot', value: 'Yes' },
+          { key: 'Price per sqft', value: '15000/-' },
+          { key: 'Area', value: '1500sqft' },
+          { key: 'Negotiable', value: 'Yes' }
+        ]">
+          <span class="key">{{ detail.key }}:</span>
+          <span class="value">{{ detail.value }}</span>
+        </div>
+      </div>
+
+      <div>
+        <h2 class="more-details-heading">Description</h2>
+        <span class="description">
+          Beautiful 3,4,5,6 BHK apartments in Zirakpur, are now available in Green Lotus Utsav housing project. 
+          Prices of apartments in this project vary between Rs. 1.85 - 12.84 Cr. Green Lotus Utsav has apartments 
+          in multiple configurations, ranging from 2,100 - 9,945 sq.ft. Green Lotus Utsav is a RERA-registered society 
+          and PBRERA-SAS79-PR0425 is the RERA registration number.
+        </span>
+      </div>
+
+      <div class="amount-enquire-container">
+        <div class="row">
+          <div class="column total-amount">
+            <span class="label">Total Amount</span>
+            <span class="amount">{{ properties[0]?.current_price || 'N/A' }}</span>
+          </div>
+          <div class="column enquire-button">
+            <button class="enquire-btn">Enquire Now</button>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="right"></div>
+
+    <ng-template #loading>
+      <div class="loading-container">
+        <ion-spinner name="crescent"></ion-spinner>
+        <p>Loading property details...</p>
+      </div>
+    </ng-template>
   </div>
-  <div *ngIf="properties.length > 0">
-    <div class="swiper-container image-slider">
-      <div class="swiper-wrapper">
-        <!-- Static Image Slider -->
-        <div class="swiper-slide">
-          <img src="assets/building_property.png" alt="Property Image 1" class="property-image">
-        </div>
-        <div class="swiper-slide">
-          <img src="assets/building_property.png" alt="Property Image 2" class="property-image">
-        </div>
-        <div class="swiper-slide">
-          <img src="assets/building_property.png" alt="Property Image 3" class="property-image">
-        </div>
-        <!-- Add more static images as needed -->
-      </div>
-    </div>
-    <div><h2 class="propertyTitle">{{ properties[0].property_name }}</h2></div>
-    <div class="location-info">
-      <img src="assets/location_icon.png" alt="Location Icon" class="location-icon">
-      <span class="property-address">{{ properties[0].property_address }}</span>
-    </div>
-    <div class="image-text-grid fourImage">
-      <div class="row">
-        <div class="column">
-          <div class="image-text">
-            <img src="assets/bed.png" alt="Bed" class="imageIcon">
-            <span class="imagetext">Bed Room</span>
-          </div>
-        </div>
-        <div class="column">
-          <div class="image-text">
-            <img src="assets/bedRoom.png" alt="Bedroom" class="imageIcon">
-            <span class="imagetext">Bedroom</span>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="column">
-          <div class="image-text">
-            <img src="assets/wall.png" alt="Wall" class="imageIcon">
-            <span class="imagetext">Wall</span>
-          </div>
-        </div>
-        <div class="column">
-          <div class="image-text">
-            <img src="assets/parking.png" alt="Parking" class="imageIcon">
-            <span class="imagetext">Parking</span>
-          </div>
-        </div>
-      </div>
-    </div> 
-    <div class="more-details-container">
-      <h2 class="more-details-heading">More Details</h2>
-    
-      <div class="details-row">
-        <span class="key">plot no:</span>
-        <span class="value">797/816.</span>
-      </div>
-      <div class="details-row">
-        <span class="key">Type:</span>
-        <span class="value">Commercial</span>
-      </div>
-      <div class="details-row">
-        <span class="key">Free hold:</span>
-        <span class="value">No</span>
-      </div>
-      <div class="details-row">
-        <span class="key">Front direction:</span>
-        <span class="value">North</span>
-      </div>
-      <div class="details-row">
-        <span class="key">Boundary wall:</span>
-        <span class="value">No</span>
-      </div>
-      <div class="details-row">
-        <span class="key">Corner plot:</span>
-        <span class="value">yes</span>
-      </div>
-      <div class="details-row">
-        <span class="key">Price per sqft:</span>
-        <span class="value">15000/-</span>
-      </div>
-      <div class="details-row">
-        <span class="key">Area:</span>
-        <span class="value">1500sqft</span>
-      </div>
-      <div class="details-row">
-        <span class="key">negotiable:</span>
-        <span class="value">Yes</span>
-      </div>
-    </div>  
-    <div>
-      <h2 class="more-details-heading">Description</h2>
-      <span class="description">Beautiful 3,4,5,6 BHK apartments in Zirakpur, are now available in Green Lotus Utsav housing project. Prices of apartments in this project, vary between Rs. 1.85 - 12.84 Cr. Green Lotus Utsav has apartments in multiple configurations, in range of 2,100 - 9,945 sq.ft.. Green Lotus Utsav is a RERA- registered society and PBRERA-SAS79-PR0425 is the RERA registration number</span>
-    </div>  
-    <div class="amount-enquire-container">
-      <div class="row">
-        <!-- Column 1: Total Amount -->
-        <div class="column total-amount">
-          <span class="label">Total Amount</span>
-          <span class="amount">{{ properties[0].current_price }}</span>
-        </div>
-        <!-- Column 2: Enquire Now Button -->
-        <div class="column enquire-button">
-          <button class="enquire-btn">Enquire Now</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<app-footer></app-footer>
+  <app-footer></app-footer>
 </ion-content>

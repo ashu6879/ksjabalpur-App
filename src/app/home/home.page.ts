@@ -24,6 +24,7 @@ export class HomePage implements OnInit, OnDestroy, AfterViewInit {
   categories: any[] = []; // Your categories array
   builder: any[] = []; // Your categories array
   properties: any[] = [];  // Array to store the property data
+  Recentproperties: any[] = [];  // Array to store the property data
   builders: any[] = []; // Will hold the API data
   isMenuOpen: boolean = false;
   // Base URL for the image
@@ -59,7 +60,7 @@ export class HomePage implements OnInit, OnDestroy, AfterViewInit {
           clickable: true,  // Enable clicking on dots
         },
       });
-      // console.log('First Swiper initialized:', this.swiper);
+      // //console.log('First Swiper initialized:', this.swiper);
     }, 500);  // Delay to ensure images are loaded before initializing Swiper
   
     // Initialize the second Swiper (3 slides per view)
@@ -73,7 +74,7 @@ export class HomePage implements OnInit, OnDestroy, AfterViewInit {
           clickable: true,  // Enable clicking on dots
         },
       });
-      // console.log('Second Swiper initialized:', this.swiper2);
+      // //console.log('Second Swiper initialized:', this.swiper2);
     }, 500);  // Delay to ensure images are loaded before initializing Swiper
     // Listen for clicks outside (optional functionality)
     document.addEventListener('click', this.handleOutsideClick.bind(this));
@@ -120,7 +121,7 @@ export class HomePage implements OnInit, OnDestroy, AfterViewInit {
     // Make the HTTP GET request with headers
     this.http.get<any[]>(apiUrl, { headers }).subscribe(
       (data) => {
-        // console.log("Fetched Data:", data); // Log the entire response to inspect the structure
+        // //console.log("Fetched Data:", data); // Log the entire response to inspect the structure
   
         // Ensure the response is an array and map the image paths
         if (Array.isArray(data)) {
@@ -133,7 +134,7 @@ export class HomePage implements OnInit, OnDestroy, AfterViewInit {
             }
           }).filter((url) => url !== null); // Filter out any null entries
   
-          // console.log("Processed Image URLs:", this.images); // Log the processed image URLs
+          // //console.log("Processed Image URLs:", this.images); // Log the processed image URLs
         } else {
           console.error("Unexpected API response structure:", data);
         }
@@ -153,9 +154,9 @@ export class HomePage implements OnInit, OnDestroy, AfterViewInit {
   
     this.http.get<any>(apiUrl, { headers }).subscribe({
       next: (responce) => {
-        console.log('my API Response:', responce);
+        //console.log('my API Response:', responce);
         const abc = responce.data;
-        console.log("abc is",abc)
+        //console.log("abc is",abc)
         if (Array.isArray(abc)) {
           // Handle array response
           this.categories = abc.map((item) => {
@@ -167,7 +168,7 @@ export class HomePage implements OnInit, OnDestroy, AfterViewInit {
         } else {
           console.error('Unexpected API response structure:', abc);
         }
-        // console.log('Processed Categories:', this.categories);
+        // //console.log('Processed Categories:', this.categories);
       },
       error: (err) => {
         console.error('API call failed:', err);
@@ -178,8 +179,8 @@ export class HomePage implements OnInit, OnDestroy, AfterViewInit {
   // Handle category click
   goToCategory(category: { id: string; name: string }) {
     if (category && category.id) {
-      // console.log('Category clicked:', category.id);
-      // console.log('Category Name:', category.name);
+      // //console.log('Category clicked:', category.id);
+      // //console.log('Category Name:', category.name);
   
       // Call POST API to fetch data for the selected category
       const apiUrl = ROUTES.PROPERTY_CAT_BYID; // Replace with actual API URL
@@ -194,7 +195,7 @@ export class HomePage implements OnInit, OnDestroy, AfterViewInit {
       // Send POST request to fetch category data
       this.http.post<any>(apiUrl, body, { headers }).subscribe({
         next: (responseData) => {
-          console.log('Fetched category data:', responseData);
+          //console.log('Fetched category data:', responseData);
           const combinedData = {
             categoryId: category.id,           // Category ID
             categoryName: category.name,       // Category Name
@@ -202,7 +203,7 @@ export class HomePage implements OnInit, OnDestroy, AfterViewInit {
           };
           // Check if the response status is false and data is 'no'
           if (responseData.status === false && responseData.data === 'no') {
-            console.log('No properties found');
+            //console.log('No properties found');
             this.noPropertiesFound = true;  // Set the flag to true
             return; // Exit the function and skip navigation
           } else {
@@ -213,7 +214,7 @@ export class HomePage implements OnInit, OnDestroy, AfterViewInit {
             this.router.navigate([`/common-property-page/`], {
               state: { combinedData: combinedData },
             }).then(() => {
-              console.log('Navigation successful to category page with data:', responseData.data);
+              //console.log('Navigation successful to category page with data:', responseData.data);
             }).catch((err) => {
               console.error('Navigation error:', err);
             });
@@ -233,9 +234,9 @@ export class HomePage implements OnInit, OnDestroy, AfterViewInit {
     const headers = new HttpHeaders({
       'Authorization': '2245', // Add the Authorization header
     });
-    this.http.get<any[]>(apiUrl, { headers }).subscribe(data => {
-      this.properties = data;
-      console.log("ye rhi",data)
+    this.http.get<any[]>(apiUrl, { headers }).subscribe(response =>{
+      const recentdata = response;
+      this.properties = recentdata;
       this.initializePropertySlider();
     });
   }
@@ -258,8 +259,11 @@ export class HomePage implements OnInit, OnDestroy, AfterViewInit {
     const headers = new HttpHeaders({
       'Authorization': '2245', // Add the Authorization header
     });
-    this.http.get<any[]>(apiUrl, { headers }).subscribe(data => {
-      this.properties = data;
+    this.http.get<any[]>(apiUrl, { headers }).subscribe(response =>{
+      // console.log("responce", response); // Log to confirm the data
+      const recentdata = response;
+      console.log("recent", recentdata); // Log to confirm the data
+      this.properties = recentdata;
       this.initializeTodayDealSlider();
     });
   }
@@ -278,12 +282,15 @@ export class HomePage implements OnInit, OnDestroy, AfterViewInit {
   }  
 
   fetchRecentlyAdded() {
-    const apiUrl = ROUTES.All_PROPERTY; // Replace with your actual API URL
+    const apiUrl = ROUTES.RECENT_PROPERTY; // Replace with your actual API URL
     const headers = new HttpHeaders({
       'Authorization': '2245', // Add the Authorization header
     });
-    this.http.get<any[]>(apiUrl, { headers }).subscribe(data => {
-      this.properties = data;
+  
+    this.http.get<{ data: any[] }>(apiUrl, { headers }).subscribe(response => {
+      const recentdata = response.data;
+      //console.log("recent", recentdata); // Log to confirm the data
+      this.Recentproperties = recentdata; // Use the correct structure
       this.initializeRecentlySlider();
     });
   }
@@ -312,14 +319,14 @@ export class HomePage implements OnInit, OnDestroy, AfterViewInit {
     this.http.get<any>(apiUrl, { headers }).subscribe(
       (response) => {
         // Log the full response to the console
-        console.log('Response data from API:', response);
+        //console.log('Response data from API:', response);
   
         // Check if response contains expected data
         if (response && response.data && Array.isArray(response.data)) {
-          console.log('Builders data:', response.data);
+          //console.log('Builders data:', response.data);
   
           this.builders = this.addBaseUrlToImages(response.data);  // Add base URL to image paths
-          // console.log('Builders with base URLs:', this.builders);  // Log the builders with added base URL
+          // //console.log('Builders with base URLs:', this.builders);  // Log the builders with added base URL
   
           this.initializeSwiper();  // Initialize Swiper after data is fetched
         } else {
@@ -331,65 +338,10 @@ export class HomePage implements OnInit, OnDestroy, AfterViewInit {
       }
     );
   }
-  
-    
-  // goToBuilder(builder: { id: string; name: string }) {
-  //   if (builder && builder.id) {
-  //     console.log('Category clicked:', builder.id);
-  //     console.log('Category Name:', builder.name);
-  
-  //     const apiUrl = ROUTES.BUILDER_BYID; // Replace with actual API URL
-  //     console.log(apiUrl)
-  //     const headers = new HttpHeaders({
-  //       'Authorization': '2245', // Replace with your actual Authorization token if needed
-  //     });
-  
-  //     const body = {
-  //       builder_id: builder.id, // Send builderId as part of the body
-  //     };
-  
-  //     this.http.post<any>(apiUrl, body, { headers }).subscribe({
-  //       next: (responseData) => {
-  //         console.log('Fetched category data:', responseData);
-  
-  //         const combinedData = {
-  //           builderID: builder.id,
-  //           builderName: builder.name,
-  //           builderData: responseData.message || [], // Ensure builderData is an array
-  //         };
-  
-  //         // Check if the response status is false and data is 'no'
-  //         if (responseData.status === false && responseData.message === 'no') {
-  //           console.log('No Builders found');
-  //           this.noPropertiesFound = true;  // Set the flag to true
-  //         } else {
-  //           this.noPropertiesFound = false;
-  //         }
-  
-  //         // Proceed with navigation, passing fetched data and noPropertiesFound flag as state
-  //         this.router.navigate([`/all-builders/`], {
-  //           state: {
-  //             combinedData: combinedData,
-  //             noPropertiesFound: this.noPropertiesFound, // Pass the flag
-  //           },
-  //         }).then(() => {
-  //           console.log('Navigation successful to category page with data:', responseData.message);
-  //         }).catch((err) => {
-  //           console.error('Navigation error:', err);
-  //         });
-  //       },
-  //       error: (err) => {
-  //         console.error('API request failed:', err); // Handle any error from the API request
-  //       },
-  //     });
-  //   } else {
-  //     console.error('Invalid category object:', builder);
-  //   }
-  // }
   goToBuilder(builder: { id: string; name: string }) {
     if (builder && builder.id) {
-      console.log('Category clicked:', builder.id);
-      console.log('Category Name:', builder.name);
+      //console.log('Category clicked:', builder.id);
+      //console.log('Category Name:', builder.name);
   
       // Proceed with navigation, passing builder id and name as state
       this.router.navigate([`/all-builders/`], {
@@ -398,7 +350,7 @@ export class HomePage implements OnInit, OnDestroy, AfterViewInit {
           builderName: builder.name
         },
       }).then(() => {
-        console.log('Navigation successful to category page');
+        //console.log('Navigation successful to category page');
       }).catch((err) => {
         console.error('Navigation error:', err);
       });
@@ -431,6 +383,7 @@ export class HomePage implements OnInit, OnDestroy, AfterViewInit {
   }
 
   goToPropertyDetails(propertyId: number): void {
+    console.log("id is",propertyId)
     this.router.navigate(['/property'], { state: { propertyId: propertyId } });
   }
 }

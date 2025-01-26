@@ -1,6 +1,6 @@
 <ion-content>
   <app-sidebar></app-sidebar>
-  <div class="outerDiv">
+  <div class="outerDiv topshuru">
     <div class="firstImage">
       <div class="swiper-container first-slider">
         <div class="swiper-wrapper">
@@ -87,8 +87,8 @@
     <!-- Property Slider -->
     <div class="swiper-container property-slider mainSlider">
       <div class="swiper-wrapper">
-        <div class="swiper-slide recentlyadded" *ngFor="let property of properties" (click)="goToPropertyDetails(property.id)">
-          <div class="property-details">
+        <div class="swiper-slide recentlyadded" *ngFor="let property of properties">
+          <div class="property-details"  (click)="goToPropertyDetails(property.property_id)">
             <img src="assets/building.png" alt="Category Icon" class="property-image">
             <div class="feturedSlider">
               <span class="property-title">{{ property.property_name }}</span>
@@ -118,9 +118,9 @@
     <div class="swiper-container todayDeal-slider mainSlider">
       <div class="swiper-wrapper">
         <!-- Iterate over the properties using *ngFor -->
-        <div class="swiper-slide recentlyadded" *ngFor="let property of properties"(click)="goToPropertyDetails(property.id)">
+        <div class="swiper-slide recentlyadded" *ngFor="let property of properties">
             <!-- Property Details -->
-            <div class="property-details">
+            <div class="property-details" (click)="goToPropertyDetails(property.property_id)">
               
               <img src="assets/building.png" alt="Category Icon" class="property-image">
               <div class="feturedSlider">
@@ -152,9 +152,9 @@
     <div class="swiper-container Recentlyadded-slider mainSlider">
       <div class="swiper-wrapper">
         <!-- Iterate over the properties using *ngFor -->
-        <div class="swiper-slide recentlyadded" *ngFor="let property of properties" (click)="goToPropertyDetails(property.id)">
+        <div class="swiper-slide recentlyadded" *ngFor="let property of Recentproperties">
             <!-- Property Details -->
-            <div class="property-details">
+            <div class="property-details" (click)="goToPropertyDetails(property.property_id)">
               
               <img src="assets/todayDeal.png" alt="Category Icon" class="property-image">
               <div class="feturedSlider">

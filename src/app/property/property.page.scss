@@ -2,17 +2,31 @@
     display: flex; /* Use Flexbox to align items */
     justify-content: space-between; /* Ensures left, center, and right items are spaced out */
     align-items: center; /* Vertically align items in the center */
-    width: 100%; /* Make the container take up the full width */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: white; /* Optional: add background color to the container */
+    width: 100%;
   }
   
   .left {
     flex: 0 0 auto; /* Do not allow left section to grow or shrink */
   }
-  
-  .image.backArrowimage {
-    width: 35px; /* Set the width of the image */
-    height: 35px; /* Set the height of the image */
+  .left,  .right {
+    display: flex;
+    align-items: center;
   }
+  
+  .backArrowimage {
+    cursor: pointer; /* Make the image clickable */
+  }
+  
   
   .center {
     flex: 1; /* This will make the center section take the available space */
@@ -20,6 +34,7 @@
   }
   
   .name {
+    text-transform: capitalize;
     font-size: 25px; /* Set the font size for the name */
     font-weight: bold; /* Optional, make the name bold */
     font-family: "Open Sans", sans-serif;
@@ -43,12 +58,13 @@
   }
   
   .property-image {
-    width: 100%; /* Make the image responsive */
+    width: 95%; /* Make the image responsive */
     height: auto; /* Maintain aspect ratio */
     object-fit: cover; /* Ensure images fill the container without stretching */
     border-radius: 10px;
   }
   .propertyTitle{
+    text-transform: capitalize;
     font-family: "Open Sans", sans-serif;
     color: #004680;
     font-weight: bolder;
@@ -224,6 +240,7 @@
   .enquire-btn:hover {
     background-color: #FAAD25; /* Darker yellow on hover */
   }
+  
   
   
   

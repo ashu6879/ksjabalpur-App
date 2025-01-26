@@ -1,3 +1,28 @@
+.topBar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  width: 100%;
+  background-color: white;
+  height: 56px; /* Adjust according to the height of your top bar */
+}
+.topbarMenu{
+  height: auto;
+}
+
+.toolbar_mine {
+  position: relative;
+  z-index: 9999; /* Ensure toolbar stays above other content */
+}
+
+.center-image-container,
+.topRibbon {
+  z-index: 9999; /* Ensure images inside buttons are visible on top */
+}
+
+
 ion-header {
   --padding-top: 20px; /* Adjust top padding */
   --padding-bottom: 0px; /* Remove bottom padding */
@@ -55,15 +80,9 @@ ion-header {
   ion-menu .menu-inner {
   padding-top: 0px; /* Remove any extra padding inside the menu */
   }
-  
-  /* Set the background color of the sidebar menu */
-  ion-menu {
-  --background: white; /* This will make the background of the menu white */
-  }
-  
-  ion-menu ion-header {
-  --background: white; /* Ensure the header inside the menu also has a white background */
-  }
-  ion-menu ion-content {
-  --background: white; /* Ensure the content inside the menu also has a white background */
+  .side-menu-custom-class{
+      z-index: 999;
+      --background: white;
+      height: 100vh;
+      margin-top: 3rem;
   }
