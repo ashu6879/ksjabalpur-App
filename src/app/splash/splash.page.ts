@@ -26,8 +26,8 @@ export class SplashPage implements OnInit {
       const isLoggedIn = await this.storage.get('is_logged_in'); // Get session status
       const email = localStorage.getItem('email'); // Correct key here
       const user_id = await this._storage?.get('user_id');
-      console.log("hii",isLoggedIn,email,user_id)
-      if (isLoggedIn && email && user_id) {
+      console.log("hii",isLoggedIn,user_id)
+      if (isLoggedIn && user_id) {
         // Navigate to home page if all conditions are met
         this.router.navigateByUrl('/home');
       } else {
