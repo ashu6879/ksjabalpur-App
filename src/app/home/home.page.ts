@@ -234,9 +234,17 @@ export class HomePage implements OnInit, OnDestroy, AfterViewInit {
     const headers = new HttpHeaders({
       'Authorization': '2245', // Add the Authorization header
     });
-    this.http.get<any[]>(apiUrl, { headers }).subscribe(response =>{
+  
+    this.http.get<any[]>(apiUrl, { headers }).subscribe(response => {
       const recentdata = response;
-      this.properties = recentdata;
+      this.properties = recentdata.map(property => {
+        // Prepend the base URL to the main_img_path
+        if (property.main_img_path) {
+          property.main_img_path = this.baseUrl + property.main_img_path;
+        }
+        return property;
+      });
+      
       this.initializePropertySlider();
     });
   }
@@ -262,8 +270,13 @@ export class HomePage implements OnInit, OnDestroy, AfterViewInit {
     this.http.get<any[]>(apiUrl, { headers }).subscribe(response =>{
       // console.log("responce", response); // Log to confirm the data
       const recentdata = response;
-      console.log("recent", recentdata); // Log to confirm the data
-      this.properties = recentdata;
+      this.properties = recentdata.map(property => {
+        // Prepend the base URL to the main_img_path
+        if (property.main_img_path) {
+          property.main_img_path = this.baseUrl + property.main_img_path;
+        }
+        return property;
+      });
       this.initializeTodayDealSlider();
     });
   }
@@ -289,8 +302,13 @@ export class HomePage implements OnInit, OnDestroy, AfterViewInit {
   
     this.http.get<{ data: any[] }>(apiUrl, { headers }).subscribe(response => {
       const recentdata = response.data;
-      //console.log("recent", recentdata); // Log to confirm the data
-      this.Recentproperties = recentdata; // Use the correct structure
+      this.Recentproperties = recentdata.map(Recentproperties => {
+        // Prepend the base URL to the main_img_path
+        if (Recentproperties.main_img_path) {
+          Recentproperties.main_img_path = this.baseUrl + Recentproperties.main_img_path;
+        }
+        return Recentproperties;
+      });
       this.initializeRecentlySlider();
     });
   }

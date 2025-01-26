@@ -30,7 +30,7 @@
         <!-- Iterate over categories using *ngFor -->
         <div class="swiper-slide" *ngFor="let category of categories">
           <button class="custom-button" (click)="goToCategory(category)">
-            <img src="assets/industrial.png" alt="Category Icon" class="iconCategory">
+            <img [src]="category.category_logo || 'assets/industrial.png'" alt="Category Icon" class="iconCategory">
             <span class="categoryText">{{ category.name }}</span>
           </button>
         </div>
@@ -89,7 +89,7 @@
       <div class="swiper-wrapper">
         <div class="swiper-slide recentlyadded" *ngFor="let property of properties">
           <div class="property-details"  (click)="goToPropertyDetails(property.property_id)">
-            <img src="assets/building.png" alt="Category Icon" class="property-image">
+            <img [src]="property.main_img_path || 'assets/industrial.png'" alt="Category Icon" class="property-image">
             <div class="feturedSlider">
               <span class="property-title">{{ property.property_name }}</span>
               <div class="property-price">
@@ -122,7 +122,7 @@
             <!-- Property Details -->
             <div class="property-details" (click)="goToPropertyDetails(property.property_id)">
               
-              <img src="assets/building.png" alt="Category Icon" class="property-image">
+              <img [src]="property.main_img_path || 'assets/industrial.png'" alt="Category Icon" class="property-image">
               <div class="feturedSlider">
                 <span class="property-title">{{ property.property_name }}</span>
                 <div class="property-price">
@@ -156,7 +156,7 @@
             <!-- Property Details -->
             <div class="property-details" (click)="goToPropertyDetails(property.property_id)">
               
-              <img src="assets/todayDeal.png" alt="Category Icon" class="property-image">
+              <img [src]="property.main_img_path || 'assets/industrial.png'" alt="Category Icon" class="property-image">
               <div class="feturedSlider">
                 <span class="property-title">{{ property.property_name }}</span>
                 <div class="property-price">
