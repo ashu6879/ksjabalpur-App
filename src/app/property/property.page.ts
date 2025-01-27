@@ -22,7 +22,7 @@ export class PropertyPage implements OnInit, AfterViewInit {
   userId: string | null = null;
   favoriteProperties: Set<number> = new Set();
   propertyId: number | null = null; // Store property ID
-  properties: any[] = [];
+  properties: any = {}; // Initialize as an object, not an array
   swiper: Swiper | undefined;
   baseUrl = 'http://65.0.7.21/ksjabalpur/';
 
@@ -81,27 +81,27 @@ export class PropertyPage implements OnInit, AfterViewInit {
       'Authorization': '2245',
       'Content-Type': 'application/json',
     });
-
+  
     const body = { property_id: propertyId };
-
+  
     this.http.post<any>(apiUrl, body, { headers }).subscribe(
       response => {
-        const propertyData = response.data;
-        console.log('API Response:', response.data);
-
+        console.log('API Response:', response);
+        const propertyData = response.data; // This is the property data object
+        console.log('Property Data:', propertyData);
+  
         // Update image paths with base URL
         if (propertyData.main_img_path) {
           propertyData.main_img_path = this.baseUrl + propertyData.main_img_path;
         }
         if (propertyData.image_paths) {
-          // console.log(propertyData.image_paths)
           propertyData.image_paths = propertyData.image_paths.map((path: string) => this.baseUrl + path);
         }
-
-        // Assign the fetched data to properties array
-        this.properties = [propertyData];
+  
+        // Assign the fetched data to properties object (not an array)
+        this.properties = propertyData;
         console.log('Updated property details:', this.properties);
-
+  
         // After properties are updated, refresh the swiper
         this.cdr.detectChanges(); // Detect changes after fetching data
         this.initializeSwiper(); // Reinitialize or refresh Swiper
@@ -144,7 +144,6 @@ export class PropertyPage implements OnInit, AfterViewInit {
   // Fetch favorite properties for the user
   checkFavoriteProperties(userId: string): void {
     const url = ROUTES.CHECK_FAVOURITE; // Replace with your actual endpoint
-  
     const body = { user_id: userId }; // Send user_id in the body
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
   
@@ -152,20 +151,26 @@ export class PropertyPage implements OnInit, AfterViewInit {
       (response) => {
         console.log("Favorite is", response.message);
   
-        const favoriteArray = response.message; // Extract the message array
+        const favoriteData = response.message; // Extract the message
         this.favoriteProperties.clear();
   
-        if (Array.isArray(favoriteArray) && favoriteArray.length > 0) {
-          const favoriteProperty = favoriteArray[0]; // Access the first object in the array
-          if (favoriteProperty.property_id) {
-            this.favoriteProperties.add(favoriteProperty.property_id);
-          }
+        // Check if favoriteData is an array or object and handle accordingly
+        if (Array.isArray(favoriteData)) {
+          favoriteData.forEach((item: any) => {
+            if (item.property_id) {
+              this.favoriteProperties.add(item.property_id);
+            }
+          });
+        } else if (favoriteData && favoriteData.property_id) {
+          this.favoriteProperties.add(favoriteData.property_id);
+        } else {
+          console.warn("No valid favorite properties found.");
         }
   
-        console.log('Loaded favorite property:', this.favoriteProperties);
+        console.log('Loaded favorite properties:', this.favoriteProperties);
       },
       (error) => {
-        console.error('Error fetching favorite property:', error);
+        console.error('Error fetching favorite properties:', error);
       }
     );
   }
@@ -180,7 +185,7 @@ export class PropertyPage implements OnInit, AfterViewInit {
       return;
     }
     console.log('Property object:', property);
-    const propertyId = property[0].property_id; // Ensure you're using the correct property ID here
+    const propertyId = property.property_id; // Ensure you're using the correct property ID here
     console.log('Toggling property with ID:', propertyId);
     if (!propertyId) {
       console.error('Property ID is null or undefined.');
@@ -236,12 +241,16 @@ export class PropertyPage implements OnInit, AfterViewInit {
 
   // Check if the icon should be filled
   isIconFilled(property: any): boolean {
-    const propertyId = property[0].id; // Assuming property has an 'id'
-    return this.favoriteProperties.has(propertyId);  // Return true if property is in favorites
+    // Check if property is defined and has an 'id' field
+    if (property && property.property_id) {
+      const propertyId = property.property_id; // Access the 'property_id' field
+      return this.favoriteProperties.has(propertyId); // Check if property is in favorites
+    }
+    return false; // Return false if property or 'property_id' is not defined
   }
   
   downloadPdf() {
-    const property = this.properties[0];
+    const property = this.properties;
   
     // Define the type for the details array
     interface Detail {
@@ -301,7 +310,7 @@ export class PropertyPage implements OnInit, AfterViewInit {
     if (property.image_paths && property.image_paths.length > 0) {
       let imageYOffset = 70;
       // Add the first image (on the left side)
-      doc.addImage(property.image_paths[0], "JPEG", 20, imageYOffset, 80, 60);
+      doc.addImage(property.image_paths, "JPEG", 20, imageYOffset, 80, 60);
       // Add the second image (on the right side)
       if (property.image_paths[1]) {
         doc.addImage(property.image_paths[1], "JPEG", 110, imageYOffset, 80, 60);

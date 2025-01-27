@@ -9,7 +9,7 @@
           (click)="goBack()">
       </div>
       <div class="center">
-        <span class="name">{{ properties[0]?.property_name || 'Loading...' }}</span>
+        <span class="name">{{ properties?.property_name || 'Loading...' }}</span>
       </div>
       <i 
       [class]="isIconFilled(properties) ? 'fas fa-heart filled' : 'far fa-heart'" 
@@ -18,11 +18,10 @@
       ></i>
       <div class="right"></div>
     </div>
-
-    <div *ngIf="properties.length > 0; else loading">
+    
       <div class="swiper-container image-slider">
         <div class="swiper-wrapper property-card">
-          <div class="swiper-slide" *ngFor="let imagePath of properties[0]?.image_paths">
+          <div class="swiper-slide" *ngFor="let imagePath of properties?.image_paths">
             <img [src]="imagePath" alt="Property Image" class="property-image">
           </div>
         </div>
@@ -31,13 +30,13 @@
       </div>
       
       <div class="property-header">
-        <h2 class="propertyTitle">{{ properties[0]?.property_name }}</h2>
+        <h2 class="propertyTitle">{{ properties?.property_name }}</h2>
         <img src="assets/pdfIcon.png" alt="Icon" class="property-icon1" (click)="downloadPdf()">
       </div>
       
       <div class="location-info">
         <img src="assets/location_icon.png" alt="Location Icon" class="location-icon">
-        <span class="property-address">{{ properties[0]?.property_address || 'No address available' }}</span>
+        <span class="property-address">{{ properties?.property_address || 'No address available' }}</span>
       </div>
 
       <div class="image-text-grid fourImage">
@@ -91,14 +90,13 @@
         <div class="row">
           <div class="column total-amount">
             <span class="label">Total Amount</span>
-            <span class="amount">{{ properties[0]?.current_price || 'N/A' }}</span>
+            <span class="amount">{{ properties?.current_price || 'N/A' }}</span>
           </div>
           <div class="column enquire-button">
             <button class="enquire-btn">Enquire Now</button>
           </div>
         </div>
       </div>
-    </div>
 
     <ng-template #loading>
       <div class="loading-container">
