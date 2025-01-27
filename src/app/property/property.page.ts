@@ -318,64 +318,127 @@ export class PropertyPage implements OnInit, AfterViewInit {
   downloadPdf() {
     const property = this.properties[0];
   
+    // Define the type for the details array
+    interface Detail {
+      key: string;
+      value: string;
+    }
+  
+    const details: Detail[] = [
+      { key: 'Plot No', value: '797/816' },
+      { key: 'Type', value: 'Commercial' },
+      { key: 'Free Hold', value: 'No' },
+      { key: 'Front Direction', value: 'North' },
+      { key: 'Boundary Wall', value: 'No' },
+      { key: 'Corner Plot', value: 'Yes' },
+      { key: 'Price per sqft', value: '15000/-' },
+      { key: 'Area', value: '1500sqft' },
+      { key: 'Negotiable', value: 'Yes' }
+    ];
+  
     // Initialize jsPDF instance
     const doc = new jsPDF();
+    const footerlogo = '../assets/logo.png'; // Replace with your logo image path
+    const logoPath = '../assets/ks.png'; // Replace with your logo image path
+    const pageWidth = doc.internal.pageSize.width;
+    const pageHeight = doc.internal.pageSize.height;
   
-    // Add Logo at the top center (adjust coordinates for your image dimensions)
-    const logoPath = '../assets/logo.png'; // Replace with your logo image path
-    doc.addImage(logoPath, 'PNG', 85, 10, 30, 30); // Logo at the top center
+    // Add logo at the center
+    doc.addImage(logoPath, 'PNG', pageWidth / 2 - 7.5, pageHeight / 2 - 7.5, 15, 15); // Reduced logo size to 15x15
+
   
-    // Set Title font (larger and bold for impact)
-    doc.setFontSize(24);
-    doc.text("Property Details", 20, 65); // Positioned just below the logo
+    // Add Heading at the center below the logo
+    doc.setFontSize(20);
+    doc.setFont("helvetica", "bold");
+    // Set color for the first text (Welcome to)
+    // Set color for the first text (Welcome to)
+    doc.setTextColor(248, 216, 20); // Yellow color (#F8D814)
+    doc.text("Welcome to", pageWidth / 2, pageHeight / 2 + 30, { align: "center" });
+
+    // Set color for the second text (Jabalpur Realty Venture)
+    doc.setTextColor(251, 3, 3); // Red color (#FB0303)
+    doc.text("Jabalpur Realty Venture", pageWidth / 2, pageHeight / 2 + 50, { align: "center" });
+
   
-    // Draw a subtle line under the title
-    doc.setLineWidth(0.5);
-    doc.setDrawColor(200, 200, 200); // Light gray line
-    doc.line(20, 70, 190, 70); // Line across the page
+    // Add a new page for property details
+    doc.addPage();
     
-    // Add some padding space between title and content
-    doc.setFontSize(12);
+    // Property Details (from the second page onwards)
+    doc.setFontSize(16);
+    doc.setTextColor(0, 0, 0);
+    const propertyName = `Name: ${property.property_name || 'No Name available'}`;
+    doc.text(propertyName, 20, 30);
   
-    // Property Information - Use a well-structured layout with better spacing
-    const yOffset = 80;
-    doc.text(`Property ID: ${property.property_id}`, 20, yOffset);
-    doc.text(`Property Name: ${property.property_name}`, 20, yOffset + 10);
-    doc.text(`Address: ${property.property_address}`, 20, yOffset + 20);
-    doc.text(`Area: ${property.property_area}`, 20, yOffset + 30);
-    doc.text(`Current Price: ${property.current_price}`, 20, yOffset + 40);
-    doc.text(`Previous Price: ${property.previous_price}`, 20, yOffset + 50);
-    doc.text(`Builder Name: ${property.builder_name}`, 20, yOffset + 60);
-    doc.text(`Finance Approval: ${property.finance_aproval}`, 20, yOffset + 70);
-    doc.text(`Construction Date: ${property.constructed_date}`, 20, yOffset + 80);
+    const locationInfo = `Address: ${property.property_address || 'No address available'}`;
+    doc.text(locationInfo, 20, 50);
   
-    // Add a thicker line after property details for separation
-    doc.setLineWidth(1);
-    doc.setDrawColor(0, 0, 0); // Black line for clear separation
-    doc.line(20, yOffset + 90, 190, yOffset + 90); // Line across the page
-  
-    // Check if images exist and add them dynamically
+    // Property Images (Swiper-like image slider)
     if (property.image_paths && property.image_paths.length > 0) {
-      // First image (on the left side)
-      doc.addImage(property.image_paths[0], "JPEG", 20, yOffset + 100, 80, 60);
-  
-      // Second image (on the right side, adjust if necessary)
+      let imageYOffset = 70;
+      // Add the first image (on the left side)
+      doc.addImage(property.image_paths[0], "JPEG", 20, imageYOffset, 80, 60);
+      // Add the second image (on the right side)
       if (property.image_paths[1]) {
-        doc.addImage(property.image_paths[1], "JPEG", 110, yOffset + 100, 80, 60);
+        doc.addImage(property.image_paths[1], "JPEG", 110, imageYOffset, 80, 60);
       }
     }
   
-    // Add a final line after the images for balance
-    doc.setLineWidth(1);
-    doc.line(20, yOffset + 170, 190, yOffset + 170);
+    // Add other property features and more details
+    const features = [
+      { icon: 'assets/bed.png', label: 'Bed Room' },
+      { icon: 'assets/bedRoom.png', label: 'Bedroom' },
+      { icon: 'assets/wall.png', label: 'Wall' },
+      { icon: 'assets/parking.png', label: 'Parking' }
+    ];
   
-    // Footer - add company name, contact, or other info, and page number
-    doc.setFontSize(10);
-    doc.text("Generated by [Your Company Name]", 20, 250);  // Company or footer info
-    doc.text(`Page 1`, 180, 250);  // Add a page number for future multiple-page PDFs
+    let featureYOffset = 180;
+    features.forEach((item, index) => {
+      const iconPath = item.icon;
+      const label = item.label;
+      
+      // Add the icon with a smaller size (10x10)
+      doc.addImage(iconPath, 'PNG', 20 + (index % 2) * 90, featureYOffset + Math.floor(index / 2) * 30, 10, 10);
+      
+      // Add label with adjusted position (more space between icon and text)
+      doc.text(label, 35 + (index % 2) * 90, featureYOffset + Math.floor(index / 2) * 30 + 5);
+    });
   
-    // Save the PDF with a refined file name
+    // More Details Section
+    doc.setFontSize(14);
+    doc.text("More Details", 20, featureYOffset + 60);
+  
+    // Loop to print key-value details
+    let yOffset = featureYOffset + 70;
+    details.forEach((detail: Detail, index: number) => {
+      // Check if we need to add a new page due to overflow
+      if (yOffset > pageHeight - 20) {
+        doc.addPage(); // Add a new page
+        yOffset = 20; // Reset Y offset to the top of the new page
+      }
+  
+      doc.text(`${detail.key}:`, 20, yOffset);
+      doc.text(detail.value, 120, yOffset, { maxWidth: 70 });
+      yOffset += 10;
+    });
+  
+    // Add Description Section
+    doc.setFontSize(12);
+    doc.text("Description", 20, yOffset + 10);
+    doc.text("Beautiful 3,4,5,6 BHK apartments in Zirakpur, are now available in Green Lotus Utsav housing project. Prices of apartments in this project vary between Rs. 1.85 - 12.84 Cr. Green Lotus Utsav has apartments in multiple configurations, ranging from 2,100 - 9,945 sq.ft. Green Lotus Utsav is a RERA-registered society and PBRERA-SAS79-PR0425 is the RERA registration number.", 20, yOffset + 20, { maxWidth: 170 });
+  
+    // Total Amount Section
+    doc.setFontSize(12);
+    doc.text("Total Amount:", 20, yOffset + 80);
+    doc.text(`${property.current_price || 'N/A'}`, 90, yOffset + 80);
+  
+    // Add logo to the last page (bottom-right corner)
+    const lastPage = doc.internal.pages.length; // Get the total number of pages
+    doc.setPage(lastPage); // Go to the last page
+    doc.addImage(footerlogo, 'PNG', pageWidth - 40, pageHeight - 40, 15, 15); // Logo at the bottom-right corner, size reduced to half
+  
+    // Save the PDF with a filename
     doc.save(`${property.property_name}_Details.pdf`);
   }
+  
   
 }
