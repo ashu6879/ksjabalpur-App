@@ -345,9 +345,10 @@ ion-slide img {
 }
 .property-icon i {
   font-size: 24px;
-  color: #333; /* Default color, can be changed */
+  color: red; /* Default color, can be changed */
   padding: 5px;
   border-radius: 50%;  /* Optional: Keeps the rounded shape, remove if not needed */
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2); /* Lighter shadow */
 }
 .property-icon i.fas {
   transition: color 0.3s ease;  /* Smooth color transition */

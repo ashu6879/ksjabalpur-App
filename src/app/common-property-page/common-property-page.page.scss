@@ -73,6 +73,7 @@ ion-menu ion-content {
 --background: white; /* Ensure the content inside the menu also has a white background */
 }
 .headerTitle{
+text-transform: capitalize;  
 color: #20568B;
 font-family: "Open Sans", sans-serif;
 font-weight: bold;
@@ -91,6 +92,7 @@ border-radius: 8px;
 }
 
 .property-title {
+text-transform: capitalize;
 color: #004680;
 font-size: 18px;
 font-weight: bold;
@@ -145,11 +147,13 @@ margin-left: 15px;
 margin-top: 8px;
 }
 .top-right-icon {
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2); /* Lighter shadow */
+  border-radius: 50%;  /* Optional: Keeps the rounded shape, remove if not needed */
   position: absolute;
   top: 21px;
   right: 10px;
   font-size: 25px;
-  color: #333;
+  color: red;
   cursor: pointer;
   z-index: 1; /* Ensure the icon appears on top */
 }

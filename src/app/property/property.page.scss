@@ -25,6 +25,7 @@
   
   .backArrowimage {
     cursor: pointer; /* Make the image clickable */
+    margin-left: 15px
   }
   
   
@@ -39,6 +40,7 @@
     font-weight: bold; /* Optional, make the name bold */
     font-family: "Open Sans", sans-serif;
     color: #20568B;
+    margin-right: 45px;
   }
   
   .right {
@@ -58,6 +60,7 @@
   }
   
   .property-image {
+    margin-top: 20px;
     width: 95%; /* Make the image responsive */
     height: auto; /* Maintain aspect ratio */
     object-fit: cover; /* Ensure images fill the container without stretching */
@@ -241,11 +244,13 @@
     background-color: #FAAD25; /* Darker yellow on hover */
   }
   .top-right-icon {
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2); /* Lighter shadow */
+    border-radius: 50%;  /* Optional: Keeps the rounded shape, remove if not needed */
     position: absolute;
     top: 17px;
-    right: 14px;
+    right: 27px;
     font-size: 21px;
-    color: black;
+    color: red;
     cursor: pointer;
     z-index: 1; /* Ensure the icon appears on top */
   }
@@ -268,6 +273,22 @@
   .property-card{
     position: relative; /* Ensure positioning for the child elements */
     padding: 10px 0;
+  }
+  .property-header {
+    display: flex;
+    justify-content: space-between;  /* Aligns property name to the left and icon to the right */
+    align-items: center;  /* Vertically centers items */
+  }
+  
+  .propertyTitle {
+    margin-right: 10px;  /* Optional: Adjust spacing between title and icon */
+  }
+  
+  .property-icon1 {
+    width: 40px;  /* Increased size */
+    height: 40px;  /* Increased size */
+    object-fit: contain;  /* Ensures the icon scales correctly */
+    margin: 16px 10px 0 10px;
   }
   
   

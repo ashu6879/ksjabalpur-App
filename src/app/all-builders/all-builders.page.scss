@@ -96,11 +96,13 @@
 .top-right-icon {
   position: absolute;
   top: 21px;
-  right: 25px;
+  right: 15px;
   font-size: 25px;
-  color: #333;
+  color: red;
   cursor: pointer;
   z-index: 1; /* Ensure the icon appears on top */
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2); /* Lighter shadow */
+  border-radius: 50%;  /* Optional: Keeps the rounded shape, remove if not needed */
 }
 
 .topBar {

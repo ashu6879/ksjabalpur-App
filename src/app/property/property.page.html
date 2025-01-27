@@ -26,10 +26,15 @@
             <img [src]="imagePath" alt="Property Image" class="property-image">
           </div>
         </div>
+        <!-- Add pagination -->
+        <div class="swiper-pagination"></div>
       </div>
-      <div>
+      
+      <div class="property-header">
         <h2 class="propertyTitle">{{ properties[0]?.property_name }}</h2>
+        <img src="assets/pdfIcon.png" alt="Icon" class="property-icon1" (click)="downloadPdf()">
       </div>
+      
       <div class="location-info">
         <img src="assets/location_icon.png" alt="Location Icon" class="location-icon">
         <span class="property-address">{{ properties[0]?.property_address || 'No address available' }}</span>
