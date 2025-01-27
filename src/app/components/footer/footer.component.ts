@@ -43,7 +43,7 @@ export class FooterComponent {
       this.searchImage = 'assets/Search.png';  // Default image for Search
     }
 
-    if (this.currentRoute === '/favourite') {
+    if (this.currentRoute === '/favourite-properties') {
       this.favouriteImage = 'assets/heartActive.png';  // Change image for active route
     } else {
       this.favouriteImage = 'assets/heart.png';  // Default image for Favourite
@@ -62,5 +62,8 @@ export class FooterComponent {
 
   goToprofile() {
     this.router.navigate(['/profile']);
+  }
+  goToFav() {
+    this.router.navigate(['/favourite-properties']);
   }
 }

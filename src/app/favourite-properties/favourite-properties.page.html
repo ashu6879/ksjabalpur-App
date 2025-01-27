@@ -1,0 +1,77 @@
+<ion-content>
+  <div class="topBar">
+  
+    <!-- Main content -->
+    <div id="main-content"></div>
+  
+    <!-- Header with images -->
+    <ion-header>
+      <ion-toolbar color="white" class="toolbar_mine">
+        <!-- Left Image (Open Sidebar) -->
+        <ion-buttons slot="start">
+          <div class="left">
+            <img 
+              src="assets/backArrow.png" 
+              alt="Image" 
+              class="backArrowimage" 
+              (click)="goBack()">
+          </div>
+        </ion-buttons>
+  
+        <!-- Center Image (visible when sidebar is closed) -->
+        <ion-buttons slot="end" class="center-image-container">
+          <!-- <ion-button>
+            <img src="assets/ks.png" alt="Center Image" />
+          </ion-button> -->
+          <span class="headerTitle">Favourites</span>
+        </ion-buttons>
+  
+        <!-- Right Image -->
+        <ion-buttons slot="end" class="topRibbon">
+          <ion-button>
+            <img src="assets/bell.png" alt="Right Image" />
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+  </div>
+  <!-- Outer Div to hold the properties loop -->
+  <div class="outerDiv"> 
+    <!-- Loop through the categoryData to display each property -->
+    <!-- <div *ngIf="categoryData && categoryData.length > 0; else noProperties" class="properties-container"> -->
+      <!-- Loop through categoryData -->
+      <!-- <div *ngFor="let property of categoryData" class="property-card" (click)="goToPropertyDetails(property.id)"> -->
+        <div>
+          <!-- <i 
+          [class]="isIconFilled(property) ? 'fas fa-heart filled' : 'far fa-heart'" 
+          (click)="toggleIcon($event, property)" 
+          class="top-right-icon"
+        ></i> -->
+          <img 
+            src="assets/categoryImage2.png" 
+            alt="Property Image" 
+            class="property-image"
+          />
+    
+          <!-- Title section -->
+          <h2 class="property-title"> property.property_name </h2>
+    
+          <!-- Price section -->
+          <div class="property-price">
+            <span class="old-new-price">
+              <!-- Previous Price -->
+              <span class="old-price"> property.previous_price || 'N/A' </span>
+              <!-- Current Price -->
+              <span class="new-price"> property.current_price || 'N/A'  /Monthly</span>
+            </span>
+          </div>
+    
+          <!-- Address section -->
+          <p class="property-address"> property.property_address || 'Address not available' </p>
+        </div>
+      <!-- </div> -->
+    <!-- </div> -->
+
+  </div> 
+  <app-footer></app-footer>
+</ion-content>  

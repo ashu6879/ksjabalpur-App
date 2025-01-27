@@ -35,12 +35,13 @@
         <ion-col
           size="3"
           class="ion-text-center column-content"
-          [ngClass]="{ 'active': currentRoute === '/favourite' }"
+          [ngClass]="{ 'active': currentRoute === '/favourite-properties' }"
         >
           <ion-img
             [src]="favouriteImage"
             alt="Image 3"
             class="footerIcon"
+            (click)="goToFav()"
           ></ion-img>
           <p class="footerText">Favourite</p>
         </ion-col>

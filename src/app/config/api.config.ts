@@ -17,4 +17,5 @@ export const ROUTES = {
   PROPERTY_DETAILS: `${API_BASE_URL}/property_details_by_property_id`,
   RECENT_PROPERTY: `${API_BASE_URL}/get_recent_properties`,
   ADD_FAVOURITE: `${API_BASE_URL}/property_wishlist`,
+  CHECK_FAVOURITE: `${API_BASE_URL}/get_all_user_wishlisted_properties`,
 };

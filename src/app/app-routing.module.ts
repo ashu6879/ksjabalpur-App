@@ -10,6 +10,7 @@ import { ProfilePage } from './profile/profile.page'; // Import SignupPage
 import { LoginPage } from './login/login.page'; // Import SignupPage
 import { PropertyPage } from './property/property.page'; // Import SignupPage
 import { AllBuildersPage } from './all-builders/all-builders.page'; // Import SignupPage
+import { FavouritePropertiesPage } from './favourite-properties/favourite-properties.page'; // Import SignupPage
 import { CommonPropertyPagePage } from './common-property-page/common-property-page.page'; // Import SignupPage
 import { HttpClientModule } from '@angular/common/http'; // <-- Import HttpClientModule
 import { FormsModule } from '@angular/forms'; // Import FormsModule for ngModel
@@ -28,7 +29,9 @@ const routes: Routes = [
   { path: 'profile', component: ProfilePage, canActivate: [AuthGuard] }, // Protected route
   { path: 'login', component: LoginPage }, // No AuthGuard needed
   { path: 'all-builders', component: AllBuildersPage, canActivate: [AuthGuard] }, // Protected route
-  { path: 'property', component: PropertyPage, canActivate: [AuthGuard] }, // Protected route
+  { path: 'property', component: PropertyPage, canActivate: [AuthGuard] },
+  { path: 'favourite-properties', component: FavouritePropertiesPage, canActivate: [AuthGuard] },
+// Protected route
 ];
 
 @NgModule({

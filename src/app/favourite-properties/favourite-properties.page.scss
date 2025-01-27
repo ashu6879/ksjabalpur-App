@@ -1,0 +1,151 @@
+.icon-left {
+left: 15px; /* Position the left icon */
+width: 25px;
+height: 25px;
+}
+
+.center-image-container {
+display: flex;
+justify-content: center;
+align-items: center;
+width: 100%;
+}
+
+.center-image-container ion-button {
+background: none;
+padding: 0;
+}
+
+.center-image-container img {
+max-width: 100px; /* Adjust the size of the center image */
+height: auto;
+}
+
+/* Increase size of the first (left) image */
+ion-buttons.topRibbon ion-button img[src="assets/sidebar.png"] {
+width: 30px; /* Set desired width */
+height: 20px; /* Set desired height */
+}
+
+/* Increase size of the last (right) image */
+ion-buttons.topRibbon ion-button img[src="assets/bell.png"] {
+width: 30px; /* Set desired width */
+height: 20px; /* Set desired height */
+}
+/* Ensure ion-menu shows below the header */
+ion-menu {
+--top: 80px; /* Set the top position of the menu to be below the header */
+z-index: 5; /* Ensure the menu appears below the header */
+--background: white; /* Set the background color of the menu to white */
+}
+
+ion-menu .menu-inner {
+padding-top: 0px; /* Remove any extra padding inside the menu */
+}
+
+/* Set the background color of the sidebar menu */
+ion-menu {
+--background: white; /* This will make the background of the menu white */
+}
+
+ion-menu ion-header {
+--background: white; /* Ensure the header inside the menu also has a white background */
+}
+ion-menu ion-content {
+--background: white; /* Ensure the content inside the menu also has a white background */
+}
+.headerTitle{
+text-transform: capitalize;  
+color: #20568B;
+font-family: "Open Sans", sans-serif;
+font-weight: bold;
+font-size: 15px;
+font-family: "Open Sans", sans-serif;
+}
+.property-card {
+position: relative; /* Ensure positioning for the child elements */
+border-radius: 8px;
+}
+
+.property-image {
+width: 100%;
+height: auto;
+border-radius: 8px;
+}
+
+.property-title {
+text-transform: capitalize;
+color: #004680;
+font-size: 18px;
+font-weight: bold;
+margin-top: 12px;
+font-family: "Open Sans", sans-serif;
+}
+
+.property-price {
+display: flex;
+align-items: center;
+margin-top: 8px;
+font-family: "Open Sans", sans-serif;
+}
+
+.old-price {
+font-size: 10px;
+text-decoration: line-through;
+margin-right: 10px;
+color: red;
+font-family: "Open Sans", sans-serif;
+margin: 6px 0;
+}
+
+.new-price {
+font-size: 13px;
+font-weight: bold;
+color: #FFFFFF;
+padding: 5px 10px;
+border-radius: 4px;
+font-family: "Open Sans", sans-serif;
+}
+
+.property-address {
+font-size: 12px;
+color: #8C8C8C;
+margin-top: 15px;
+font-family: "Open Sans", sans-serif;
+}
+.old-new-price {
+background-color: #FAAD25;
+padding: 5px 10px;
+border-radius: 4px;
+display: flex;
+justify-content: space-between;
+width: fit-content;
+}
+
+.backArrowimage {
+width: 25px;
+cursor: pointer;
+margin-left: 15px;
+margin-top: 8px;
+}
+.top-right-icon {
+box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2); /* Lighter shadow */
+border-radius: 50%;  /* Optional: Keeps the rounded shape, remove if not needed */
+position: absolute;
+top: 21px;
+right: 10px;
+font-size: 25px;
+color: red;
+cursor: pointer;
+z-index: 1; /* Ensure the icon appears on top */
+}
+.property-icon {
+margin-top:10px;
+position: absolute;
+top: 10px;
+right: 10px; /* Aligns the icon to the right */
+z-index: 10;  /* Ensures the icon is on top */
+}
+.top-right-icon.filled {
+color: red;  /* Make the heart red when filled */
+}

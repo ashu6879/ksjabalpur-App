@@ -52,8 +52,9 @@ export class AllBuildersPage implements OnInit {
       // Fetch the user_id from Ionic Storage
       const userId = await this.storage.get('user_id');
       if (userId) {
+        console.log("user",userId)
         // Optionally, check favorite properties or any other action needed
-        // this.checkFavoriteProperties(userId);
+        this.checkFavoriteProperties(userId);
       } else {
         console.warn('User ID not found in storage.');
       }
@@ -98,169 +99,94 @@ export class AllBuildersPage implements OnInit {
   goToPropertyDetails(propertyId: number): void {
     this.router.navigate(['/property'], { state: { propertyId: propertyId } });
   }
-
-
-  // async toggleIcon(event: Event, property: any): Promise<void> {
-  //   event.stopPropagation();  // Prevent the click from triggering goToPropertyDetails
-  
-  //   // Retrieve the user_id from Ionic Storage
-  //   const userId = await this.storage.get('user_id');
-    
-  //   if (!userId) {
-  //     console.log('No user_id found');
-  //     return;
-  //   }
-  
-  //   // Check if the property is already a favorite
-  //   if (this.favoriteProperties.has(property.property_id)) {
-  //     this.favoriteProperties.delete(property.property_id);  // Remove if already filled
-  //     console.log(`Removed from favorites: ${property.property_id}`);
-  //   } else {
-  //     // Add the property to favorites
-  //     this.favoriteProperties.add(property.property_id);
-  //     console.log(`Added to favorites: ${property.property_id}`);
-  
-  //     // Make an API call to add the favorite property
-  //     this.addToFavorites(userId, property.property_id);
-  //   }
-  // }
-  
-  // // API call to add a favorite property
-  // addToFavorites(userId: string, propertyId: string): void {
-  //   const url = ROUTES.ADD_FAVOURITE;  // Replace with your actual API URL
-  
-  //   const body = {
-  //     user_id: userId,
-  //     property_id: propertyId
-  //   };
-  
-  //   // Optionally, set headers if needed
-  //   const headers = new HttpHeaders({
-  //     'Content-Type': 'application/json'
-  //   });
-  
-  //   this.http.post(url, body, { headers }).subscribe(
-  //     (response) => {
-  //       console.log('API Response:', response);
-  //     },
-  //     (error) => {
-  //       console.error('API Error:', error);
-  //     }
-  //   );
-  // }
-  // checkFavoriteProperties(userId: string): void {
-  //   const url = 'YOUR_API_URL';  // Replace with your actual API URL
-  //   const headers = new HttpHeaders({
-  //     'Content-Type': 'application/json',
-  //   });
-
-  //   // Make a GET request to fetch the user's favorite properties
-  //   this.http.get<any[]>(`${url}/favorites?user_id=${userId}`, { headers })
-  //     .subscribe(
-  //       (response) => {
-  //         // Assuming response contains an array of property IDs that are favorites
-  //         this.favoriteProperties.clear();
-  //         response.forEach(favorite => {
-  //           this.favoriteProperties.add(favorite.property_id);
-  //         });
-  //         console.log('Favorite properties loaded:', this.favoriteProperties);
-  //       },
-  //       (error) => {
-  //         console.error('Error fetching favorite properties:', error);
-  //       }
-  //     );
-  // }
-
-  // async isIconFilled(property: any): Promise<boolean> {
-  //   // Retrieve the user_id from storage
-  //   const userId = await this.storage.get('user_id');
-  //   if (userId) {
-  //     // If favoriteProperties is already populated, check it
-  //     if (this.favoriteProperties.has(property.property_id)) {
-  //       return true;
-  //     } else {
-  //       // If not, fetch the user's favorites from the API
-  //       this.checkFavoriteProperties(userId);
-  //       return this.favoriteProperties.has(property.property_id);
-  //     }
-  //   }
-  //   return false;
-  // }
   // Fetch favorite properties for the user
-  // checkFavoriteProperties(userId: string): void {
-  //   const url = `${ROUTES.FETCH_FAVORITES}?user_id=${userId}`; // Replace with your actual endpoint
-
-  //   const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-
-  //   this.http.get<any[]>(url, { headers }).subscribe(
-  //     (response) => {
-  //       this.favoriteProperties.clear();
-  //       response.forEach((favorite) => {
-  //         this.favoriteProperties.add(favorite.property_id);
-  //       });
-  //       console.log('Loaded favorite properties:', this.favoriteProperties);
-  //     },
-  //     (error) => {
-  //       console.error('Error fetching favorite properties:', error);
-  //     }
-  //   );
-  // }
+  checkFavoriteProperties(userId: string): void {
+    const url = ROUTES.CHECK_FAVOURITE; // Replace with your actual endpoint
+  
+    const body = { user_id: userId }; // Send user_id in the body
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+  
+    this.http.post<any>(url, body, { headers }).subscribe(
+      (response) => {
+        console.log("Favorite is", response.message);
+  
+        const favoriteArray = response.message; // Extract the message array
+        this.favoriteProperties.clear(); // Clear the current properties
+  
+        if (Array.isArray(favoriteArray) && favoriteArray.length > 0) {
+          favoriteArray.forEach((favoriteProperty) => {
+            if (favoriteProperty.property_id) {
+              this.favoriteProperties.add(favoriteProperty.property_id); // Add each property_id
+            }
+          });
+        }
+  
+        console.log('Loaded favorite properties:', this.favoriteProperties);
+      },
+      (error) => {
+        console.error('Error fetching favorite properties:', error);
+      }
+    );
+  }
 
   // Toggle favorite property
   async toggleIcon(event: Event, property: any): Promise<void> {
     event.stopPropagation();
-    this.userId = await this.storage.get('user_id');
-    if (!this.userId) {
-      console.error('User ID not found in storage.');
+    const userId = await this.storage.get('user_id');
+    console.log("hello",userId);
+    if (!userId) {
+      console.error('User ID not found in storage2.');
       return;
     }
 
     const propertyId = property.id;
-
+    console.log("property id is",propertyId);
     if (this.favoriteProperties.has(propertyId)) {
       this.favoriteProperties.delete(propertyId);
       console.log(`Removed from favorites: ${propertyId}`);
-      // this.removeFromFavorites(this.userId, propertyId);
+      this.removeFromFavorites(userId, propertyId);
     } else {
       this.favoriteProperties.add(propertyId);
       console.log(`Added to favorites: ${propertyId}`);
-      // this.addToFavorites(this.userId, propertyId);
+      this.addToFavorites(userId, propertyId);
     }
   }
 
   // Add to favorites API call
-  // addToFavorites(userId: string, propertyId: number): void {
-  //   const url = ROUTES.ADD_FAVORITE; // Replace with your actual endpoint
+  // Add to favorites API call
+  addToFavorites(userId: string, propertyId: number): void {
+    const url = ROUTES.ADD_FAVOURITE; // Replace with your actual endpoint
+    const iconAction="add";
+    const body = { user_id: userId, property_id: propertyId,action:iconAction};
+    console.log(body);
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-  //   const body = { user_id: userId, property_id: propertyId };
-  //   const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-
-  //   this.http.post(url, body, { headers }).subscribe(
-  //     (response) => {
-  //       console.log('Added to favorites successfully:', response);
-  //     },
-  //     (error) => {
-  //       console.error('Error adding to favorites:', error);
-  //     }
-  //   );
-  // }
+    this.http.post(url, body, { headers }).subscribe(
+      (response) => {
+        console.log('Added to favorites successfully:', response);
+      },
+      (error) => {
+        console.error('Error adding to favorites:', error);
+      }
+    );
+  }
 
   // Remove from favorites API call
-  // removeFromFavorites(userId: string, propertyId: number): void {
-  //   const url = `${ROUTES.REMOVE_FAVORITE}`; // Replace with your actual endpoint
+  removeFromFavorites(userId: string, propertyId: number): void {
+    const url = `${ROUTES.ADD_FAVOURITE}`; // Replace with your actual endpoint
+    const iconAction="remove";
+    const body = { user_id: userId, property_id: propertyId,action:iconAction};
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-  //   const body = { user_id: userId, property_id: propertyId };
-  //   const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-
-  //   this.http.post(url, body, { headers }).subscribe(
-  //     (response) => {
-  //       console.log('Removed from favorites successfully:', response);
-  //     },
-  //     (error) => {
-  //       console.error('Error removing from favorites:', error);
-  //     }
-  //   );
-  // }
+    this.http.post(url, body, { headers }).subscribe(
+      (response) => {
+        console.log('Removed from favorites successfully:', response);
+      },
+      (error) => {
+        console.error('Error removing from favorites:', error);
+      }
+    );
+  }
 
   // Check if the icon should be filled
   isIconFilled(property: any): boolean {
