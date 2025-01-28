@@ -21,6 +21,7 @@
     margin-top: 20px;
   }
   .buildingImage{
+    margin-top: 20px;
     width: 100%;
   }
 .custom-button-container {
@@ -298,17 +299,22 @@ ion-slide img {
 }
 .property-icon i {
   font-size: 24px;
-  color: red; /* Default color, can be changed */
+  color: #c5c0c0; /* Default color, can be changed */
   padding: 5px;
   border-radius: 50%;  /* Optional: Keeps the rounded shape, remove if not needed */
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2); /* Lighter shadow */
 }
 .property-icon i.fas {
   transition: color 0.3s ease;  /* Smooth color transition */
-  color: red; /* Filled heart icon color */
+  color: #c5c0c0; /* Filled heart icon color */
 }
 .property-info {
   padding: 12px 0;
+}
+.sliderBorder{
+  // border: 1px solid #897b7b;
+  box-shadow: 7px 14px 21px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
 }
 
 .recentlyadded{

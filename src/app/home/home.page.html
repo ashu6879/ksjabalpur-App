@@ -90,7 +90,7 @@
     <!-- Property Slider -->
     <div class="swiper-container property-slider mainSlider">
       <div class="swiper-wrapper">
-        <div class="swiper-slide recentlyadded" *ngFor="let property of properties">
+        <div class="swiper-slide recentlyadded sliderBorder" *ngFor="let property of properties">
           <div class="property-details" (click)="goToPropertyDetails(property.property_id)">
             <!-- Icon added here, positioned on the right side -->
             <div class="property-icon" (click)="toggleIcon($event, property)">
@@ -125,7 +125,7 @@
     <div class="swiper-container todayDeal-slider mainSlider">
       <div class="swiper-wrapper">
         <!-- Iterate over the properties using *ngFor -->
-        <div class="swiper-slide recentlyadded" *ngFor="let property of properties">
+        <div class="swiper-slide recentlyadded sliderBorder" *ngFor="let property of properties">
             <!-- Property Details -->
             <div class="property-details" (click)="goToPropertyDetails(property.property_id)">
               <div class="property-icon" (click)="toggleIcon($event, property)">
@@ -161,7 +161,7 @@
     <div class="swiper-container Recentlyadded-slider mainSlider">
       <div class="swiper-wrapper">
         <!-- Iterate over the properties using *ngFor -->
-        <div class="swiper-slide recentlyadded" *ngFor="let property of Recentproperties">
+        <div class="swiper-slide recentlyadded sliderBorder" *ngFor="let property of Recentproperties">
             <!-- Property Details -->
             <div class="property-details" (click)="goToPropertyDetails(property.property_id)">
               <div class="property-icon" (click)="toggleIcon($event, property)">

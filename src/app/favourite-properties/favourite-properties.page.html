@@ -40,8 +40,11 @@
   </div>
   <!-- Outer Div to hold the properties loop -->
   <div class="outerDiv topshuru"> 
-    <!-- <div *ngIf="favouriteProperties && favouriteProperties.length > 0; else noProperties" class="properties-container">
-      <div *ngFor="let property of favouriteProperties" class="property-card" (click)="goToPropertyDetails(property.id)">
+    <!-- <div *ngIf="propertyData.length == 0">
+      No Wishlisted Properties
+    </div> -->
+    <div *ngIf="propertyData  && propertyData.length > 0;" class="properties-container">
+      <div *ngFor="let property of propertyData " class="property-card" (click)="goToPropertyDetails(property.id)">
         <div>
           <i 
           [class]="isIconFilled(property) ? 'fas fa-heart filled' : 'far fa-heart'" 
@@ -66,14 +69,11 @@
           </div>
         </div>
       </div>
-    </div> -->
+    </div>
   
-    <!-- Template for no properties found -->
-    <ng-template #noProperties>
-      <div class="no-properties-message">
-        <p>Fetching properties for this builder.</p>
-      </div>
-    </ng-template>
+    <div *ngIf="noFavouriteProperties">
+      No Wishlisted Properties
+    </div>
   </div>
   <app-footer></app-footer>
 </ion-content>  

@@ -157,12 +157,12 @@ export class PropertyPage implements OnInit, AfterViewInit {
         // Check if favoriteData is an array or object and handle accordingly
         if (Array.isArray(favoriteData)) {
           favoriteData.forEach((item: any) => {
-            if (item.property_id) {
-              this.favoriteProperties.add(item.property_id);
+            if (item.id) {
+              this.favoriteProperties.add(item.id);
             }
           });
-        } else if (favoriteData && favoriteData.property_id) {
-          this.favoriteProperties.add(favoriteData.property_id);
+        } else if (favoriteData && favoriteData.id) {
+          this.favoriteProperties.add(favoriteData.id);
         } else {
           console.warn("No valid favorite properties found.");
         }
@@ -250,8 +250,12 @@ export class PropertyPage implements OnInit, AfterViewInit {
   }
   
   downloadPdf() {
+    
     console.log("click from phone");
     const property = this.properties;
+    console.log("pdf",property)
+    console.log(property.image_paths)
+    console.log(property.image_paths.length);
   
     // Define the type for the details array
     interface Detail {

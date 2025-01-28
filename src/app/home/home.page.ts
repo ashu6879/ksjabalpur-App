@@ -439,8 +439,8 @@ export class HomePage implements OnInit, OnDestroy, AfterViewInit {
   
         if (Array.isArray(favoriteArray) && favoriteArray.length > 0) {
           favoriteArray.forEach((favoriteProperty) => {
-            if (favoriteProperty.property_id) {
-              this.favoriteProperties.add(favoriteProperty.property_id); // Add each property_id
+            if (favoriteProperty.id) {
+              this.favoriteProperties.add(favoriteProperty.id); // Add each property_id
             }
           });
         }

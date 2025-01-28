@@ -250,7 +250,7 @@
     top: 17px;
     right: 27px;
     font-size: 21px;
-    color: red;
+    color: #c5c0c0;
     cursor: pointer;
     z-index: 1; /* Ensure the icon appears on top */
   }
@@ -268,7 +268,7 @@
   //   border-radius: 50%;  /* Optional: Keeps the rounded shape, remove if not needed */
   // }
   .top-right-icon.filled {
-    color: red;  /* Make the heart red when filled */
+    color: #c5c0c0;  /* Make the heart red when filled */
   }
   .property-card{
     position: relative; /* Ensure positioning for the child elements */
