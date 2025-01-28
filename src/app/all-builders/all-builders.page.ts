@@ -23,9 +23,24 @@ export class AllBuildersPage implements OnInit {
   baseUrl = 'https://vibrantlivingblog.com/ksjabalpur/';
   builderID: string = ''; // Default to an empty string
   builderName: string = ''; // Default to an empty string
-  builderData: any[] = []; // To hold the fetched builder data
+  // builderData: any[] = []; // To hold the fetched builder data
+  builderData: any[] = []; // Holds the filtered data
+  fullData: any[] = [];    // Holds the complete data (before filtering)
   isLoading = false;
   errorMessage = '';
+  filteredData: any[] = [];
+  categories: string[] = [];
+  isFilterModalOpen: boolean = false;
+  minPrice: number = 100000; // Minimum price value
+  maxPrice: number = 1000000; // Maximum price value
+  filters = {
+    price: { min: this.minPrice, max: this.maxPrice },
+    location: '',
+    propertyName: ''
+  };
+  // Selected category and search text for filtering
+  selectedCategory: string = '';
+  searchText: string = '';
 
   constructor(
     private storage: Storage,
@@ -67,6 +82,7 @@ export class AllBuildersPage implements OnInit {
   
       // Fetch builder data
       this.fetchBuilderData(this.builderID);
+      this.builderData = [...this.fullData]; // Show all properties initially
   
     } else {
       console.error('No navigation state found');
@@ -80,15 +96,16 @@ export class AllBuildersPage implements OnInit {
     const headers = new HttpHeaders({
       'Authorization': '2245', // Replace with your actual Authorization token if needed
     });
-
+  
     const body = {
       builder_id: builderID, // Send builderId as part of the body
     };
-
+  
     this.http.post<any>(apiUrl, body, { headers }).subscribe({
       next: (responseData) => {
         console.log('Fetched builder data:', responseData);
-        this.builderData = responseData.message; // Assuming 'message' contains the property data
+        this.fullData = responseData.message; // Assuming 'message' contains the property data
+        this.builderData = [...this.fullData]; // Show all properties initially
         this.isLoading = false; // Stop loading
       },
       error: (error) => {
@@ -98,6 +115,7 @@ export class AllBuildersPage implements OnInit {
       }
     });
   }
+  
 
   goBack(): void {
     this.location.back(); // Navigate to the previous page
@@ -199,4 +217,92 @@ export class AllBuildersPage implements OnInit {
     const propertyId = property.id; // Assuming property has an 'id'
     return this.favoriteProperties.has(propertyId);  // Return true if property is in favorites
   }
+  filterData(): void {
+    let filteredData = [...this.fullData];  // Start from the full data
+
+    // Apply price filter
+    if (this.filters.price) {
+      filteredData = filteredData.filter(property =>
+        property.current_price >= this.filters.price.min && property.current_price <= this.filters.price.max
+      );
+    }
+
+    // Apply location filter
+    if (this.filters.location) {
+      filteredData = filteredData.filter(property =>
+        property.city.toLowerCase().includes(this.filters.location.toLowerCase()) ||
+        property.property_address.toLowerCase().includes(this.filters.location.toLowerCase())
+      );
+    }
+
+    // Apply property name filter
+    if (this.filters.propertyName) {
+      filteredData = filteredData.filter(property =>
+        property.property_name.toLowerCase().includes(this.filters.propertyName.toLowerCase())
+      );
+    }
+
+    // Update builderData with filtered data
+    this.builderData = filteredData;
+  }
+  applyFilter() {
+    let filteredData = [...this.fullData]; // Start with the full data
+  
+    // Function to parse price (e.g., "10 lakh" to 10)
+    const parsePrice = (price: string): number => {
+      const numericPrice = price.toLowerCase().replace(/[^\d.-]/g, ''); // Remove non-numeric characters
+      return parseFloat(numericPrice);
+    };
+  
+    // Apply price range filter if set
+    if (this.filters.price) {
+      filteredData = filteredData.filter(property => {
+        const currentPriceNumeric = parsePrice(property.current_price);
+        return currentPriceNumeric >= this.filters.price.min && currentPriceNumeric <= this.filters.price.max;
+      });
+    }
+  
+    // Apply location filter if set (city or property_address)
+    if (this.filters.location) {
+      filteredData = filteredData.filter(property =>
+        property.city.toLowerCase().includes(this.filters.location.toLowerCase()) || 
+        property.property_address.toLowerCase().includes(this.filters.location.toLowerCase())
+      );
+    }
+  
+    // Apply property name filter if set
+    if (this.filters.propertyName) {
+      filteredData = filteredData.filter(property =>
+        property.property_name.toLowerCase().includes(this.filters.propertyName.toLowerCase())
+      );
+    }
+  
+    // Update builderData with filtered results
+    this.builderData = filteredData;
+    this.closeFilterModal(); // Close the filter modal
+  }
+
+  // Method to clear all filters and show all data
+  clearFilters() {
+    // Reset all filter values to default
+    this.filters = {
+      price: { min: 0, max: 100 },  // Reset price range
+      location: '',
+      propertyName: ''
+    };
+  
+    // Reset builderData to full data without filters
+    this.builderData = [...this.fullData]; // Show all properties again
+  }
+  
+  
+    // Toggle Filter Modal
+    openFilterModal() {
+      this.isFilterModalOpen = true;
+    }
+  
+    closeFilterModal() {
+      this.isFilterModalOpen = false;
+    }
+
 }

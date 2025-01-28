@@ -39,48 +39,83 @@
       </ion-toolbar>
     </ion-header>
   </div> 
-  <div class="outerDiv topshuru"> 
-    <!-- Check if builderData is available and has properties -->
-    <div *ngIf="builderData && builderData.length > 0; else noProperties" class="properties-container">
-      <!-- Loop through builderData -->
-      <div *ngFor="let property of builderData" class="property-card" (click)="goToPropertyDetails(property.id)">
+<!-- Filter Button -->
+<div class="outerDiv topshuru">
+  <div class="btnDiv">
+    <div class="filter-button" (click)="openFilterModal()">
+      <img src="assets/sort.jpg" alt="Sort Filters" class="clear-filters-img">
+    </div>
+    <button (click)="clearFilters()" class="clear-filters-btn clearBTN">
+      <!-- <i class="fas fa-times"></i>  -->
+       <span class="clearBTN">Clear filter</span>
+    </button>
+  </div>
+  <!-- Filter Modal -->
+  <div class="filter-modal" *ngIf="isFilterModalOpen">
+    <div class="filter-modal-content">
+      <span class="close-btn" (click)="closeFilterModal()">&times;</span>
+  
+      <!-- Filter Options -->
+      <div class="filter-container">
+        <!-- Price Filter -->
         <div>
-          <!-- Top-right icon -->
-          <i 
-          [class]="isIconFilled(property) ? 'fas fa-heart filled' : 'far fa-heart'" 
-          (click)="toggleIcon($event, property)" 
-          class="top-right-icon"
-          ></i>
-          <!-- Image section -->
-          <img 
-            [src]="property.image || 'assets/categoryImage2.png'" 
-            alt="Property Image" 
-            class="property-image"
-          />
-    
-          <!-- Title section -->
-          <h2 class="propertyTitle">{{ property.property_name }}</h2>
-          <p class="property-address">{{ property.property_address || 'Address not available' }}</p>
-    
-          <div class="container">
-            <div class="left-area propertyTitle">
-              <!-- Left area content goes here -->
-              <p>{{property.property_area}}</p>
-            </div>
-            <div class="right-button">
-              <button>{{property.current_price}}</button>
-            </div>
+          <label for="priceRange">Price Range</label>
+          <input type="range" id="priceRange" min="0" max="100" [(ngModel)]="filters.price.min" />
+          <input type="range" id="priceRangeMax" min="0" max="100" [(ngModel)]="filters.price.max" />
+          <span>{{filters.price.min}} Lakh - {{filters.price.max}} Lakh</span>
+        </div>
+        <!-- Location Filter -->
+        <div>
+          <label for="location">Location</label>
+          <input type="text" id="location" [(ngModel)]="filters.location" placeholder="Enter city or address" />
+        </div>
+  
+        <!-- Property Name Filter -->
+        <div>
+          <label for="propertyName">Property Name</label>
+          <input type="text" id="propertyName" [(ngModel)]="filters.propertyName" placeholder="Enter property name" />
+        </div>
+  
+        <!-- Apply Filter Button -->
+        <button (click)="applyFilter()">Apply Filter</button>
+  
+        <!-- Clear Filter Button (Outside Modal) -->
+        <button *ngIf="filters.location || filters.propertyName || filters.price" (click)="clearFilters()">Clear Filters</button>
+  
+        <!-- Close Modal Button -->
+        <button class="close-filter-modal" (click)="closeFilterModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Property Listings -->
+  <div *ngIf="builderData && builderData.length > 0; else noProperties" class="properties-container">
+    <div *ngFor="let property of builderData" class="property-card" (click)="goToPropertyDetails(property.id)">
+      <div>
+        <i [class]="isIconFilled(property) ? 'fas fa-heart filled' : 'far fa-heart'" (click)="toggleIcon($event, property)" class="top-right-icon"></i>
+        <img [src]="property.image || 'assets/categoryImage2.png'" alt="Property Image" class="property-image" />
+        <h2 class="propertyTitle">{{ property.property_name }}</h2>
+        <p class="property-address">{{ property.property_address || 'Address not available' }}</p>
+        <div class="container">
+          <div class="left-area propertyTitle">
+            <p>{{ property.property_area }}</p>
+          </div>
+          <div class="right-button">
+            <button>{{ property.current_price }}</button>
           </div>
         </div>
       </div>
     </div>
-  
-    <!-- Template for no properties found -->
-    <ng-template #noProperties>
-      <div class="no-properties-message">
-        <p>Fetching properties for this builder.</p>
-      </div>
-    </ng-template>
   </div>
+
+  <!-- No properties found message -->
+  <ng-template #noProperties>
+    <div class="no-properties-message">
+      <p>Fetching properties for this builder.</p>
+    </div>
+  </ng-template>
+</div>
+
+  
   <app-footer></app-footer>
 </ion-content>
