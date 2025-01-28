@@ -32,8 +32,11 @@
       <div class="swiper-wrapper">
         <!-- Iterate over categories using *ngFor -->
         <div class="swiper-slide" *ngFor="let category of categories">
-          <button class="custom-button" (click)="goToCategory(category)">
-            <img [src]="category.category_logo || 'assets/industrial.png'" alt="Category Icon" class="iconCategory">
+          <button 
+            class="custom-button" 
+            [class.active]="category === activeCategory"
+            (click)="goToCategory(category)">
+            <img [src]="category.category_logo" alt="Category Icon" class="iconCategory">
             <span class="categoryText">{{ category.name }}</span>
           </button>
         </div>

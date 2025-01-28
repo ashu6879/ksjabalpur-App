@@ -70,6 +70,7 @@
 
 .iconCategory{
   margin: 0 2px;
+  max-width: 20px;
 }
 
 .button-container1 {
@@ -397,4 +398,8 @@ ion-refresher-content {
 }
 .categoryText{
   font-size: 10px;
+}
+.custom-button.active {
+  background-color: red; /* Example active state background */
+  color: white; /* Change text color when active */
 }

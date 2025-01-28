@@ -30,6 +30,7 @@ export class HomePage implements OnInit, OnDestroy, AfterViewInit {
   Recentproperties: any[] = [];  // Array to store the property data
   builders: any[] = []; // Will hold the API data
   isMenuOpen: boolean = false;
+  activeCategory: any;
   // Base URL for the image
   baseUrl = 'https://vibrantlivingblog.com/ksjabalpur/';
 
@@ -175,11 +176,15 @@ export class HomePage implements OnInit, OnDestroy, AfterViewInit {
       next: (responce) => {
         //console.log('my API Response:', responce);
         const abc = responce.data;
-        //console.log("abc is",abc)
+        console.log("abc is",abc)
         if (Array.isArray(abc)) {
           // Handle array response
           this.categories = abc.map((item) => {
-            return { id: item.id, name: item.Category }; // Make sure the object contains 'id' and 'name'
+            return { 
+              id: item.id, 
+              name: item.Category, 
+              category_logo: item.category_logo ? this.baseUrl + item.category_logo : 'assets/industrial.png' 
+            }; 
           });
         } else if (abc && abc.Category) {
           // Handle single object response
@@ -197,6 +202,7 @@ export class HomePage implements OnInit, OnDestroy, AfterViewInit {
     
   // Handle category click
   goToCategory(category: { id: string; name: string }) {
+    this.activeCategory = category; // Set the selected category as active
     if (category && category.id) {
       // //console.log('Category clicked:', category.id);
       // //console.log('Category Name:', category.name);
