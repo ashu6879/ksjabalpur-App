@@ -64,27 +64,35 @@
           <input type="range" id="priceRangeMax" min="0" max="100" [(ngModel)]="filters.price.max" />
           <span>{{filters.price.min}} Lakh - {{filters.price.max}} Lakh</span>
         </div>
+      
         <!-- Location Filter -->
-        <div>
-          <label for="location">Location</label>
-          <input type="text" id="location" [(ngModel)]="filters.location" placeholder="Enter city or address" />
+        <div class="filter-inputs">
+          <!-- Location Filter -->
+          <div class="filter-item">
+            <label for="location">Location</label>
+            <input type="text" id="location" [(ngModel)]="filters.location" placeholder="Enter city or address" />
+          </div>
+        
+          <!-- Property Name Filter -->
+          <div class="filter-item">
+            <label for="propertyName">Property Name</label>
+            <input type="text" id="propertyName" [(ngModel)]="filters.propertyName" placeholder="Enter property name" />
+          </div>
         </div>
-  
-        <!-- Property Name Filter -->
-        <div>
-          <label for="propertyName">Property Name</label>
-          <input type="text" id="propertyName" [(ngModel)]="filters.propertyName" placeholder="Enter property name" />
+      
+        <!-- Buttons in Same Line -->
+        <div class="button-container">
+          <!-- Apply Filter Button -->
+          <button class="apply-button" (click)="applyFilter()">Apply Filter</button>
+      
+          <!-- Clear Filter Button -->
+          <button class="clear-button" *ngIf="filters.location || filters.propertyName || filters.price" (click)="clearFilters()">Clear Filters</button>
+      
+          <!-- Close Modal Button -->
+          <button class="close-filter-modal" (click)="closeFilterModal()">Close</button>
         </div>
-  
-        <!-- Apply Filter Button -->
-        <button (click)="applyFilter()">Apply Filter</button>
-  
-        <!-- Clear Filter Button (Outside Modal) -->
-        <button *ngIf="filters.location || filters.propertyName || filters.price" (click)="clearFilters()">Clear Filters</button>
-  
-        <!-- Close Modal Button -->
-        <button class="close-filter-modal" (click)="closeFilterModal()">Close</button>
       </div>
+      
     </div>
   </div>
 

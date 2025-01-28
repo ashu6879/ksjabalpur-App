@@ -167,3 +167,260 @@ margin-top: 8px;
 .top-right-icon.filled {
   color: #c5c0c0;  /* Make the heart red when filled */
 }
+
+
+/* Modal Styles */
+.filter-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Modal Content */
+.filter-modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Close Button */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 30px;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+}
+
+/* Filter Container Styles */
+.filter-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Input and Select Fields */
+.filter-container input {
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+.filter-container input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Apply Filter Button */
+// .filter-button {
+//   background: transparent;
+//   border: none;
+//   cursor: pointer;
+//   font-size: 20px;
+//   color: #888;
+// }
+
+// .filter-button:hover {
+//   color: #007bff; /* Change color when hovered */
+// }
+.clear-filters-img {
+  width: 25px;  /* Adjust size as needed */
+  height: auto;
+}
+
+// .clear-filters-btn {
+//   padding: 10px;
+//   margin: 20px;
+//   background-color: #f44336;
+//   color: white;
+//   border: none;
+//   cursor: pointer;
+//   border-radius: 5px;
+//   position: relative;
+//   top: 0;
+// }
+.slider {
+  width: 100%;
+  margin: 10px 0;
+}
+
+.price-slider {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price-slider input[type="range"] {
+  width: 80%;
+}
+
+.price-slider span {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+/* Clear Filters Button outside the modal */
+.clear-filters-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  color: #888;
+}
+
+.clear-filters-btn:hover {
+  color: #f00; /* Change color when hovered */
+}
+// button {
+//   padding: 10px;
+//   margin: 5px;
+//   background-color: #007BFF;
+//   color: white;
+//   border: none;
+//   cursor: pointer;
+//   border-radius: 5px;
+// }
+
+/* Optional: Add styles to position filter modal more elegantly */
+.filter-content {
+  width: 100%;
+  max-width: 500px;
+  margin: 20px;
+}
+input[type="range"] {
+  width: 100%;
+  height: 5px;
+  -webkit-appearance: none;
+  background: #ddd;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: #007bff;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+input[type="range"]:focus {
+  outline: none;
+}
+.filter-button {
+  display: inline-block; /* Makes the container behave like an inline element */
+  cursor: pointer;
+}
+
+.clear-filters-img {
+  width: 35px;  /* Adjust size */
+  height: auto;
+}
+
+.filter-button {
+  cursor: pointer;
+  margin-top: 8px;
+}
+.btnDiv{
+  display: flex;
+}
+.filter-container {
+  /* Styling for the filter container */
+  padding: 20px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  border-radius: 5px;
+}
+
+.apply-button {
+  background-color: #4CAF50;  /* Green */
+  color: white;
+}
+
+.clear-button {
+  background-color: #f44336;  /* Red */
+  color: white;
+}
+
+.close-filter-modal {
+  background-color: #008CBA;  /* Blue */
+  color: white;
+}
+
+button:hover {
+  opacity: 0.8; /* Add hover effect */
+}
+.filter-inputs {
+  background-color: #f4f4f4;  /* Light gray background */
+  padding: 20px;
+  border-radius: 8px;  /* Rounded corners */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);  /* Subtle shadow */
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.filter-item {
+  margin-bottom: 15px;  /* Space between filter items */
+}
+
+.filter-item label {
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.filter-item input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  color: #333;
+  background-color: #fff;
+  transition: all 0.3s ease;
+}
+
+.filter-item input:focus {
+  border-color: #4CAF50;  /* Green border on focus */
+  outline: none;
+  box-shadow: 0px 0px 5px rgba(76, 175, 80, 0.6);
+}
+
+.filter-item input::placeholder {
+  color: #aaa;  /* Light placeholder color */
+}
+
+@media (max-width: 600px) {
+  .filter-inputs {
+    padding: 15px;
+  }
+}
+

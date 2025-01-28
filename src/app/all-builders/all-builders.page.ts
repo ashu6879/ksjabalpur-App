@@ -31,7 +31,7 @@ export class AllBuildersPage implements OnInit {
   filteredData: any[] = [];
   categories: string[] = [];
   isFilterModalOpen: boolean = false;
-  minPrice: number = 100000; // Minimum price value
+  minPrice: number = 5; // Minimum price value
   maxPrice: number = 1000000; // Maximum price value
   filters = {
     price: { min: this.minPrice, max: this.maxPrice },
