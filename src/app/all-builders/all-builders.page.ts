@@ -20,7 +20,7 @@ import { Storage } from '@ionic/storage-angular';
 export class AllBuildersPage implements OnInit {
   userId: string | null = null;
   favoriteProperties: Set<number> = new Set();
-  baseUrl = 'http://65.0.7.21/ksjabalpur/';
+  baseUrl = 'https://vibrantlivingblog.com/ksjabalpur/';
   builderID: string = ''; // Default to an empty string
   builderName: string = ''; // Default to an empty string
   builderData: any[] = []; // To hold the fetched builder data
@@ -34,7 +34,13 @@ export class AllBuildersPage implements OnInit {
     private location: Location,
     private http: HttpClient
   ) {}
-
+  handleRefresh(event: { target: { complete: () => void; }; }) {
+    setTimeout(() => {
+      // Any calls to load data go here
+      event.target.complete();
+      location.reload();
+    }, 2000);
+  }
   async ngOnInit(): Promise<void> {
     const navigationState = history.state;
   

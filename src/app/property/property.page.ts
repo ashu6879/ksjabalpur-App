@@ -24,7 +24,7 @@ export class PropertyPage implements OnInit, AfterViewInit {
   propertyId: number | null = null; // Store property ID
   properties: any = {}; // Initialize as an object, not an array
   swiper: Swiper | undefined;
-  baseUrl = 'http://65.0.7.21/ksjabalpur/';
+  baseUrl = 'https://vibrantlivingblog.com/ksjabalpur/';
 
   constructor(
     private storage: Storage,
@@ -250,6 +250,7 @@ export class PropertyPage implements OnInit, AfterViewInit {
   }
   
   downloadPdf() {
+    console.log("click from phone");
     const property = this.properties;
   
     // Define the type for the details array
@@ -309,11 +310,23 @@ export class PropertyPage implements OnInit, AfterViewInit {
     // Property Images (Swiper-like image slider)
     if (property.image_paths && property.image_paths.length > 0) {
       let imageYOffset = 70;
-      // Add the first image (on the left side)
-      doc.addImage(property.image_paths, "JPEG", 20, imageYOffset, 80, 60);
-      // Add the second image (on the right side)
-      if (property.image_paths[1]) {
+    
+      // Check if the first image is available and valid
+      if (property.image_paths[0] && typeof property.image_paths[0] === 'string' && property.image_paths[0].startsWith('data:image')) {
+        doc.addImage(property.image_paths[0], "JPEG", 20, imageYOffset, 80, 60);
+      } else {
+        // Add alternate text when the first image is not available
+        doc.setFontSize(12);
+        doc.text('Image not available', 20, imageYOffset);
+      }
+    
+      // Check if the second image is available and valid
+      if (property.image_paths[1] && typeof property.image_paths[1] === 'string' && property.image_paths[1].startsWith('data:image')) {
         doc.addImage(property.image_paths[1], "JPEG", 110, imageYOffset, 80, 60);
+      } else {
+        // Add alternate text when the second image is not available
+        doc.setFontSize(12);
+        doc.text('Image not available', 110, imageYOffset);
       }
     }
   

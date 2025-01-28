@@ -1,4 +1,7 @@
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <div class="topBar">
   
     <!-- Main content -->
@@ -36,42 +39,41 @@
     </ion-header>
   </div>
   <!-- Outer Div to hold the properties loop -->
-  <div class="outerDiv"> 
-    <!-- Loop through the categoryData to display each property -->
-    <!-- <div *ngIf="categoryData && categoryData.length > 0; else noProperties" class="properties-container"> -->
-      <!-- Loop through categoryData -->
-      <!-- <div *ngFor="let property of categoryData" class="property-card" (click)="goToPropertyDetails(property.id)"> -->
+  <div class="outerDiv topshuru"> 
+    <!-- <div *ngIf="favouriteProperties && favouriteProperties.length > 0; else noProperties" class="properties-container">
+      <div *ngFor="let property of favouriteProperties" class="property-card" (click)="goToPropertyDetails(property.id)">
         <div>
-          <!-- <i 
+          <i 
           [class]="isIconFilled(property) ? 'fas fa-heart filled' : 'far fa-heart'" 
           (click)="toggleIcon($event, property)" 
           class="top-right-icon"
-        ></i> -->
+          ></i>
           <img 
-            src="assets/categoryImage2.png" 
+            [src]="property.image || 'assets/categoryImage2.png'" 
             alt="Property Image" 
             class="property-image"
           />
+          <h2 class="propertyTitle">{{ property.property_name }}</h2>
+          <p class="property-address">{{ property.property_address || 'Address not available' }}</p>
     
-          <!-- Title section -->
-          <h2 class="property-title"> property.property_name </h2>
-    
-          <!-- Price section -->
-          <div class="property-price">
-            <span class="old-new-price">
-              <!-- Previous Price -->
-              <span class="old-price"> property.previous_price || 'N/A' </span>
-              <!-- Current Price -->
-              <span class="new-price"> property.current_price || 'N/A'  /Monthly</span>
-            </span>
+          <div class="container">
+            <div class="left-area propertyTitle">
+              <p>{{property.property_area}}</p>
+            </div>
+            <div class="right-button">
+              <button>{{property.current_price}}</button>
+            </div>
           </div>
-    
-          <!-- Address section -->
-          <p class="property-address"> property.property_address || 'Address not available' </p>
         </div>
-      <!-- </div> -->
-    <!-- </div> -->
-
-  </div> 
+      </div>
+    </div> -->
+  
+    <!-- Template for no properties found -->
+    <ng-template #noProperties>
+      <div class="no-properties-message">
+        <p>Fetching properties for this builder.</p>
+      </div>
+    </ng-template>
+  </div>
   <app-footer></app-footer>
 </ion-content>  

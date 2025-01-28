@@ -56,6 +56,13 @@ export class CommonPropertyPagePage  implements   OnDestroy {
 
   ngOnDestroy() {
   }
+  handleRefresh(event: { target: { complete: () => void; }; }) {
+    setTimeout(() => {
+      // Any calls to load data go here
+      event.target.complete();
+      location.reload();
+    }, 2000);
+  }
   goBack() {
     this.location.back(); // This will navigate the user to the previous page
   }

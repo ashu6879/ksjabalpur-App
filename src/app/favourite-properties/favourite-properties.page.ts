@@ -9,13 +9,14 @@ import { Storage } from '@ionic/storage-angular';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ROUTES } from '../config/api.config'; // Adjust the import path as needed
 import { forkJoin } from 'rxjs';  // import forkJoin
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-favourite-properties',
   templateUrl: './favourite-properties.page.html',
   styleUrls: ['./favourite-properties.page.scss'],
   standalone: true,
-  imports: [IonicModule, FooterComponent, FormsModule],
+  imports: [IonicModule, FooterComponent, FormsModule,CommonModule],
 
 })
 export class FavouritePropertiesPage implements OnInit {
@@ -34,6 +35,13 @@ export class FavouritePropertiesPage implements OnInit {
       console.warn('User ID not found in storage.');
     }
   }
+  handleRefresh(event: { target: { complete: () => void; }; }) {
+    setTimeout(() => {
+      // Any calls to load data go here
+      event.target.complete();
+      location.reload();
+    }, 2000);
+  }
 
   fetchFavouriteProperties(userId: string) {
     const apiUrl = ROUTES.CHECK_FAVOURITE;  // replace with your actual API URL
@@ -47,7 +55,7 @@ export class FavouritePropertiesPage implements OnInit {
       (response: any) => {
         if (response && Array.isArray(response.message)) {
           const favouriteProperties = response.message;  // Extract the array of favorite properties
-          this.fetchFavouritebyID(favouriteProperties);
+          // this.fetchFavouritebyID(favouriteProperties);
           console.log('Favourite properties:', favouriteProperties);
           // You can now work with the `favouriteProperties` array
         } else {
@@ -60,30 +68,26 @@ export class FavouritePropertiesPage implements OnInit {
     );
   }
 
-  fetchFavouritebyID(favouriteProperties: any[]) {
-    const apiUrl = ROUTES.PROPERTY_CAT_BYID;  // replace with your actual API URL
-    const allPropertiesDetails: any[] = [];  // This array will store all the property details
+  fetchFavouritebyID(favouriteProperties: any[], userId: string) {
+    const apiUrl = ROUTES.CHECK_FAVOURITE;  // replace with your actual API URL
     const headers = new HttpHeaders({
       'Authorization': '2245',
       'Content-Type': 'application/json',
     });
   
-    // Create an array of Observables for all API calls
-    const apiCalls = favouriteProperties.map(favProperty => {
-      const propertyId = favProperty.ID;  // Fetch propertyId from favouriteProperties.id
-      console.log("Property ID:", propertyId);
-      return this.http.post(apiUrl, { property_id: propertyId }, { headers });
-    });
+    // Create an array of property IDs
+    const propertyIds = favouriteProperties.map(favProperty => favProperty.id);
   
-    // Use forkJoin to wait for all API calls to complete
-    forkJoin(apiCalls).subscribe(
-      (responses: any[]) => {
-        // Process and log all responses
-        responses.forEach((response, index) => {
-          console.log(`Response for property ID ${favouriteProperties[index].ID}:`, response);
-          allPropertiesDetails.push(response);  // Add the response to the combined array
-        });
-        console.log('Combined property details:', allPropertiesDetails);
+    console.log("Property IDs:", propertyIds);
+  
+    // Make one HTTP request with all the property IDs and userId
+    this.http.post(apiUrl, { 
+      property_ids: propertyIds,  // Send all property IDs in one request
+      user_id: userId  // Include userId in the request body
+    }, { headers }).subscribe(
+      (response) => {
+        // Process the response containing all the data
+        console.log('Response for all properties:', response);
       },
       (error) => {
         console.error('Error fetching property details:', error);
@@ -154,5 +158,8 @@ export class FavouritePropertiesPage implements OnInit {
   isIconFilled(property: any): boolean {
     const propertyId = 22; // Assuming property has an 'id'
     return this.favoriteProperties.has(propertyId);  // Return true if property is in favorites
+  }
+  goToPropertyDetails(propertyId: number): void {
+    this.router.navigate(['/property'], { state: { propertyId: propertyId } });
   }
 }

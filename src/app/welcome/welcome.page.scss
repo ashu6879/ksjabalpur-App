@@ -20,19 +20,19 @@ ion-content{
 
 .welcomeTop{
     margin-top: 40px;
-    width: 65%;
-    height: 145px;
+    width: 60%;
+    height: 130px;
 }
 
 .welcomeText1{
     background: linear-gradient(to right, #FB0303, #F8D814); /* Gradient from red to yellow */
     -webkit-background-clip: text; /* Ensures the gradient is applied to the text */
     color: transparent; /* Makes the text color transparent so the gradient is visible */
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 700;
   }
 .text-container{
-    margin-top: 20px;
+    margin-top: 15px;
     display: flex;
     justify-content: center; /* Horizontally center */
     align-items: center; /* Vertically center */
@@ -46,14 +46,14 @@ ion-content{
 }  
 .welcomeText2{
     color:#363636;
-    font-size: 17px;
+    font-size: 15px;
 }
 .welcomeSlider{
     margin-top: 20px;
 }
 /* Gradient button styling */
 .login-button {
-    margin-top: 3rem;
+    margin-top: 2rem;
     background: linear-gradient(to right, #FB0303, #F8D814);
     border: none;
     color: white;

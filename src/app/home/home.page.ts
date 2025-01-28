@@ -31,7 +31,7 @@ export class HomePage implements OnInit, OnDestroy, AfterViewInit {
   builders: any[] = []; // Will hold the API data
   isMenuOpen: boolean = false;
   // Base URL for the image
-  baseUrl = 'http://65.0.7.21/ksjabalpur/';
+  baseUrl = 'https://vibrantlivingblog.com/ksjabalpur/';
 
   constructor(
     private storage: Storage,
@@ -39,6 +39,13 @@ export class HomePage implements OnInit, OnDestroy, AfterViewInit {
     private menuCtrl: MenuController,
     private http: HttpClient // Inject HttpClient
   ) {}
+  handleRefresh(event: { target: { complete: () => void; }; }) {
+    setTimeout(() => {
+      // Any calls to load data go here
+      event.target.complete();
+      location.reload();
+    }, 2000);
+  }
   
 
   async ngOnInit() {

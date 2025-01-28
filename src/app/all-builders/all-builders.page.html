@@ -1,4 +1,7 @@
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <div class="topBar">
   
     <!-- Main content -->
@@ -75,7 +78,7 @@
     <!-- Template for no properties found -->
     <ng-template #noProperties>
       <div class="no-properties-message">
-        <p>No properties found for this builder.</p>
+        <p>Fetching properties for this builder.</p>
       </div>
     </ng-template>
   </div>
