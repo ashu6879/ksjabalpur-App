@@ -25,7 +25,6 @@
   
   .backArrowimage {
     cursor: pointer; /* Make the image clickable */
-    margin-left: 15px
   }
   
   
@@ -62,7 +61,7 @@
   .property-image {
     height: 12rem !important;
     margin-top: 20px;
-    width: 95%; /* Make the image responsive */
+    width: 100%; /* Make the image responsive */
     height: auto; /* Maintain aspect ratio */
     object-fit: cover; /* Ensure images fill the container without stretching */
     border-radius: 10px;
@@ -136,7 +135,7 @@
   }
   /* Container for the "More Details" section */
 .more-details-container {
-    padding: 10px;
+    padding: 10px 0px;
     background-color: #f9f9f9;
     border-radius: 8px; /* Optional, to add rounded corners */
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Optional, for some shadow effect */

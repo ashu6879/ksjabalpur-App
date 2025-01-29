@@ -55,13 +55,14 @@ ion-menu ion-content {
 --background: white; /* Ensure the content inside the menu also has a white background */
 }
 .propertyTitle{
+font-size: 15px;    
 text-transform: capitalize;
 font-family: "Open Sans", sans-serif;
 color: #004680;
 font-weight: bolder;
 }
 .property-address {
-font-size: 17x;
+font-size: 12px;
 font-family: "Open Sans", sans-serif;
 color: #0D0B0C; /* Text color */
 }
@@ -73,6 +74,7 @@ align-items: center;
 }
 
 .left-area {
+font-size: 12px;
 font-family: "Open Sans", sans-serif;
 flex: 1;
 }
