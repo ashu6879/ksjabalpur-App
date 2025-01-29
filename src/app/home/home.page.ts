@@ -14,6 +14,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ROUTES } from '../config/api.config'; // Adjust the import path as needed
 import { CommonModule } from '@angular/common';  // Import CommonModule
 import { Storage } from '@ionic/storage-angular';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -40,6 +41,7 @@ export class HomePage implements OnInit, OnDestroy, AfterViewInit {
   baseUrl = 'https://vibrantlivingblog.com/ksjabalpur/';
 
   constructor(
+    private navController: NavController,
     private storage: Storage,
     private router: Router,
     private menuCtrl: MenuController,
@@ -530,5 +532,37 @@ export class HomePage implements OnInit, OnDestroy, AfterViewInit {
   // Check if the icon should be filled
   isIconFilled(property: any): boolean {
     return this.favoriteProperties.has(property.property_id);
+  }
+  goToshowAllbuilder() {
+    console.log("Builder data:", this.builders);
+  
+    // Assuming you want to send `this.builders` (which holds the builder data) to another page
+    this.navController.navigateForward(['/show-all-builders'], {
+      state: { builderData: this.builders }  // Passing the builder data to the target page
+    });
+  }
+  goToshowAllProperty(type: string): void {
+    console.log('Parameter received:', type);
+  
+    let dataToSend: any;
+  
+    // Check if the passed parameter matches a specific value
+    if (type === 'recentlyadded') {
+      console.log('Sending recently added properties:', this.Recentproperties);
+      dataToSend = this.Recentproperties; // Send recently added properties data
+    } else if (type === 'Todaydeal') {
+      console.log('Sending Todaydeal properties:', this.properties);
+      dataToSend = this.properties; // Send Todaydeal properties data
+    } else if (type === 'featured') {
+      console.log('Sending featured properties:', this.properties);
+      dataToSend = this.properties; // Send featured properties data
+    } else {
+      console.error('Unknown type, sending default properties');
+    }
+  
+    // Now pass the correct data to the target page
+    this.navController.navigateForward(['/show-all-common-properties'], {
+      state: { propertyData: dataToSend }  // Sending the data that was selected based on type
+    });
   }
 }

@@ -1,0 +1,125 @@
+.icon-left {
+left: 15px; /* Position the left icon */
+width: 25px;
+height: 25px;
+}
+
+.center-image-container {
+display: flex;
+justify-content: center;
+align-items: center;
+width: 100%;
+}
+
+.center-image-container ion-button {
+background: none;
+padding: 0;
+}
+
+.center-image-container img {
+max-width: 100px; /* Adjust the size of the center image */
+height: auto;
+}
+
+/* Increase size of the first (left) image */
+ion-buttons.topRibbon ion-button img[src="assets/sidebar.png"] {
+width: 30px; /* Set desired width */
+height: 20px; /* Set desired height */
+}
+
+/* Increase size of the last (right) image */
+ion-buttons.topRibbon ion-button img[src="assets/bell.png"] {
+width: 30px; /* Set desired width */
+height: 20px; /* Set desired height */
+}
+/* Ensure ion-menu shows below the header */
+ion-menu {
+--top: 80px; /* Set the top position of the menu to be below the header */
+z-index: 5; /* Ensure the menu appears below the header */
+--background: white; /* Set the background color of the menu to white */
+}
+
+ion-menu .menu-inner {
+padding-top: 0px; /* Remove any extra padding inside the menu */
+}
+
+/* Set the background color of the sidebar menu */
+ion-menu {
+--background: white; /* This will make the background of the menu white */
+}
+
+ion-menu ion-header {
+--background: white; /* Ensure the header inside the menu also has a white background */
+}
+ion-menu ion-content {
+--background: white; /* Ensure the content inside the menu also has a white background */
+}
+.builders-container {
+display: flex;
+flex-direction: column;
+gap: 20px;
+}
+
+.builder-card {
+display: flex;
+flex-direction: column; /* Stack content vertically */
+border: 1px solid #ccc;
+padding: 15px;
+border-radius: 8px;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+background-color: #fff;
+}
+
+.builder-card-content {
+display: flex;
+align-items: center;
+}
+
+.builder-image {
+flex: 0 0 80px; /* Set fixed width for the image */
+margin-right: 15px;
+}
+
+.builder-logo {
+width: 80px;
+height: 80px;
+border-radius: 50%;
+object-fit: cover;
+}
+
+.builder-details {
+flex-grow: 1;
+}
+
+.builder-name {
+font-size: 1.2rem;
+font-weight: bold;
+color: #333;
+}
+
+.builder-email {
+font-size: 1rem;
+color: #555;
+margin-top: 5px;
+}
+
+.view-more-container {
+margin-top: 15px; /* Creates space between builder details and button */
+width: 100%;
+}
+
+.view-more {
+font-family: "Open Sans", sans-serif;
+width: 100%; /* Ensures full-width button */
+// background-color: #FAAD25 !important;
+color: white !important;
+text-align: center;
+border-radius: 5px;
+font-size: 1rem;
+font-weight: bold;
+}
+
+// .view-more:hover {
+// background-color: #e09c20 !important; /* Slightly darker shade for hover effect */
+// }
+

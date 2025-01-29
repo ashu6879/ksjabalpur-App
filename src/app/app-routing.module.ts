@@ -13,6 +13,8 @@ import { AllBuildersPage } from './all-builders/all-builders.page'; // Import Si
 import { FavouritePropertiesPage } from './favourite-properties/favourite-properties.page'; // Import SignupPage
 import { SearchPage } from './search/search.page'; // Import SignupPage
 import { CommonPropertyPagePage } from './common-property-page/common-property-page.page'; // Import SignupPage
+import { ShowAllBuildersPage } from './show-all-builders/show-all-builders.page'; // Import SignupPage
+import { ShowAllCommonPropertiesPage } from './show-all-common-properties/show-all-common-properties.page'; // Import SignupPage
 import { HttpClientModule } from '@angular/common/http'; // <-- Import HttpClientModule
 import { FormsModule } from '@angular/forms'; // Import FormsModule for ngModel
 import { AuthGuard } from './auth.guard'; // Import the AuthGuard
@@ -33,10 +35,10 @@ const routes: Routes = [
   { path: 'property', component: PropertyPage, canActivate: [AuthGuard] },
   { path: 'favourite-properties', component: FavouritePropertiesPage, canActivate: [AuthGuard] },
   { path: 'search', component: SearchPage, canActivate: [AuthGuard] },
-  {
-    path: 'search',
-    loadChildren: () => import('./search/search.module').then( m => m.SearchPageModule)
-  },
+  { path: 'show-all-builders', component: ShowAllBuildersPage, canActivate: [AuthGuard] },
+  { path: 'show-all-common-properties', component: ShowAllCommonPropertiesPage, canActivate: [AuthGuard] },
+
+
 
 // Protected route
 ];

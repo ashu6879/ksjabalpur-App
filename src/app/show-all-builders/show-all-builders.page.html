@@ -1,0 +1,67 @@
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div class="topBar">
+  
+    <!-- Main content -->
+    <div id="main-content"></div>
+  
+    <!-- Header with images -->
+    <ion-header>
+      <ion-toolbar color="white" class="toolbar_mine">
+        <!-- Left Image (Open Sidebar) -->
+        <ion-buttons slot="start">
+          <div class="left">
+            <img 
+              src="assets/backArrow.png" 
+              alt="Image" 
+              class="backArrowimage" 
+              (click)="goBack()">
+          </div>
+        </ion-buttons>
+  
+        <!-- Center Image (visible when sidebar is closed) -->
+        <ion-buttons slot="end" class="center-image-container">
+          <!-- <ion-button>
+            <img src="assets/ks.png" alt="Center Image" />
+          </ion-button> -->
+          <span class="headerTitle">All Builders</span>
+        </ion-buttons>
+  
+        <!-- Right Image -->
+        <ion-buttons slot="end" class="topRibbon">
+          <ion-button>
+            <img src="assets/bell.png" alt="Right Image" />
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+  </div>
+  <div class="outerDiv topshuru"> 
+    <div *ngIf="builderData && builderData.length > 0;" class="builders-container">
+      <div *ngFor="let builder of builderData" class="builder-card">
+        <div class="builder-card-content">
+          <!-- Image on the left -->
+          <div class="builder-image">
+            <img [src]="builder.BuilderLogo" alt="Builder Logo" class="builder-logo" />
+          </div>
+    
+          <!-- Builder details on the right -->
+          <div class="builder-details">
+            <h2 class="builder-name">{{ builder.BuilderName }}</h2>
+            <p class="builder-email">{{ builder.builder_email }}</p>
+          </div>
+        </div>
+    
+        <!-- View More button in full width on a new row -->
+        <div class="view-more-container">
+          <ion-button expand="block" class="view-more" (click)="goToBuilder({ id: builder.ID, name: builder.BuilderName })">
+            View More
+          </ion-button>
+        </div>
+      </div>
+    </div>     
+  </div>  
+  <app-footer></app-footer>
+</ion-content>    

@@ -1,0 +1,78 @@
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div class="topBar">
+  
+    <!-- Main content -->
+    <div id="main-content"></div>
+  
+    <!-- Header with images -->
+    <ion-header>
+      <ion-toolbar color="white" class="toolbar_mine">
+        <!-- Left Image (Open Sidebar) -->
+        <ion-buttons slot="start">
+          <div class="left">
+            <img 
+              src="assets/backArrow.png" 
+              alt="Image" 
+              class="backArrowimage" 
+              (click)="goBack()">
+          </div>
+        </ion-buttons>
+  
+        <!-- Center Image (visible when sidebar is closed) -->
+        <ion-buttons slot="end" class="center-image-container">
+          <!-- <ion-button>
+            <img src="assets/ks.png" alt="Center Image" />
+          </ion-button> -->
+          <span class="headerTitle">All Properties</span>
+        </ion-buttons>
+  
+        <!-- Right Image -->
+        <ion-buttons slot="end" class="topRibbon">
+          <ion-button>
+            <img src="assets/bell.png" alt="Right Image" />
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+  </div>
+    <div class="outerDiv topshuru"> 
+      <!-- <div *ngIf="propertyData.length == 0">
+        No Wishlisted Properties
+      </div> -->
+      <div *ngIf="propertyData  && propertyData.length > 0;" class="properties-container">
+        <div *ngFor="let property of propertyData " class="property-card" (click)="goToPropertyDetails(property.id)">
+          <div>
+            <i 
+            [class]="isIconFilled(property) ? 'fas fa-heart filled' : 'far fa-heart'" 
+            (click)="toggleIcon($event, property)" 
+            class="top-right-icon"
+            ></i>
+            <img 
+              [src]="property.main_img_path || 'assets/categoryImage2.png'" 
+              alt="Property Image" 
+              class="property-image"
+            />
+            <h2 class="propertyTitle">{{ property.property_name }}</h2>
+            <p class="property-address">{{ property.property_address || 'Address not available' }}</p>
+      
+            <div class="container">
+              <div class="left-area propertyTitle">
+                <p>{{property.property_area}}</p>
+              </div>
+              <div class="right-button">
+                <button>{{property.current_price}}</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div *ngIf="noFavouriteProperties">
+        No Wishlisted Properties
+      </div>
+    </div> 
+  <app-footer></app-footer>
+</ion-content>    

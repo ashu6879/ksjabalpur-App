@@ -50,7 +50,7 @@
     
     <div class="featuredContainer">
       <span class="left">builder</span>
-      <span class="right">Show All</span>
+      <span class="right" (click)="goToshowAllbuilder()">Show All</span>
     </div> 
         <div class="swiper-container getBuilder-slider builderSlider">
           <div class="swiper-wrapper">
@@ -64,7 +64,7 @@
                     <h2 class="headingIcon">{{ builder.BuilderName }}</h2>
                   </div>
                   <div class="box-content">
-                    <ion-button expand="block" class="view-more" (click)="goToBuilder({ id: builder.ID, name: builder.BuilderName })">View More</ion-button>
+                    <ion-button expand="block" class="view-more" (click)="goToBuilder({ id: builder.ID, name: builder.BuilderName })">View Properties</ion-button>
                   </div>
                 </div>
             </div>
@@ -85,7 +85,7 @@
     
     <div class="featuredContainer">
       <span class="left">Featured Property</span>
-      <span class="right">Show All</span>
+      <span class="right" (click)="goToshowAllProperty('featured')">Show All</span>
     </div>
 
 
@@ -120,7 +120,7 @@
 
     <div class="featuredContainer">
       <span class="left">Today’s Deal</span>
-      <span class="right">Show All</span>
+      <span class="right" (click)="goToshowAllProperty('Todaydeal')">Show All</span>
     </div>
 
 
@@ -158,7 +158,7 @@
     </div>  
     <div class="featuredContainer">
       <span class="left">Recently Added</span>
-      <span class="right">Show All</span>
+      <span class="right" (click)="goToshowAllProperty('recentlyadded')">Show All</span>
     </div> 
 
     <div class="swiper-container Recentlyadded-slider mainSlider">

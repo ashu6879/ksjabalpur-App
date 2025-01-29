@@ -8,7 +8,6 @@ import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ROUTES } from '../config/api.config'; // Adjust the import path as needed
-import { forkJoin } from 'rxjs';  // import forkJoin
 import { CommonModule } from '@angular/common';
 
 @Component({
