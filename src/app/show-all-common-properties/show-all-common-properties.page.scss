@@ -29,8 +29,8 @@ height: 20px; /* Set desired height */
 
 /* Increase size of the last (right) image */
 ion-buttons.topRibbon ion-button img[src="assets/bell.png"] {
-width: 30px; /* Set desired width */
-height: 20px; /* Set desired height */
+width: 35px; /* Set desired width */
+height: 25px; /* Set desired height */
 }
 /* Ensure ion-menu shows below the header */
 ion-menu {
@@ -55,13 +55,14 @@ ion-menu ion-content {
 --background: white; /* Ensure the content inside the menu also has a white background */
 }
 .propertyTitle{
+    font-size: 15px;
 text-transform: capitalize;
 font-family: "Open Sans", sans-serif;
 color: #004680;
 font-weight: bolder;
 }
 .property-address {
-font-size: 17x;
+font-size: 12px;
 font-family: "Open Sans", sans-serif;
 color: #0D0B0C; /* Text color */
 }
@@ -73,6 +74,7 @@ align-items: center;
 }
 
 .left-area {
+font-size: 12px;
 font-family: "Open Sans", sans-serif;
 flex: 1;
 }
@@ -90,6 +92,7 @@ margin: 0 auto;
 border-radius: 10px;
 }
 .property-card{
+    border-radius: 10px;
 margin-top: 10px;
 box-shadow: 2px -3px 10px 1px rgba(169, 169, 169, 0.5);
 position: relative; /* Ensure positioning for the child elements */
