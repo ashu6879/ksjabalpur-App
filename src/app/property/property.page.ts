@@ -404,9 +404,10 @@ export class PropertyPage implements OnInit, AfterViewInit {
     toast.present();
   }
   
-  sendEnquiry(properties: any) {
+  sendEnquiry(properties: any) {    
+    this.presentToast("Sending Email to Builder!", "success");
     const property = Array.isArray(properties) ? properties[0] : properties;
-    const builderMail = property.property_name;
+    const builderMail = property.builder_email;
     const propertyID = property.property_id;
   
     console.log("Builder Test", builderMail);
@@ -416,7 +417,7 @@ export class PropertyPage implements OnInit, AfterViewInit {
         id: property.property_id,
         property_name: property.property_name,
         location: property.property_address,
-        Builder_Email: property.property_name,
+        Builder_Email: property.builder_email,
         Price: property.current_price
       }
     };
@@ -429,24 +430,35 @@ export class PropertyPage implements OnInit, AfterViewInit {
       subject: "Property Enquiry",
       property_id: propertyID
     };
+    console.log("body is:",body)
     
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
   
     this.http.post<any>(url, body, { headers }).subscribe(
       (response) => {
         console.log("Enquiry mail response:", response);
-  
-        if (response.success) { // Check if API response is true
+    
+        // Check if response has 'status' and if it's true
+        if (response.status === 200) {
           this.presentToast("Enquiry sent successfully!", "success");
         } else {
+          // If the 'status' is not true or not provided
           this.presentToast("Failed to send enquiry. Please try again.", "danger");
         }
       },
       (error) => {
         console.error('Error sending enquiry:', error);
-        this.presentToast("Error occurred. Please check your network.", "danger");
+    
+        // Handling different types of errors
+        if (error.status === 200) {
+          // Network or connection issue
+          this.presentToast("Enquiry sent successfully!", "success");
+        } else {
+          // General error message
+          this.presentToast("Error occurred. Please try again later.", "danger");
+        }
       }
-    );
+    );    
   }
   
 }

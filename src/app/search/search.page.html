@@ -40,14 +40,16 @@
   </div>
   <div class="outerDiv">
     <div class="search-container">
-      <!-- Search placeholder with dynamic search items -->
-      <input 
-        type="text" 
-        [(ngModel)]="searchTerm" 
-        (keyup)="onSearch($event)" 
-        placeholder="Search for Current Price, Property Category, Property Name..." 
-        class="search-input"
-      />
+      <div class="search-input-wrapper">
+        <ion-icon name="search" class="search-icon"></ion-icon>
+        <input 
+          type="text" 
+          [(ngModel)]="searchTerm" 
+          (keyup)="onSearch($event)" 
+          placeholder="Search for Current Price, Property Category, Property Name..." 
+          class="search-input"
+        />
+      </div>
     </div>
   
     <!-- Display search results -->
@@ -65,7 +67,7 @@
           class="top-right-icon"
           ></i>
           <img 
-            [src]="property.image || 'assets/categoryImage2.png'" 
+            [src]="property.main_img_path || 'assets/categoryImage2.png'" 
             alt="Property Image" 
             class="property-image"
           />
@@ -84,8 +86,7 @@
       </div>
     </div>
   
-    <!-- Show a message if no results -->
-    <ion-item *ngIf="searchResults.length === 0">
+    <ion-item *ngIf="searchPerformed && searchResults.length === 0" class="no-results-item">
       <ion-label>No results found.</ion-label>
     </ion-item>
 

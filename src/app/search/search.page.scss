@@ -56,16 +56,51 @@ ion-menu ion-content {
 }
 /* src/app/search/search.page.scss */
 .search-container {
+padding: 40px 0 !important;
+width: 100%;
 padding: 10px;
+display: flex;
+justify-content: center; /* Centers the search bar */
+}
+
+.search-input-wrapper {
+position: relative;
+width: 100%;
+max-width: 600px; /* Adjust the max-width to control the width */
+background-color: #fff;
+border-radius: 30px; /* Rounded corners */
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Soft box shadow */
+display: flex;
+align-items: center; /* Vertically center the content */
 }
 
 .search-input {
 width: 100%;
-padding: 10px;
-border-radius: 5px;
-border: 1px solid #ccc;
+padding: 10px 40px 10px 40px; /* Padding for icon and space inside */
 font-size: 16px;
-margin-top: 20px;
+border: 2px solid #ddd; /* Light border */
+outline: none;
+background-color: #fff;
+color: #333;
+border-radius: 30px; /* Rounded corners */
+transition: all 0.3s ease;
+}
+
+.search-input::placeholder {
+color: #aaa;
+font-style: italic;
+}
+
+.search-input:focus {
+border-color: #007bff; /* Change border color on focus */
+box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add glow effect */
+}
+
+.search-icon {
+position: absolute;
+left: 15px;
+color: #888;
+font-size: 20px;
 }
 
 ion-list {
@@ -76,88 +111,105 @@ ion-item {
 padding: 10px;
 }
 .propertyTitle{
-    text-transform: capitalize;
-    font-family: "Open Sans", sans-serif;
-    color: #004680;
-    font-weight: bolder;
-  }
-  .property-address {
-    font-size: 17x;
-    font-family: "Open Sans", sans-serif;
-    color: #0D0B0C; /* Text color */
-  }
-  .container {
-    margin-top: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .left-area {
-    font-family: "Open Sans", sans-serif;
-    flex: 1;
-  }
-  
-  .right-button button {
-    font-family: "Open Sans", sans-serif;
-    background-color: #FAAD25;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    text-align: center;
-    display: block;
-    margin: 0 auto;
-    border-radius: 10px;
-  }
+text-transform: capitalize;
+font-family: "Open Sans", sans-serif;
+color: #004680;
+font-weight: bolder;
+}
+.property-address {
+font-size: 17x;
+font-family: "Open Sans", sans-serif;
+color: #0D0B0C; /* Text color */
+}
+.container {
+margin-top: 10px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.left-area {
+font-family: "Open Sans", sans-serif;
+flex: 1;
+}
+
+.right-button button {
+font-family: "Open Sans", sans-serif;
+background-color: #FAAD25;
+border: none;
+padding: 10px 20px;
+font-size: 16px;
+cursor: pointer;
+text-align: center;
+display: block;
+margin: 0 auto;
+border-radius: 10px;
+}
 .property-card{
-  position: relative; /* Ensure positioning for the child elements */
-  padding: 10px 0;
+ box-shadow: 2px -3px 10px 1px rgba(169, 169, 169, 0.5);
+padding:10px 0;
+position: relative; /* Ensure positioning for the child elements */
+padding: 10px 0;
 }
 .top-right-icon {
-  position: absolute;
-  top: 21px;
-  right: 15px;
-  font-size: 25px;
-  color: #c5c0c0;
-  cursor: pointer;
-  z-index: 1; /* Ensure the icon appears on top */
-  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2); /* Lighter shadow */
-  border-radius: 50%;  /* Optional: Keeps the rounded shape, remove if not needed */
+position: absolute;
+top: 21px;
+right: 15px;
+font-size: 25px;
+color: #c5c0c0;
+cursor: pointer;
+z-index: 1; /* Ensure the icon appears on top */
+box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2); /* Lighter shadow */
+border-radius: 50%;  /* Optional: Keeps the rounded shape, remove if not needed */
 }
 
 .topBar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 9999;
-  width: 100%;
-  background-color: white;
+position: fixed;
+top: 0;
+left: 0;
+right: 0;
+z-index: 9999;
+width: 100%;
+background-color: white;
 }
 
 .toolbar_mine {
-  position: relative;
-  z-index: 9999; /* Ensure toolbar stays above other content */
+position: relative;
+z-index: 9999; /* Ensure toolbar stays above other content */
 }
 
 .center-image-container,
 .topRibbon {
-  z-index: 9999; /* Ensure images inside buttons are visible on top */
+z-index: 9999; /* Ensure images inside buttons are visible on top */
 }
 .backArrowimage {
-  width: 25px;
-  cursor: pointer;
-  margin-left: 15px;
-  margin-top: 8px;
+width: 25px;
+cursor: pointer;
+margin-left: 15px;
+margin-top: 8px;
 }
 .property-icon {
-  margin-top:10px;
-  position: absolute;
-  top: 10px;
-  right: 10px; /* Aligns the icon to the right */
-  z-index: 10;  /* Ensures the icon is on top */
+margin-top:10px;
+position: absolute;
+top: 10px;
+right: 10px; /* Aligns the icon to the right */
+z-index: 10;  /* Ensures the icon is on top */
 }
 .top-right-icon.filled {
-  color: #c5c0c0;  /* Make the heart red when filled */
+color: #c5c0c0;  /* Make the heart red when filled */
 }
+.no-results-item {
+    background-color: #fff !important; /* White background to override any inheritance */
+    border: 1px solid #ddd; /* Light border */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    margin: 15px 0; /* Space around the item */
+    padding: 10px 15px; /* Padding for better readability */
+  }
+  
+  .no-results-item ion-label {
+    color: #888; /* Light gray color for the text */
+    font-size: 16px; /* Set a readable font size */
+    text-align: center; /* Center the text */
+    font-style: italic; /* Italicize the text to differentiate it */
+  }

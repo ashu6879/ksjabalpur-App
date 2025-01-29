@@ -51,11 +51,11 @@
           (click)="toggleIcon($event, property)" 
           class="top-right-icon"
           ></i>
-          <ion-img 
+          <img 
             [src]="property.main_img_path || 'assets/categoryImage2.png'" 
             alt="Property Image" 
             class="property-image"
-          ></ion-img>
+          />
           <h2 class="propertyTitle">{{ property.property_name }}</h2>
           <p class="property-address">{{ property.property_address || 'Address not available' }}</p>
     

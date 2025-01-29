@@ -20,6 +20,7 @@ import { Storage } from '@ionic/storage-angular';
   imports: [IonicModule, GoBackComponent, FooterComponent, CommonModule,FormsModule],
 })
 export class SearchPage implements OnInit {
+  searchPerformed: boolean = false;  // Tracks if a search has been performed
   userId: string | null = null;
   favouriteProperties: Set<number> = new Set();
   searchTerm: string = ''; // To bind to the search input field
@@ -45,9 +46,13 @@ export class SearchPage implements OnInit {
     
       if (this.searchTerm.trim() === '') {
         this.searchResults = []; // Clear results if input is empty
+        this.searchPerformed = false;  // No search performed yet
         console.log('Search input is empty, clearing results');
         return;
       }
+    
+      // Mark search as performed
+      this.searchPerformed = true;
     
       // Prepare the form-data to send as key-value pairs
       const formData = new FormData();
@@ -69,15 +74,22 @@ export class SearchPage implements OnInit {
           if (response.success) {
             console.log('Search results received:', response.data);
             this.searchResults = response.data; // Save only the 'data' array
+    
+            // If no results found, ensure that searchPerformed is true
+            if (this.searchResults.length === 0) {
+              console.log('No results found');
+            }
           } else {
             console.error('Search failed: ', response.message);
+            this.searchResults = []; // Clear results if search fails
           }
         },
         (error) => {
           console.error('Error fetching search results:', error);
+          this.searchResults = []; // Clear results in case of error
         }
       );
-    }
+    }    
     checkFavoriteProperties(userId: string): void {
       const url = ROUTES.CHECK_FAVOURITE; // Replace with your actual endpoint
     

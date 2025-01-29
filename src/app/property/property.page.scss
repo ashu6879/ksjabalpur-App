@@ -60,6 +60,7 @@
   }
   
   .property-image {
+    height: 12rem !important;
     margin-top: 20px;
     width: 95%; /* Make the image responsive */
     height: auto; /* Maintain aspect ratio */
@@ -271,6 +272,8 @@
     color: #c5c0c0;  /* Make the heart red when filled */
   }
   .property-card{
+ box-shadow: 2px -3px 10px 1px rgba(169, 169, 169, 0.5);
+padding:10px 0;
     position: relative; /* Ensure positioning for the child elements */
     padding: 10px 0;
   }
