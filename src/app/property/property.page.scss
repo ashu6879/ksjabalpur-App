@@ -245,7 +245,6 @@
     background-color: #FAAD25; /* Darker yellow on hover */
   }
   .top-right-icon {
-    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2); /* Lighter shadow */
     border-radius: 50%;  /* Optional: Keeps the rounded shape, remove if not needed */
     position: absolute;
     top: 17px;
@@ -272,8 +271,6 @@
     color: #c5c0c0;  /* Make the heart red when filled */
   }
   .property-card{
- box-shadow: 2px -3px 10px 1px rgba(169, 169, 169, 0.5);
-padding:10px 0;
     position: relative; /* Ensure positioning for the child elements */
     padding: 10px 0;
   }
