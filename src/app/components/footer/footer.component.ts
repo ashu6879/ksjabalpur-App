@@ -59,6 +59,9 @@ export class FooterComponent {
   goToHome() {
     this.router.navigate(['/home']);
   }
+  goToSearch() {
+    this.router.navigate(['/search']);
+  }
 
   goToprofile() {
     this.router.navigate(['/profile']);

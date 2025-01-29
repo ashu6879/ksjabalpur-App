@@ -61,6 +61,7 @@
         <ion-item class="itemForm">
           <ion-label position="floating" class="profileItem">Gender</ion-label>
           <ion-select [(ngModel)]="gender" name="gender" required class="profileItemDetails" interface="popover" (ngModelChange)="setProfileImage()">
+            <ion-select-option [value]="'3'" disabled selected>Select Gender</ion-select-option>
             <ion-select-option [value]="'0'">Male</ion-select-option>
             <ion-select-option [value]="'1'">Female</ion-select-option>
           </ion-select>

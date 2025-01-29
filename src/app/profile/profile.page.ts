@@ -29,13 +29,13 @@ import { ToastController } from '@ionic/angular';
   imports: [IonicModule, GoBackComponent, FormsModule, FooterComponent, CommonModule], // Import IonicModule here
 })
 export class ProfilePage {
-  profileImage: string = "assets/maleIcon.jpg";
+  profileImage: string = "assets/emptyIcon.png";
   phone: string = ' '; // Default value for Phone
   Email: string = "";
   User_id: string = "";
   Username: string = ' '; // Default value for Username
   showEmailMessage: string = "";
-  gender: string = '0'; // Default value set to '0' (Male)
+  gender: string = '3'; // Default value set to '0' (Male)
   private _storage: Storage | null = null; // Private storage instance
 
   constructor(
@@ -94,7 +94,7 @@ export class ProfilePage {
             this.phone = data.phone ? data.phone : 'Enter Phone Number';
 
             // For Gender
-            this.gender = data.gender ? data.gender : '0';  // Use the placeholder if no data
+            this.gender = data.gender ? data.gender : '3';  // Use the placeholder if no data
 
             // Dynamically set the profile image based on the gender
             this.setProfileImage();
@@ -119,12 +119,14 @@ export class ProfilePage {
   setProfileImage() {
     // Dynamically map the gender value to the corresponding profile image
     if (this.gender === '0') {
-      this.profileImage = 'assets/maleIcon.jpg';  // Male image
+        this.profileImage = 'assets/maleIcon.jpg';  // Male image
     } else if (this.gender === '1') {
-      this.profileImage = 'assets/female.jpg';  // Female image
-    } 
+        this.profileImage = 'assets/female.jpg';  // Female image
+    } else if (this.gender === '3') {
+        this.profileImage = 'assets/emptyIcon.png';  // Default empty image
+    }
     console.log('Profile image set to:', this.profileImage);
-  }
+}
   async showToast(message: string, color: string = 'success') {
     const toast = await this.toastController.create({
       message,

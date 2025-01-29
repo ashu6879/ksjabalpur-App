@@ -55,6 +55,8 @@ export class FavouritePropertiesPage implements OnInit {
       'Content-Type': 'application/json',
     });
   
+    const baseUrl = 'https://vibrantlivingblog.com/ksjabalpur/'; // Replace with your actual base URL
+  
     this.http.post<any>(apiUrl, body, { headers }).subscribe({
       next: (responseData) => {
         console.log("Fetched favourite property data:", responseData);
@@ -67,14 +69,20 @@ export class FavouritePropertiesPage implements OnInit {
           this.propertyData = favoriteArray; // Store the full array for further use
           this.noFavouriteProperties = false;
   
-          // Use your structure for adding property IDs
+          // Append base URL to main_img_path for each favorite property
           if (Array.isArray(favoriteArray) && favoriteArray.length > 0) {
             favoriteArray.forEach((favoriteProperty) => {
+              if (favoriteProperty.main_img_path) {
+                favoriteProperty.main_img_path = `${baseUrl}${favoriteProperty.main_img_path}`;
+              }
+  
+              // Add the property ID to the Set
               if (favoriteProperty.id) {
                 this.favouriteProperties.add(Number(favoriteProperty.id)); // Add each `id` to the Set
               }
             });
           }
+  
           console.log('Property IDs added to favoriteProperties:', Array.from(this.favouriteProperties));
         }
       },
@@ -85,6 +93,7 @@ export class FavouritePropertiesPage implements OnInit {
       }
     });
   }
+  
 
   checkFavoriteProperties(userId: string): void {
     const url = ROUTES.CHECK_FAVOURITE; // Replace with your actual endpoint
@@ -114,29 +123,6 @@ export class FavouritePropertiesPage implements OnInit {
       }
     );
   }
-
-  // fetchFavouriteProperties(userId: string) {
-  //   const apiUrl = ROUTES.CHECK_FAVOURITE;  // replace with your actual API URL
-  //   const body = { user_id: userId };
-  //   const headers = new HttpHeaders({
-  //     'Authorization': '2245',
-  //     'Content-Type': 'application/json',
-  //   });
-
-  //   this.http.post(apiUrl, body, { headers }).subscribe(
-  //     (response: any) => {
-  //       if (response && Array.isArray(response.message)) {
-  //         this.favouriteProperties = response.message;  // Assuming response.message is an array of property objects
-  //         console.log('Favourite properties:', this.favouriteProperties);
-  //       } else {
-  //         console.warn('No favourite properties found or invalid response format');
-  //       }
-  //     },
-  //     (error) => {
-  //       console.error('Error fetching favourite properties:', error);
-  //     }
-  //   );
-  // }
 
   fetchFavouritebyID(favouriteProperties: any[], userId: string) {
     const apiUrl = ROUTES.CHECK_FAVOURITE;  // replace with your actual API URL

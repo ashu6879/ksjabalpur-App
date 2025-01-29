@@ -1,3 +1,8 @@
+
+interface CategoryItem {
+  main_img_path?: string; // Assuming main_img_path is an optional string
+  // Add other properties that the item might have
+}
 import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { MenuController } from '@ionic/angular';
@@ -221,6 +226,11 @@ export class HomePage implements OnInit, OnDestroy, AfterViewInit {
       this.http.post<any>(apiUrl, body, { headers }).subscribe({
         next: (responseData) => {
           //console.log('Fetched category data:', responseData);
+          (responseData.data as CategoryItem[]).forEach((item) => {
+            if (item.main_img_path) {
+              item.main_img_path = `${this.baseUrl}${item.main_img_path}`;
+            }
+          });
           const combinedData = {
             categoryId: category.id,           // Category ID
             categoryName: category.name,       // Category Name

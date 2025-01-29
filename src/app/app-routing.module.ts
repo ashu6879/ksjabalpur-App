@@ -11,6 +11,7 @@ import { LoginPage } from './login/login.page'; // Import SignupPage
 import { PropertyPage } from './property/property.page'; // Import SignupPage
 import { AllBuildersPage } from './all-builders/all-builders.page'; // Import SignupPage
 import { FavouritePropertiesPage } from './favourite-properties/favourite-properties.page'; // Import SignupPage
+import { SearchPage } from './search/search.page'; // Import SignupPage
 import { CommonPropertyPagePage } from './common-property-page/common-property-page.page'; // Import SignupPage
 import { HttpClientModule } from '@angular/common/http'; // <-- Import HttpClientModule
 import { FormsModule } from '@angular/forms'; // Import FormsModule for ngModel
@@ -31,6 +32,12 @@ const routes: Routes = [
   { path: 'all-builders', component: AllBuildersPage, canActivate: [AuthGuard] }, // Protected route
   { path: 'property', component: PropertyPage, canActivate: [AuthGuard] },
   { path: 'favourite-properties', component: FavouritePropertiesPage, canActivate: [AuthGuard] },
+  { path: 'search', component: SearchPage, canActivate: [AuthGuard] },
+  {
+    path: 'search',
+    loadChildren: () => import('./search/search.module').then( m => m.SearchPageModule)
+  },
+
 // Protected route
 ];
 

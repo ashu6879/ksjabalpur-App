@@ -106,6 +106,12 @@ export class AllBuildersPage implements OnInit {
         console.log('Fetched builder data:', responseData);
         this.fullData = responseData.message; // Assuming 'message' contains the property data
         this.builderData = [...this.fullData]; // Show all properties initially
+        this.fullData.forEach((builderData) => {
+          if (builderData.main_img_path) {
+            builderData.main_img_path = `${this.baseUrl}${builderData.main_img_path}`;
+            console.log(builderData.main_img_path);
+          }
+        });
         this.isLoading = false; // Stop loading
       },
       error: (error) => {

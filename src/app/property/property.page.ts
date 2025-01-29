@@ -10,6 +10,7 @@ import { ROUTES } from '../config/api.config'; // Adjust the import path as need
 import { CommonModule } from '@angular/common';  // Import CommonModule
 import { Storage } from '@ionic/storage-angular';
 import { jsPDF } from "jspdf";
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-property',
@@ -20,6 +21,7 @@ import { jsPDF } from "jspdf";
 })
 export class PropertyPage implements OnInit, AfterViewInit {
   userId: string | null = null;
+  userEmail: string | null = null;
   favoriteProperties: Set<number> = new Set();
   propertyId: number | null = null; // Store property ID
   properties: any = {}; // Initialize as an object, not an array
@@ -27,6 +29,7 @@ export class PropertyPage implements OnInit, AfterViewInit {
   baseUrl = 'https://vibrantlivingblog.com/ksjabalpur/';
 
   constructor(
+    private toastController: ToastController,
     private storage: Storage,
     private route: ActivatedRoute,
     private http: HttpClient,
@@ -53,9 +56,10 @@ export class PropertyPage implements OnInit, AfterViewInit {
     try {
       await this.storage.create(); // Ensure storage is initialized properly
       this.userId = await this.storage.get('user_id');
+      this.userEmail = await this.storage.get('email');
   
       if (this.userId) {
-        console.log('User ID found:', this.userId);
+        console.log('User ID found:', this.userId,this.userEmail);
         this.checkFavoriteProperties(this.userId);
       } else {
         console.warn('User ID not found in storage.');
@@ -390,6 +394,59 @@ export class PropertyPage implements OnInit, AfterViewInit {
     // Save the PDF with a filename
     doc.save(`${property.property_name}_Details.pdf`);
   }
+  async presentToast(message: string, color: string = 'success') {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 3000, // Show for 3 seconds
+      color: color, // 'success' for green, 'danger' for red
+      position: 'bottom',
+    });
+    toast.present();
+  }
   
+  sendEnquiry(properties: any) {
+    const property = Array.isArray(properties) ? properties[0] : properties;
+    const builderMail = property.property_name;
+    const propertyID = property.property_id;
+  
+    console.log("Builder Test", builderMail);
+  
+    const message = {
+      message: {
+        id: property.property_id,
+        property_name: property.property_name,
+        location: property.property_address,
+        Builder_Email: property.property_name,
+        Price: property.current_price
+      }
+    };
+  
+    const url = ROUTES.SEND_ENQUIY; // Replace with your actual endpoint
+    const body = {
+      user_email: this.userEmail,
+      message: message,
+      builder_email: builderMail,
+      subject: "Property Enquiry",
+      property_id: propertyID
+    };
+    
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+  
+    this.http.post<any>(url, body, { headers }).subscribe(
+      (response) => {
+        console.log("Enquiry mail response:", response);
+  
+        if (response.success) { // Check if API response is true
+          this.presentToast("Enquiry sent successfully!", "success");
+        } else {
+          this.presentToast("Failed to send enquiry. Please try again.", "danger");
+        }
+      },
+      (error) => {
+        console.error('Error sending enquiry:', error);
+        this.presentToast("Error occurred. Please check your network.", "danger");
+      }
+    );
+  }
   
 }

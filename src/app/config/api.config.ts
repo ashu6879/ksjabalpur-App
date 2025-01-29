@@ -18,4 +18,6 @@ export const ROUTES = {
   RECENT_PROPERTY: `${API_BASE_URL}/get_recent_properties`,
   ADD_FAVOURITE: `${API_BASE_URL}/property_wishlist`,
   CHECK_FAVOURITE: `${API_BASE_URL}/get_all_user_wishlisted_properties`,
+  SEND_ENQUIY: `${API_BASE_URL}/send_enquiry`,
+  SEARCH_PROPERTY: `${API_BASE_URL}/search`,
 };

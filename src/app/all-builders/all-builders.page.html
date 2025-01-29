@@ -101,7 +101,7 @@
     <div *ngFor="let property of builderData" class="property-card" (click)="goToPropertyDetails(property.id)">
       <div>
         <i [class]="isIconFilled(property) ? 'fas fa-heart filled' : 'far fa-heart'" (click)="toggleIcon($event, property)" class="top-right-icon"></i>
-        <img [src]="property.image || 'assets/categoryImage2.png'" alt="Property Image" class="property-image" />
+        <img [src]="property.main_img_path || 'assets/categoryImage2.png'" alt="Property Image" class="property-image" />
         <h2 class="propertyTitle">{{ property.property_name }}</h2>
         <p class="property-address">{{ property.property_address || 'Address not available' }}</p>
         <div class="container">

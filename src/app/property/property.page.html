@@ -93,7 +93,7 @@
             <span class="amount">{{ properties?.current_price || 'N/A' }}</span>
           </div>
           <div class="column enquire-button">
-            <button class="enquire-btn">Enquire Now</button>
+            <button class="enquire-btn" (click)="sendEnquiry(properties)">Enquire Now</button>
           </div>
         </div>
       </div>
