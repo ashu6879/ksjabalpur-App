@@ -146,7 +146,7 @@ margin: 0 auto;
 border-radius: 10px;
 }
 .property-card{
- box-shadow: 2px -3px 10px 1px rgba(169, 169, 169, 0.5);
+box-shadow: 2px -3px 10px 1px rgba(169, 169, 169, 0.5);
 padding:10px 0;
 position: relative; /* Ensure positioning for the child elements */
 padding: 10px 0;
@@ -199,17 +199,23 @@ z-index: 10;  /* Ensures the icon is on top */
 color: #c5c0c0;  /* Make the heart red when filled */
 }
 .no-results-item {
-    background-color: #fff !important; /* White background to override any inheritance */
-    border: 1px solid #ddd; /* Light border */
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
-    margin: 15px 0; /* Space around the item */
-    padding: 10px 15px; /* Padding for better readability */
-  }
-  
-  .no-results-item ion-label {
-    color: #888; /* Light gray color for the text */
-    font-size: 16px; /* Set a readable font size */
-    text-align: center; /* Center the text */
-    font-style: italic; /* Italicize the text to differentiate it */
-  }
+background-color: #fff !important; /* White background to override any inheritance */
+border: 1px solid #ddd; /* Light border */
+border-radius: 10px; /* Rounded corners */
+box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+margin: 15px 0; /* Space around the item */
+padding: 10px 15px; /* Padding for better readability */
+}
+
+.no-results-item ion-label {
+color: #888; /* Light gray color for the text */
+font-size: 16px; /* Set a readable font size */
+text-align: center; /* Center the text */
+font-style: italic; /* Italicize the text to differentiate it */
+}
+.mainHeading{
+font-family: "Open Sans", sans-serif;
+color: #223263;
+font-size: 20px;
+font-weight: 800;
+}

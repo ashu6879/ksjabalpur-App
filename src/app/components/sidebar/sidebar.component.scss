@@ -39,6 +39,7 @@ ion-header {
   }
   
   .topRibbon {
+  margin-left: 8px;
   padding: 0; /* Remove padding around the icons */
   }
   
@@ -89,4 +90,10 @@ ion-header {
   
 .header-ios ion-toolbar:last-of-type {
   --border-width: 0 0 0 0 !important; 
+}
+.mainHeading{
+  font-family: "Open Sans", sans-serif;
+  color: #223263;
+  font-size: 20px;
+  font-weight: 800;
 }
