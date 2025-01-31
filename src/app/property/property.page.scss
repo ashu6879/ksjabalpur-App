@@ -91,47 +91,25 @@
     font-family: "Open Sans", sans-serif;
     color: #0D0B0C; /* Text color */
   }
-/* Main container to hold all rows */
-/* Main container to hold all rows */
-.image-text-grid {
+  .icon-container {
     display: flex;
-    flex-direction: column; /* Stack rows vertically */
-    gap: 20px; /* Space between rows */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
-  
-  /* Each row in the grid */
-  .row {
-    display: flex;
-    gap: 20px; /* Space between columns */
-    justify-content: space-between; /* Spread columns evenly */
+
+  .icon-container img {
+    margin-bottom: 8px; /* Space between image and text */
+    max-width: 100%; /* Ensure images are responsive */
+    height: 40px;
+    width: 35px;
   }
-  
-  /* Each column in the grid */
-  .column {
-    width: 45%; /* Each column takes up 45% of the row width */
-  }
-  
-  /* Container for image and text to display them inline */
+
   .image-text {
-    display: flex;
-    align-items: center; /* Align image and text vertically in the center */
-    gap: 10px; /* Space between the image and the text */
-  }
-  
-  /* Image styling */
-  .imageIcon {
-    width: 35px; /* Set a fixed width for the image */
-    height: 30px; /* Set a fixed height for the image */
-  }
-  
-  /* Text styling */
-  .imagetext {
-    font-size: 14px;
-    color: #808080; /* Text color */
-    padding: 0 15px;
-  }
-  .fourImage{
-    margin-top: 20px;
+    margin: 0;
+    font-size: 10px; /* Adjust text size */
+    font-family: "Open Sans", sans-serif;
+    color: #000; /* Adjust text color if needed */
   }
   /* Container for the "More Details" section */
 .more-details-container {
@@ -288,6 +266,9 @@
     height: 40px;  /* Increased size */
     object-fit: contain;  /* Ensures the icon scales correctly */
     margin: 16px 10px 0 10px;
+  }
+  .facilityIcon{
+    margin-top: 15px;
   }
   
   

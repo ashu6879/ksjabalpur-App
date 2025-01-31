@@ -20,6 +20,10 @@ import { ToastController } from '@ionic/angular';
   imports: [IonicModule, GoBackComponent, FooterComponent, CommonModule],
 })
 export class PropertyPage implements OnInit, AfterViewInit {
+  showFirstRow: boolean = true; // Toggle this to show/hide the first row
+  showSecondRow: boolean = true; // Toggle this to show/hide the second row
+  plotType: string = '';
+  propertyDetails: { key: string, value: string }[] = [];
   userId: string | null = null;
   userEmail: string | null = null;
   favoriteProperties: Set<number> = new Set();
@@ -80,6 +84,10 @@ export class PropertyPage implements OnInit, AfterViewInit {
   }
 
   fetchPropertyDetails(propertyId: number): void {
+    let plotType = '';
+    let freeHold = '';
+    let plotDirection = '';
+    let cornerPlot = '';
     const apiUrl = ROUTES.PROPERTY_DETAILS;
     const headers = new HttpHeaders({
       'Authorization': '2245',
@@ -102,9 +110,70 @@ export class PropertyPage implements OnInit, AfterViewInit {
           propertyData.image_paths = propertyData.image_paths.map((path: string) => this.baseUrl + path);
         }
   
-        // Assign the fetched data to properties object (not an array)
+        // Assign the fetched data to properties object
         this.properties = propertyData;
         console.log('Updated property details:', this.properties);
+        
+        console.log("catrgory is",this.properties.Category)
+        if (this.properties.Category === "Residential") {
+          this.showFirstRow = true;
+          this.showSecondRow = true; // Optional: Hide second row if needed
+        } else {
+          this.showFirstRow = true;
+          this.showSecondRow = false; // Show second row for other cases
+        }
+        // Initialize plotType based on select_plot_no
+        switch (this.properties.select_plot_no) {
+          case '1':
+            plotType = 'Plot No';
+            break;
+          case '2':
+            plotType = 'Unit No';
+            break;
+          case '3':
+            plotType = 'House No';
+            break;
+          default:
+            plotType = 'Unknown';
+            break;
+        }
+        switch (this.properties.front_direction) {
+          case '1':
+            plotDirection = 'North';
+            break;
+          case '2':
+            plotDirection = 'South';
+            break;
+          case '3':
+            plotDirection = 'East';
+            break;
+          default:
+            plotDirection = 'West';
+            break;
+        }
+        if(this.properties.free_hold=="1"){
+          freeHold="yes";
+        }
+        else{
+          freeHold="no"; 
+        }
+        if(this.properties.corner_plot=="1"){
+          cornerPlot="yes";
+        }
+        else{
+          cornerPlot="no"; 
+        }
+  
+        // Update the propertyDetails array with dynamic plotType
+        this.propertyDetails = [
+          { key: plotType, value: this.properties.plot_no },  // Using plotType here
+          { key: 'Free Hold', value: freeHold },
+          { key: 'Front Direction', value: plotDirection },
+          { key: 'Corner Plot', value: cornerPlot },
+          { key: 'Price per sqft', value: this.properties.price_per_sqft},
+          { key: 'Area', value: `${this.properties.property_area} sqft` },
+          { key: 'Finance Approval', value: this.properties.finance_aproval}
+        ];
   
         // After properties are updated, refresh the swiper
         this.cdr.detectChanges(); // Detect changes after fetching data
@@ -114,7 +183,7 @@ export class PropertyPage implements OnInit, AfterViewInit {
         console.error('Error fetching property details:', error);
       }
     );
-  }
+  }  
 
   initializeSwiper(): void {
     if (!this.swiper) {
@@ -459,6 +528,5 @@ export class PropertyPage implements OnInit, AfterViewInit {
         }
       }
     );    
-  }
-  
+  } 
 }

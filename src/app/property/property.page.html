@@ -35,42 +35,59 @@
       </div>
       
       <div class="location-info">
-        <img src="assets/location_icon.png" alt="Location Icon" class="location-icon">
+        <img src="assets/location_icon.svg" alt="Location Icon" class="location-icon">
         <span class="property-address">{{ properties?.property_address || 'No address available' }}</span>
       </div>
-
-      <div class="image-text-grid fourImage">
-        <div class="row">
-          <div class="column" *ngFor="let item of [['Bed Room', 'assets/bed.png'], ['Bedroom', 'assets/bedRoom.png']]">
-            <div class="image-text">
-              <img [src]="item[1]" [alt]="item[0]" class="imageIcon">
-              <span class="imagetext">{{ item[0] }}</span>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="column" *ngFor="let item of [['Wall', 'assets/wall.png'], ['Parking', 'assets/parking.png']]">
-            <div class="image-text">
-              <img [src]="item[1]" [alt]="item[0]" class="imageIcon">
-              <span class="imagetext">{{ item[0] }}</span>
-            </div>
-          </div>
-        </div>
+      <div class="facilityIcon">
+        <ion-grid *ngIf="showSecondRow">
+          <ion-row class="ion-justify-content-around">
+            <ion-col size="4" class="ion-text-center">
+              <div class="icon-container">
+                <img src="assets/bedroom.svg" alt="Bedroom" class="column">
+                <p class="image-text">Bedroom-{{ properties?.bedroom_quantity}}</p>
+              </div>
+            </ion-col>
+            <ion-col size="4" class="ion-text-center">
+              <div class="icon-container">
+                <img src="assets/garbage.svg" alt="Garbage" class="column">
+                <p class="image-text">Garbage Facility- {{ properties?.garbage === 1 ? 'Yes' : 'No' }}</p>
+              </div>
+            </ion-col>
+            <ion-col size="4" class="ion-text-center">
+              <div class="icon-container">
+                <img src="assets/hall.svg" alt="Hall" class="column">
+                <p class="image-text">Hall-{{ properties?.hall}}</p>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      
+        <ion-grid *ngIf="showFirstRow">
+          <ion-row class="ion-justify-content-around">
+            <ion-col size="4" class="ion-text-center">
+              <div class="icon-container">
+                <img src="assets/furnished.svg" alt="Furnished" class="column">
+                <p class="image-text">{{ properties?.furnished === "1" ? 'Fully Furnished' : properties?.furnished === "2" ? 'Semi Furnished' : 'No Furnished' }}</p>
+              </div>
+            </ion-col>
+            <ion-col size="4" class="ion-text-center">
+              <div class="icon-container">
+                <img src="assets/electricity.svg" alt="Electricity" class="column">
+                <p class="image-text">Electricity-{{ properties?.electricity === 1 ? 'Yes' : 'No' }}</p>
+              </div>
+            </ion-col>
+            <ion-col size="4" class="ion-text-center">
+              <div class="icon-container">
+                <img src="assets/parking.svg" alt="Parking" class="column">
+                <p class="image-text">Parking-{{ properties?.parking === 1 ? 'Yes' : 'No' }}</p>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </div>
-
       <div class="more-details-container">
         <h2 class="more-details-heading">More Details</h2>
-        <div class="details-row" *ngFor="let detail of [
-          { key: 'Plot No', value: '797/816' },
-          { key: 'Type', value: 'Commercial' },
-          { key: 'Free Hold', value: 'No' },
-          { key: 'Front Direction', value: 'North' },
-          { key: 'Boundary Wall', value: 'No' },
-          { key: 'Corner Plot', value: 'Yes' },
-          { key: 'Price per sqft', value: '15000/-' },
-          { key: 'Area', value: '1500sqft' },
-          { key: 'Negotiable', value: 'Yes' }
-        ]">
+        <div class="details-row" *ngFor="let detail of propertyDetails">
           <span class="key">{{ detail.key }}:</span>
           <span class="value">{{ detail.value }}</span>
         </div>
@@ -78,11 +95,7 @@
 
       <div>
         <h2 class="more-details-heading">Description</h2>
-        <span class="description">
-          Beautiful 3,4,5,6 BHK apartments in Zirakpur, are now available in Green Lotus Utsav housing project. 
-          Prices of apartments in this project vary between Rs. 1.85 - 12.84 Cr. Green Lotus Utsav has apartments 
-          in multiple configurations, ranging from 2,100 - 9,945 sq.ft. Green Lotus Utsav is a RERA-registered society 
-          and PBRERA-SAS79-PR0425 is the RERA registration number.
+        <span class="description">{{properties?.property_desc}}
         </span>
       </div>
 
