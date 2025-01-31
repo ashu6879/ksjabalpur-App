@@ -27,6 +27,7 @@ export class HomePage implements OnInit, OnDestroy, AfterViewInit {
   private autoplayId: any; 
   userId: string | null = null;
   favoriteProperties: Set<number> = new Set();
+  getbuilderswiper:  Swiper | undefined;
   swiper: Swiper | undefined;
   swiper2: Swiper | undefined;
   noPropertiesFound: boolean = false; // Variable to track if properties are found
@@ -76,37 +77,70 @@ export class HomePage implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  ngAfterViewInit() {
-    // Initialize the first Swiper (1 slide per view)
-    setTimeout(() => {
-      this.swiper = new Swiper('.swiper-container.first-slider', {
-        slidesPerView: 1,  // Show one slide per view
-        spaceBetween: 10,
-        loop: false,  // Enable infinite loop
-        pagination: {
-          el: '.swiper-pagination',
-          clickable: true,  // Enable clicking on dots
-        },
-      });
-      // //console.log('First Swiper initialized:', this.swiper);
-    }, 500);  // Delay to ensure images are loaded before initializing Swiper
-  
-    // Initialize the second Swiper (3 slides per view)
-    setTimeout(() => {
-      this.swiper2 = new Swiper('.swiper-container.second-slider', {
-        slidesPerView: 3,  // Show three slides per view
-        spaceBetween: 20,  // Space between slides
-        loop: false,  // Enable infinite loop
-        pagination: {
-          el: '.swiper-pagination',
-          clickable: true,  // Enable clicking on dots
-        },
-      });
-      // //console.log('Second Swiper initialized:', this.swiper2);
-    }, 500);  // Delay to ensure images are loaded before initializing Swiper
-    // Listen for clicks outside (optional functionality)
-    document.addEventListener('click', this.handleOutsideClick.bind(this));
+ngAfterViewInit() {
+  // Initialize the first Swiper (1 slide per view)
+  setTimeout(() => {
+    this.swiper = new Swiper('.swiper-container.first-slider', {
+      slidesPerView: 1,
+      spaceBetween: 10,
+      loop: false,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+    });
+  }, 500);
+
+  // Initialize the second Swiper (3 slides per view)
+  setTimeout(() => {
+    this.swiper2 = new Swiper('.swiper-container.second-slider', {
+      slidesPerView: 3,
+      spaceBetween: 20,
+      loop: true,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      observer: true,
+      observeParents: true,
+      autoplay: false,
+    });
+
+    // Start custom autoplay for the second swiper
+    const autoplayInterval = 3000;
+    this.startAutoplayForSecondSlider(autoplayInterval);
+  }, 500);
+
+  document.addEventListener('click', this.handleOutsideClick.bind(this));
+}
+
+// Move this function outside `ngAfterViewInit`
+startAutoplayForSecondSlider(interval: number) {
+  console.log("Starting custom autoplay for second swiper...");
+
+  this.autoplayId = setInterval(() => {
+    if (this.swiper) {
+      const totalSlides = this.swiper.slides.length;
+      const currentSlideIndex = this.swiper.realIndex;
+
+      if (currentSlideIndex === totalSlides - 1) {
+        this.swiper.slideTo(0);
+        console.log("Reached last slide, moving to first.");
+      } else {
+        this.swiper.slideNext();
+        console.log("Slide moved to the next.");
+      }
+    }
+  }, interval);
+}
+
+// Move this function outside `ngAfterViewInit`
+stopAutoplayForSecondSlider() {
+  if (this.autoplayId) {
+    clearInterval(this.autoplayId);
+    console.log("Autoplay for second swiper stopped.");
   }
+}
 
   ngOnDestroy() {
     document.removeEventListener('click', this.handleOutsideClick.bind(this));
@@ -427,7 +461,7 @@ export class HomePage implements OnInit, OnDestroy, AfterViewInit {
   initializeSwiper() {
     console.log("Initializing Swiper...");
 
-    this.swiper = new Swiper('.getBuilder-slider', {
+    this.getbuilderswiper = new Swiper('.getBuilder-slider', {
       slidesPerView: 2,    // Show two slides at a time
       spaceBetween: 20,     // Adjust space between slides
       loop: true,           // Enable infinite loop (internal looping)
@@ -445,7 +479,7 @@ export class HomePage implements OnInit, OnDestroy, AfterViewInit {
 
     this.startAutoplay(autoplayInterval); // Start the custom autoplay
 
-    if (this.swiper) {
+    if (this.getbuilderswiper) {
       console.log("Swiper initialized successfully.");
     } else {
       console.log("Swiper initialization failed.");
@@ -458,16 +492,16 @@ export class HomePage implements OnInit, OnDestroy, AfterViewInit {
 
     // Set an interval to move to the next slide
     this.autoplayId = setInterval(() => {
-      if (this.swiper) {
-        const totalSlides = this.swiper.slides.length;
-        const currentSlideIndex = this.swiper.realIndex;
+      if (this.getbuilderswiper) {
+        const totalSlides = this.getbuilderswiper.slides.length;
+        const currentSlideIndex = this.getbuilderswiper.realIndex;
 
         // If we reach the last slide, go back to the first slide to loop
         if (currentSlideIndex === totalSlides - 1) {
-          this.swiper.slideTo(0); // Move to the first slide
+          this.getbuilderswiper.slideTo(0); // Move to the first slide
           console.log("Reached last slide, moving to first.");
         } else {
-          this.swiper.slideNext(); // Move to the next slide
+          this.getbuilderswiper.slideNext(); // Move to the next slide
           console.log("Slide moved to the next.");
         }
       }
