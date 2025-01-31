@@ -24,6 +24,7 @@ import { NavController } from '@ionic/angular';
   imports: [IonicModule, FooterComponent, SidebarComponent,CommonModule],
 })
 export class HomePage implements OnInit, OnDestroy, AfterViewInit {
+  private autoplayId: any; 
   userId: string | null = null;
   favoriteProperties: Set<number> = new Set();
   swiper: Swiper | undefined;
@@ -424,17 +425,61 @@ export class HomePage implements OnInit, OnDestroy, AfterViewInit {
 
   // Function to initialize Swiper
   initializeSwiper() {
-    setTimeout(() => {
-      this.swiper = new Swiper('.getBuilder-slider', {
-        slidesPerView: 2,  // Show two slides at a time
-        spaceBetween: 20,  // Adjust space between slides
-        loop: false,         // Enable infinite loop
-        pagination: {
-          el: '.swiper-pagination',
-          clickable: true,
-        },
-      });
-    }, 500);  // Delay to ensure images are loaded before initializing Swiper
+    console.log("Initializing Swiper...");
+
+    this.swiper = new Swiper('.getBuilder-slider', {
+      slidesPerView: 2,    // Show two slides at a time
+      spaceBetween: 20,     // Adjust space between slides
+      loop: true,           // Enable infinite loop (internal looping)
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      observer: true,       // Enable the observer
+      observeParents: true, // Enable observing parent elements
+      autoplay: false,      // Disable the built-in autoplay
+    });
+
+    // Manually trigger autoplay using setInterval
+    const autoplayInterval = 3000; // Time between slide transitions in ms (3000ms = 3 seconds)
+
+    this.startAutoplay(autoplayInterval); // Start the custom autoplay
+
+    if (this.swiper) {
+      console.log("Swiper initialized successfully.");
+    } else {
+      console.log("Swiper initialization failed.");
+    }
+  }
+
+  // Custom autoplay logic
+  startAutoplay(interval: number) {
+    console.log("Starting custom autoplay...");
+
+    // Set an interval to move to the next slide
+    this.autoplayId = setInterval(() => {
+      if (this.swiper) {
+        const totalSlides = this.swiper.slides.length;
+        const currentSlideIndex = this.swiper.realIndex;
+
+        // If we reach the last slide, go back to the first slide to loop
+        if (currentSlideIndex === totalSlides - 1) {
+          this.swiper.slideTo(0); // Move to the first slide
+          console.log("Reached last slide, moving to first.");
+        } else {
+          this.swiper.slideNext(); // Move to the next slide
+          console.log("Slide moved to the next.");
+        }
+      }
+    }, interval);
+  }
+
+  // If you want to stop autoplay at some point (e.g., when the user interacts)
+  stopAutoplay() {
+    if (this.autoplayId) {
+      clearInterval(this.autoplayId);
+      console.log("Autoplay stopped.");
+    }
   }
 
   goToPropertyDetails(propertyId: number): void {
